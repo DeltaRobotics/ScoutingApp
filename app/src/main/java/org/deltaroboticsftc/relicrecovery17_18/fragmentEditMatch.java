@@ -1,0 +1,82 @@
+package org.deltaroboticsftc.relicrecovery17_18;
+
+import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+/**
+ * Created by Luke Poellet on 9/17/2017.
+ */
+
+public class fragmentEditMatch extends Fragment
+{
+
+    private matchBuilder match;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        super.onCreateView(inflater, container, savedInstanceState);
+        View rootView = inflater.inflate(R.layout.fragment_edit_match, container, false);
+
+        SharedPreferences DRFTCScouting = rootView.getContext().getSharedPreferences("DRFTCScouting", 0);
+        String game = rootView.getResources().getString(R.string.game);
+
+        match = new matchBuilder(DRFTCScouting.getString("Game", game), rootView.getContext());
+
+        TextView gameTitle = (TextView) rootView.findViewById(R.id.game_title);
+        gameTitle.setText(match.getGameTitle());
+
+        TextView gameBy = (TextView) rootView.findViewById(R.id.game_by);
+        ImageView banner = (ImageView) rootView.findViewById(R.id.delta_banner);
+        if(match.getGameBy().equals("DR-2015-Official"))
+        {
+            gameBy.setVisibility(View.GONE);
+            banner.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            gameBy.setVisibility(View.VISIBLE);
+            gameBy.setText(match.getGameTitle() + " By: " + match.getGameBy());
+            banner.setVisibility(View.GONE);
+        }
+
+        EditText teamNumber = (EditText) rootView.findViewById(R.id.team_number);
+        if(match.getMode().equals("Alliance"))
+        {
+            teamNumber.setVisibility(View.GONE);
+        }
+        else
+        {
+            teamNumber.setVisibility(View.VISIBLE);
+        }
+
+        LinearLayout layout = (LinearLayout) rootView.findViewById(R.id.game_autonomous);
+        layout.addView(match.getAutonomousLayout());
+
+        layout = (LinearLayout) rootView.findViewById(R.id.game_teleop);
+        layout.addView(match.getTeleOpLayout());
+
+        layout = (LinearLayout) rootView.findViewById(R.id.game_endgame);
+        layout.addView(match.getEndGameLayout());
+
+        layout = (LinearLayout) rootView.findViewById(R.id.game_extras);
+        if(match.getExtrasLayout() == null)
+        {
+            layout.setVisibility(View.GONE);
+        }
+        else
+        {
+            layout.addView(match.getExtrasLayout());
+        }
+
+        return rootView;
+    }
+}

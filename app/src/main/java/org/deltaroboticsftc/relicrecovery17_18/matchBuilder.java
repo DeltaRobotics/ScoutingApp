@@ -1,6 +1,7 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.LinearLayout;
 
@@ -13,36 +14,59 @@ import java.util.ArrayList;
 public class matchBuilder
 {
     private String game;
+    private String gameTitle;
+    private String gameBy;
+    private String mode;
     private LinearLayout AutonomousLayout;
+    private ArrayList<matchElement> AutonomousElements;
     private LinearLayout TeleOpLayout;
+    private ArrayList<matchElement> TeleOpElements;
     private LinearLayout EndGameLayout;
+    private ArrayList<matchElement> EndGameElements;
     private LinearLayout ExtrasLayout;
+    private ArrayList<matchElement> ExtrasElements;
 
     public matchBuilder(String game, Context context)
     {
-        if(game.equals("default"))
-        {
-            this.game = context.getResources().getString(R.string.game);
-        }
-        else
-        {
-            this.game = game;
-        }
-        Log.i("Game", this.game);
+        this.game = cut(game, "Game{", "}Game");
 
+        gameTitle = cutInfo(this.game, "gametitle");
+        gameBy = cutInfo(this.game, "creator");
+        mode = cutInfo(this.game, "mode");
 
-        AutonomousLayout = buildLayout(cut(this.game, "Autonomous{", "}Autonomous"), context);
-        TeleOpLayout = buildLayout(cut(this.game, "Tele-Op{", "}Tele-Op"), context);
-        EndGameLayout = buildLayout(cut(this.game, "EndGame{", "}EndGame"), context);
+        AutonomousElements = new ArrayList<>();
+        AutonomousLayout = buildLayout(cut(this.game, "Autonomous{", "}Autonomous"), context, AutonomousElements);
+
+        TeleOpElements = new ArrayList<>();
+        TeleOpLayout = buildLayout(cut(this.game, "Tele-Op{", "}Tele-Op"), context, TeleOpElements);
+
+        EndGameElements = new ArrayList<>();
+        EndGameLayout = buildLayout(cut(this.game, "EndGame{", "}EndGame"), context, EndGameElements);
 
         if(Boolean.parseBoolean(cutInfo(cut(this.game, "Extras{", "}Extras"), "include")))
         {
-            ExtrasLayout = buildLayout(cut(this.game, "Extras{", "}Extras"), context);
+            ExtrasElements = new ArrayList<>();
+            ExtrasLayout = buildLayout(cut(this.game, "Extras{", "}Extras"), context, ExtrasElements);
         }
         else
         {
             ExtrasLayout = null;
         }
+    }
+
+    public String getGameTitle()
+    {
+        return gameTitle;
+    }
+
+    public String getGameBy()
+    {
+        return gameBy;
+    }
+
+    public String getMode()
+    {
+        return mode;
     }
 
     public LinearLayout getAutonomousLayout()
@@ -77,7 +101,7 @@ public class matchBuilder
         return temp2.substring(temp2.indexOf("=") + 1);
     }
 
-    private LinearLayout buildLayout(String text, Context context)
+    private LinearLayout buildLayout(String text, Context context, ArrayList<matchElement> elements)
     {
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -108,6 +132,7 @@ public class matchBuilder
                     }
 
                     elementCheckBox checkBox = new elementCheckBox(checkBoxTitle, checkBoxText, checkBoxChecked);
+                    elements.add(checkBox);
                     linearLayout.addView(checkBox.getElement(context));
                     break;
 
@@ -119,13 +144,14 @@ public class matchBuilder
                     int maxValue = Integer.parseInt(cutInfo(item, "maxvalue"));
 
                     elementCounter counter = new elementCounter(counterTitle, defaultValue, modifier, minValue, maxValue);
+                    elements.add(counter);
                     linearLayout.addView(counter.getElement(context));
                     break;
 
                 case "radioGroup":
                     String radioGroupTitle = cutInfo(item, "title");
                     int radioCount = Integer.parseInt(cutInfo(item, "radiocount"));
-                    int defaultSelect = Integer.parseInt(cutInfo(item, "defaultselect"));
+                    int defaultSelect = Integer.parseInt(cutInfo(item, "defaultselect")) - 1;
 
                     ArrayList<String> radioGroupText = new ArrayList<>();
 
@@ -135,6 +161,7 @@ public class matchBuilder
                     }
 
                     elementRadioGroup radioGroup = new elementRadioGroup(radioGroupTitle, radioGroupText, defaultSelect);
+                    elements.add(radioGroup);
                     linearLayout.addView(radioGroup.getElement(context));
                     break;
 
@@ -143,6 +170,7 @@ public class matchBuilder
                     int lines = Integer.parseInt(cutInfo(item, "lines"));
 
                     elementTextArea textArea = new elementTextArea(textAreaTitle, lines);
+                    elements.add(textArea);
                     linearLayout.addView(textArea.getElement(context));
                     break;
 
@@ -153,6 +181,7 @@ public class matchBuilder
                     String falseText = cutInfo(item, "falsetext");
 
                     elementToggleButton toggleButton = new elementToggleButton(toggleButtonTitle, defaultToggle, trueText, falseText);
+                    elements.add(toggleButton);
                     linearLayout.addView(toggleButton.getElement(context));
                     break;
             }

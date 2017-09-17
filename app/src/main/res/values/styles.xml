@@ -33,23 +33,51 @@
         <item name="android:paddingTop">5dp</item>
     </style>
 
-    <style name="toggleButton">
+    <style name="elementToggleButton">
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="android:paddingTop">5dp</item>
     </style>
 
-    <style name="checkBox">
+    <style name="elementCheckBox">
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="android:paddingTop">5dp</item>
     </style>
 
-    <style name="radioGroup">
+    <style name="elementRadioGroup">
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+    <style name="elementEditText">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+    <style name="elementCounterNumber">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+    <style name="elementCounterButton">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingTop">5dp</item>
+    </style>
+
+    <style name="subText">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">10dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="android:paddingTop">5dp</item>
     </style>
@@ -57,22 +85,6 @@
     <style name="editText">
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15dp</item>
-        <item name="android:paddingBottom">0dp</item>
-        <item name="android:paddingTop">5dp</item>
-    </style>
-
-    <style name="counterNumber">
-        <item name="android:textColor">#000000</item>
-        <item name="android:textSize">15dp</item>
-        <item name="android:paddingBottom">0dp</item>
-        <item name="android:paddingTop">5dp</item>
-    </style>
-
-    <style name="counterButton">
-        <item name="android:textColor">#000000</item>
-        <item name="android:textSize">15dp</item>
-        <item name="android:paddingBottom">0dp</item>
-        <item name="android:paddingTop">5dp</item>
     </style>
 
 </resources>

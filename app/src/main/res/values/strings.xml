@@ -8,200 +8,184 @@
 
     <string name="game">
         Game{
-            gametitle=Test Game;
-            creator=Luke Poellet;
+            gametitle=Relic Recovery;
+            creator=DR-2015-Official;
+            mode=Team;
 
-        Autonomous{
-            itemcount=5;
+            Autonomous{
+                itemcount=4;
 
-            Item1{
-                itemtype=checkBox;
-                title=Check Box;
-                checkboxcount=2;
-                checkbox1=#1;
-                checkbox1checked=false;
-                checkbox2=#2;
-                checkbox2checked=false;
-            }Item1
+                Item1{
+                    itemtype=checkBox;
+                    title=Jewel;
+                    checkboxcount=2;
+                    checkbox1=Blue Jewel Moved;
+                    checkbox1checked=false;
+                    checkbox2=Red Jewel Moved;
+                    checkbox2checked=false;
+                }Item1
 
-            Item2{
-                itemtype=counter;
-                title=Counter;
-                default=0;
-                modifier=1;
-                minvalue=0;
-                maxvalue=100;
-            }Item2
+                Item2{
+                    itemtype=counter;
+                    title=Glyphs Scored;
+                    default=0;
+                    modifier=1;
+                    minvalue=0;
+                    maxvalue=24;
+                }Item2
 
-            Item3{
-                itemtype=radioGroup;
-                title=Radio Group;
-                radiocount=3;
-                radio1=#1;
-                radio2=#2;
-                radio3=#3;
-                defaultselect=1;
-            }Item3
+                Item3{
+                    itemtype=toggleButton;
+                    title=First Glyph In Keyed Column;
+                    default=false;
+                    truetext=YES;
+                    falsetext=NO;
+                }Item3
 
-            Item4{
-                itemtype=textArea;
-                title=Text Area;
-                lines=5;
-            }Item4
+                Item4{
+                    itemtype=toggleButton;
+                    title=Robot Parked;
+                    default=false;
+                    truetext=PARKED;
+                    falsetext=NOT PARKED;
+                }Item4
 
-            Item5{
-                itemtype=toggleButton;
-                title=Toggle Button;
-                default=false;
-                truetext=ON;
-                falsetext=OFF;
-            }Item5
+            }Autonomous
 
-        }Autonomous
+            Tele-Op{
+                itemcount=4;
 
-        Tele-Op{
-            itemcount=5;
+                Item1{
+                    itemtype=counter;
+                    title=Glyphs Scored;
+                    default=0;
+                    modifier=1;
+                    minvalue=0;
+                    maxvalue=24;
+                }Item1
 
-            Item1{
-                itemtype=checkBox;
-                title=Check Box;
-                checkboxcount=2;
-                checkbox1=#1;
-                checkbox1checked=false;
-                checkbox2=#2;
-                checkbox2checked=false;
-            }Item1
+                Item2{
+                    itemtype=counter;
+                    title=Completed Rows of Glyphs;
+                    default=0;
+                    modifier=1;
+                    minvalue=0;
+                    maxvalue=4;
+                }Item2
 
-            Item2{
-                itemtype=counter;
-                title=Counter;
-                default=0;
-                modifier=1;
-                minvalue=0;
-                maxvalue=100;
-            }Item2
+                Item3{
+                    itemtype=counter;
+                    title=Completed Columns of Glyphs;
+                    default=0;
+                    modifier=1;
+                    minvalue=0;
+                    maxvalue=3;
+                }Item3
 
-            Item3{
-                itemtype=radioGroup;
-                title=Radio Group;
-                radiocount=3;
-                radio1=#1;
-                radio2=#2;
-                radio3=#3;
-                defaultselect=1;
-            }Item3
+                Item4{
+                    itemtype=radioGroup;
+                    title=Completed Cipher;
+                    radiocount=3;
+                    radio1=2 Ciphers Completed;
+                    radio2=1 Cipher Completed;
+                    radio3=No Ciphers Completed;
+                    defaultselect=3;
+                }Item4
 
-            Item4{
-                itemtype=textArea;
-                title=Text Area;
-                lines=5;
-            }Item4
+            }Tele-Op
 
-            Item5{
-                itemtype=toggleButton;
-                title=Toggle Button;
-                default=false;
-                truetext=ON;
-                falsetext=OFF;
-            }Item5
+            EndGame{
+                itemcount=5;
 
-        }Tele-Op
+                Item1{
+                    itemtype=radioGroup;
+                    title=First Relic Scored;
+                    radiocount=4;
+                    radio1=Zone 3;
+                    radio2=Zone 2;
+                    radio3=Zone 1;
+                    radio4=Not Scored;
+                    defaultselect=4;
+                }Item1
 
-        EndGame{
-            itemcount=5;
+                Item2{
+                    itemtype=toggleButton;
+                    title=First Relic Standing;
+                    default=false;
+                    truetext=STANDING;
+                    falsetext=NOT STANDING;
+                }Item2
 
-            Item1{
-                itemtype=checkBox;
-                title=Check Box;
-                checkboxcount=2;
-                checkbox1=#1;
-                checkbox1checked=false;
-                checkbox2=#2;
-                checkbox2checked=false;
-            }Item1
+                Item3{
+                    itemtype=radioGroup;
+                    title=Second Relic Scored;
+                    radiocount=4;
+                    radio1=Zone 3;
+                    radio2=Zone 2;
+                    radio3=Zone 1;
+                    radio4=Not Scored;
+                    defaultselect=4;
+                }Item3
 
-            Item2{
-                itemtype=counter;
-                title=Counter;
-                default=0;
-                modifier=1;
-                minvalue=0;
-                maxvalue=100;
-            }Item2
+                Item4{
+                    itemtype=toggleButton;
+                    title=Second Relic Standing;
+                    default=false;
+                    truetext=STANDING;
+                    falsetext=NOT STANDING;
+                }Item4
 
-            Item3{
-                itemtype=radioGroup;
-                title=Radio Group;
-                radiocount=3;
-                radio1=#1;
-                radio2=#2;
-                radio3=#3;
-                defaultselect=1;
-            }Item3
+                Item5{
+                    itemtype=toggleButton;
+                    title=Robot Balanced;
+                    default=false;
+                    truetext=BALANCED;
+                    falsetext=NOT BALANCED;
+                }Item5
 
-            Item4{
-                itemtype=textArea;
-                title=Text Area;
-                lines=5;
-            }Item4
+            }EndGame
 
-            Item5{
-                itemtype=toggleButton;
-                title=Toggle Button;
-                default=false;
-                truetext=ON;
-                falsetext=OFF;
-            }Item5
+            Extras{
+                include=true;
+                itemcount=4;
 
-        }EndGame
+                Item1{
+                    itemtype=radioGroup;
+                    title=Robot Reliability at Scoring Glyphs;
+                    radiocount=3;
+                    radio1=Good;
+                    radio2=So-So;
+                    radio3=Bad;
+                    defaultselect=-1;
+                }Item1
 
-        Extras{
-            include=true;
-            itemcount=5;
+                Item2{
+                    itemtype=radioGroup;
+                    title=Robot Reliability at Scoring Relics;
+                    radiocount=3;
+                    radio1=Good;
+                    radio2=So-So;
+                    radio3=Bad;
+                    defaultselect=-1;
+                }Item2
 
-            Item1{
-                itemtype=checkBox;
-                title=Check Box;
-                checkboxcount=2;
-                checkbox1=#1;
-                checkbox1checked=false;
-                checkbox2=#2;
-                checkbox2checked=false;
-            }Item1
+                Item3{
+                    itemtype=radioGroup;
+                    title=Robot Speed;
+                    radiocount=2;
+                    radio1=Fast;zsf
+                    radio2=Slow;
+                    defaultselect=-1;
+                }Item3
 
-            Item2{
-                itemtype=counter;
-                title=Counter;
-                default=0;
-                modifier=1;
-                minvalue=0;
-                maxvalue=100;
-            }Item2
+                Item4{
+                    itemtype=textArea;
+                    title=Comments;
+                    lines=5;
+                }Item4
 
-            Item3{
-                itemtype=radioGroup;
-                title=Radio Group;
-                radiocount=3;
-                radio1=#1;
-                radio2=#2;
-                radio3=#3;
-                defaultselect=1;
-            }Item3
+            }Extras
 
-            Item4{
-                itemtype=textArea;
-                title=Text Area;
-                lines=5;
-            }Item4
-
-            Item5{
-                itemtype=toggleButton;
-                title=Toggle Button;
-                default=false;
-                truetext=ON;
-                falsetext=OFF;
-            }Item5
-
-        }Extras
+        }Game
     </string>
 </resources>

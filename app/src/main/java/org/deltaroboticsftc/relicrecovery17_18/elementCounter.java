@@ -1,7 +1,9 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -60,6 +62,7 @@ public class elementCounter extends matchElement {
 
         textView = new TextView(context);
         textView.setLayoutParams(layoutParams);
+        textView.setGravity(Gravity.CENTER);
         textView.setText(Integer.toString(elementDefault));
         if (Build.VERSION.SDK_INT >= 23) {
             textView.setTextAppearance(counterNumberStyle);
