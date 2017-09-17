@@ -79,6 +79,7 @@
             android:layout_height="wrap_content"
             android:text="AUTONOMOUS"
             android:textAlignment="center" />
+
     </LinearLayout>
 
     <LinearLayout

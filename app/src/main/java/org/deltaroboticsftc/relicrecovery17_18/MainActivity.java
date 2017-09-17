@@ -43,6 +43,29 @@ public class MainActivity extends AppCompatActivity
 
 
         matchBuilder test = new matchBuilder("default", this);
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.game_autonomous);
+        layout.addView(test.getAutonomousLayout());
+
+        layout = (LinearLayout) findViewById(R.id.game_teleop);
+        layout.addView(test.getTeleOpLayout());
+
+        layout = (LinearLayout) findViewById(R.id.game_endgame);
+        layout.addView(test.getEndGameLayout());
+
+        layout = (LinearLayout) findViewById(R.id.game_extras);
+        if(test.getExtrasLayout() == null)
+        {
+            layout.setVisibility(View.GONE);
+        }
+        else
+        {
+            layout.addView(test.getExtrasLayout());
+        }
+
+
+
+
     }
 
     @Override

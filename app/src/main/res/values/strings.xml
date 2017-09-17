@@ -8,31 +8,200 @@
 
     <string name="game">
         Game{
-            title=Test Game;
+            gametitle=Test Game;
             creator=Luke Poellet;
 
         Autonomous{
-            itemcount=1;
+            itemcount=5;
 
             Item1{
+                itemtype=checkBox;
                 title=Check Box;
                 checkboxcount=2;
-                checkbox0=#1;
-                checkbox0checked=false;
-                checkbox1=#2;
+                checkbox1=#1;
                 checkbox1checked=false;
+                checkbox2=#2;
+                checkbox2checked=false;
             }Item1
+
+            Item2{
+                itemtype=counter;
+                title=Counter;
+                default=0;
+                modifier=1;
+                minvalue=0;
+                maxvalue=100;
+            }Item2
+
+            Item3{
+                itemtype=radioGroup;
+                title=Radio Group;
+                radiocount=3;
+                radio1=#1;
+                radio2=#2;
+                radio3=#3;
+                defaultselect=1;
+            }Item3
+
+            Item4{
+                itemtype=textArea;
+                title=Text Area;
+                lines=5;
+            }Item4
+
+            Item5{
+                itemtype=toggleButton;
+                title=Toggle Button;
+                default=false;
+                truetext=ON;
+                falsetext=OFF;
+            }Item5
 
         }Autonomous
 
         Tele-Op{
+            itemcount=5;
+
+            Item1{
+                itemtype=checkBox;
+                title=Check Box;
+                checkboxcount=2;
+                checkbox1=#1;
+                checkbox1checked=false;
+                checkbox2=#2;
+                checkbox2checked=false;
+            }Item1
+
+            Item2{
+                itemtype=counter;
+                title=Counter;
+                default=0;
+                modifier=1;
+                minvalue=0;
+                maxvalue=100;
+            }Item2
+
+            Item3{
+                itemtype=radioGroup;
+                title=Radio Group;
+                radiocount=3;
+                radio1=#1;
+                radio2=#2;
+                radio3=#3;
+                defaultselect=1;
+            }Item3
+
+            Item4{
+                itemtype=textArea;
+                title=Text Area;
+                lines=5;
+            }Item4
+
+            Item5{
+                itemtype=toggleButton;
+                title=Toggle Button;
+                default=false;
+                truetext=ON;
+                falsetext=OFF;
+            }Item5
+
         }Tele-Op
 
-        End Game{
-        }End Game
+        EndGame{
+            itemcount=5;
+
+            Item1{
+                itemtype=checkBox;
+                title=Check Box;
+                checkboxcount=2;
+                checkbox1=#1;
+                checkbox1checked=false;
+                checkbox2=#2;
+                checkbox2checked=false;
+            }Item1
+
+            Item2{
+                itemtype=counter;
+                title=Counter;
+                default=0;
+                modifier=1;
+                minvalue=0;
+                maxvalue=100;
+            }Item2
+
+            Item3{
+                itemtype=radioGroup;
+                title=Radio Group;
+                radiocount=3;
+                radio1=#1;
+                radio2=#2;
+                radio3=#3;
+                defaultselect=1;
+            }Item3
+
+            Item4{
+                itemtype=textArea;
+                title=Text Area;
+                lines=5;
+            }Item4
+
+            Item5{
+                itemtype=toggleButton;
+                title=Toggle Button;
+                default=false;
+                truetext=ON;
+                falsetext=OFF;
+            }Item5
+
+        }EndGame
 
         Extras{
             include=true;
+            itemcount=5;
+
+            Item1{
+                itemtype=checkBox;
+                title=Check Box;
+                checkboxcount=2;
+                checkbox1=#1;
+                checkbox1checked=false;
+                checkbox2=#2;
+                checkbox2checked=false;
+            }Item1
+
+            Item2{
+                itemtype=counter;
+                title=Counter;
+                default=0;
+                modifier=1;
+                minvalue=0;
+                maxvalue=100;
+            }Item2
+
+            Item3{
+                itemtype=radioGroup;
+                title=Radio Group;
+                radiocount=3;
+                radio1=#1;
+                radio2=#2;
+                radio3=#3;
+                defaultselect=1;
+            }Item3
+
+            Item4{
+                itemtype=textArea;
+                title=Text Area;
+                lines=5;
+            }Item4
+
+            Item5{
+                itemtype=toggleButton;
+                title=Toggle Button;
+                default=false;
+                truetext=ON;
+                falsetext=OFF;
+            }Item5
+
         }Extras
     </string>
 </resources>

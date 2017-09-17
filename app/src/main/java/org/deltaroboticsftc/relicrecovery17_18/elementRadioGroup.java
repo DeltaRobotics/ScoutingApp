@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Created by Luke Poellet on 9/16/2017.
  */
 
-public class elementRadioGoup extends matchElement {
+public class elementRadioGroup extends matchElement {
 
     private ArrayList<String> elementsText;
     private int elementChecked;
@@ -20,7 +20,7 @@ public class elementRadioGoup extends matchElement {
 
     private ArrayList<RadioButton> radioButtons;
 
-    public elementRadioGoup(String title, ArrayList<String> elementsText, int elementChecked)
+    public elementRadioGroup(String title, ArrayList<String> elementsText, int elementChecked)
     {
         super(title);
         this.elementsText = elementsText;

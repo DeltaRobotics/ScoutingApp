@@ -2,6 +2,7 @@ package org.deltaroboticsftc.relicrecovery17_18;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
