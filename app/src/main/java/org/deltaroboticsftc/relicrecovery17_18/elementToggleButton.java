@@ -1,6 +1,7 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
 import android.content.Context;
+import android.os.Build;
 import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
@@ -8,11 +9,14 @@ import android.widget.ToggleButton;
  * Created by Luke Poellet on 9/13/2017.
  */
 
-public class elementToggleButton extends matchElement {
+public class elementToggleButton extends matchElement
+{
 
-    private boolean elementDefaultToggle = false;
-    private String elementToggledTrueText = "Checked";
-    private String elementToggledFalseText = "Not Checked";
+    private boolean elementDefaultToggle;
+    private String elementToggledTrueText;
+    private String elementToggledFalseText;
+
+    private ToggleButton toggleButton;
 
     public elementToggleButton(String title, boolean elementDefaultToggle, String elementToggledTrueText, String elementToggledFalseText)
     {
@@ -22,18 +26,30 @@ public class elementToggleButton extends matchElement {
         this.elementToggledFalseText = elementToggledFalseText;
     }
 
-    protected void setElementTitle(String title)
+    public boolean getValue()
     {
-        super.elementTitle = title;
+        return toggleButton.isChecked();
     }
 
-    protected LinearLayout getElement(int section, Context context)
+    public LinearLayout getElement(Context context)
     {
-        ToggleButton toggleButton = new ToggleButton(context);
+        int toggleButtonStyle = context.getResources().getIdentifier("toggleButton", "style", context.getPackageName());
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+        toggleButton = new ToggleButton(context);
+        toggleButton.setLayoutParams(layoutParams);
         toggleButton.setTextOff(this.elementToggledFalseText);
         toggleButton.setTextOn(this.elementToggledTrueText);
+        toggleButton.setChecked(elementDefaultToggle);
+        if(Build.VERSION.SDK_INT >= 23)
+        {
+            toggleButton.setTextAppearance(toggleButtonStyle);
+        }
+        else
+        {
+            toggleButton.setTextAppearance(context, toggleButtonStyle);
+        }
 
-        super.buildElement(toggleButton);
-        return null;
+        return super.buildElement(toggleButton, context);
     }
 }

@@ -1,8 +1,15 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
+import android.app.Notification;
 import android.content.Context;
+import android.os.Build;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.ToggleButton;
+
+import java.security.Policy;
 
 /**
  * Created by Luke Poellet on 9/13/2017.
@@ -11,23 +18,38 @@ import android.widget.LinearLayout;
 public abstract class matchElement {
 
     protected String elementTitle = null;
-    protected int gameSection = 0;
-    //gameSection = 0 : Section is Unknown
-    //gameSection = 1 : Autonomous
-    //gameSection = 2 : Tele-Op
-    //gameSection = 3 : End Game
-    //gameSection = 4 : Extra Items
 
     protected matchElement(String title)
     {
         elementTitle = title;
     }
 
-    protected abstract LinearLayout getElement(int section, Context context);
+    public abstract LinearLayout getElement(Context context);
 
-    protected LinearLayout buildElement(View element)
+    protected LinearLayout buildElement(View element, Context context)
     {
-        return null;
+        int titleStyle = context.getResources().getIdentifier("subTitle", "style", context.getPackageName());
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+        TextView title = new TextView(context);
+        title.setLayoutParams(layoutParams);
+        title.setText(elementTitle);
+        if(Build.VERSION.SDK_INT >= 23)
+        {
+            title.setTextAppearance(titleStyle);
+        }
+        else
+        {
+            title.setTextAppearance(context, titleStyle);
+        }
+
+        LinearLayout finalElement = new LinearLayout(context);
+        finalElement.setLayoutParams(layoutParams);
+        finalElement.setOrientation(LinearLayout.VERTICAL);
+        finalElement.addView(title);
+        finalElement.addView(element);
+
+        return finalElement;
     }
 
 }

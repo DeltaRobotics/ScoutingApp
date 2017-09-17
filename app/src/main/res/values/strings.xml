@@ -5,4 +5,34 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="game">
+        Game{
+            title=Test Game;
+            creator=Luke Poellet;
+
+        Autonomous{
+            itemcount=1;
+
+            Item1{
+                title=Check Box;
+                checkboxcount=2;
+                checkbox0=#1;
+                checkbox0checked=false;
+                checkbox1=#2;
+                checkbox1checked=false;
+            }Item1
+
+        }Autonomous
+
+        Tele-Op{
+        }Tele-Op
+
+        End Game{
+        }End Game
+
+        Extras{
+            include=true;
+        }Extras
+    </string>
 </resources>
