@@ -70,7 +70,7 @@
                     default=0;
                     modifier=1;
                     minvalue=0;
-                    maxvalue=4;
+                    maxvalue=8;
                 }Item2
 
                 Item3{
@@ -79,17 +79,17 @@
                     default=0;
                     modifier=1;
                     minvalue=0;
-                    maxvalue=3;
+                    maxvalue=6;
                 }Item3
 
                 Item4{
                     itemtype=radioGroup;
                     title=Completed Cipher;
                     radiocount=3;
-                    radio1=2 Ciphers Completed;
+                    radio1=No Ciphers Completed;
                     radio2=1 Cipher Completed;
-                    radio3=No Ciphers Completed;
-                    defaultselect=3;
+                    radio3=2 Ciphers Completed;
+                    defaultselect=1;
                 }Item4
 
             }Tele-Op
@@ -101,11 +101,11 @@
                     itemtype=radioGroup;
                     title=First Relic Scored;
                     radiocount=4;
-                    radio1=Zone 3;
-                    radio2=Zone 2;
-                    radio3=Zone 1;
-                    radio4=Not Scored;
-                    defaultselect=4;
+                    radio1=Not Scored;
+                    radio2=Zone 1;
+                    radio3=Zone 2;
+                    radio4=Zone 3;
+                    defaultselect=1;
                 }Item1
 
                 Item2{
@@ -120,11 +120,11 @@
                     itemtype=radioGroup;
                     title=Second Relic Scored;
                     radiocount=4;
-                    radio1=Zone 3;
-                    radio2=Zone 2;
-                    radio3=Zone 1;
-                    radio4=Not Scored;
-                    defaultselect=4;
+                    radio1=Not Scored;
+                    radio2=Zone 1;
+                    radio3=Zone 2;
+                    radio4=Zone 3;
+                    defaultselect=1;
                 }Item3
 
                 Item4{
@@ -151,7 +151,7 @@
 
                 Item1{
                     itemtype=radioGroup;
-                    title=Robot Reliability at Scoring Glyphs;
+                    title=Robot Efficiency at Scoring Glyphs;
                     radiocount=3;
                     radio1=Good;
                     radio2=So-So;
@@ -161,7 +161,7 @@
 
                 Item2{
                     itemtype=radioGroup;
-                    title=Robot Reliability at Scoring Relics;
+                    title=Robot Efficiency at Scoring Relics;
                     radiocount=3;
                     radio1=Good;
                     radio2=So-So;
@@ -179,10 +179,20 @@
                 }Item3
 
                 Item4{
+                    itemtype=checkBox;
+                    title=Robot Problems;
+                    checkboxcount=2;
+                    checkbox1=Phone Connection Issues;
+                    checkbox1checked=false;
+                    checkbox2=Mechanical Issues;
+                    checkbox2checked=false;
+                }Item4
+
+                Item5{
                     itemtype=textArea;
                     title=Comments;
                     lines=5;
-                }Item4
+                }Item5
 
             }Extras
 

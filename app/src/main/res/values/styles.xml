@@ -37,21 +37,21 @@
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15dp</item>
         <item name="android:paddingBottom">0dp</item>
-        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingTop">0dp</item>
     </style>
 
     <style name="elementCheckBox">
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15dp</item>
         <item name="android:paddingBottom">0dp</item>
-        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingTop">0dp</item>
     </style>
 
     <style name="elementRadioGroup">
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15dp</item>
         <item name="android:paddingBottom">0dp</item>
-        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingTop">0dp</item>
     </style>
 
     <style name="elementEditText">
@@ -65,14 +65,14 @@
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15dp</item>
         <item name="android:paddingBottom">0dp</item>
-        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingTop">0dp</item>
     </style>
 
     <style name="elementCounterButton">
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15dp</item>
         <item name="android:paddingBottom">0dp</item>
-        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingTop">0dp</item>
     </style>
 
     <style name="subText">
@@ -85,6 +85,13 @@
     <style name="editText">
         <item name="android:textColor">#000000</item>
         <item name="android:textSize">15dp</item>
+    </style>
+
+    <style name="settingsSwitch">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:paddingTop">0dp</item>
     </style>
 
 </resources>

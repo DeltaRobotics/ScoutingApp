@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerHeight"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"></LinearLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        style="@style/subTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="File Output" />
+
+    <Switch
+        android:id="@+id/settings_file_readable"
+        style="@style/settingsSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Output Readable File" />
+
+    <Switch
+        android:id="@+id/settings_file_csv"
+        style="@style/settingsSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Output CSV File" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerHeight"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/settings_delete_data"
+        style="@style/elementCounterButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete All Match Data"
+        android:textColor="@android:color/holo_red_dark" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerHeight"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/settings_reset_app"
+        style="@style/elementCounterButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset App To Default"
+        android:textColor="@android:color/holo_red_dark" />
+
+</LinearLayout>
