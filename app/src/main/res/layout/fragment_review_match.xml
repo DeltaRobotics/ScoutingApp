@@ -21,65 +21,38 @@
         android:background="@color/colorPrimary"
         android:orientation="vertical"></LinearLayout>
 
-    <EditText
-        android:id="@+id/team_number"
+    <TextView
+        android:id="@+id/review_team_number"
+        style="@style/subTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Team Number" />
+
+    <TextView
+        android:id="@+id/review_match_number"
         style="@style/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Team Number"
-        android:inputType="number"
-        android:imeOptions="actionNext"/>
+        android:gravity="center_horizontal"
+        android:text="Match Number" />
 
-    <EditText
-        android:id="@+id/match_number"
-        style="@style/editText"
+    <TextView
+        android:id="@+id/review_alliance_color"
+        style="@style/elementToggleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Match Number"
-        android:inputType="number"
-        android:imeOptions="actionDone"/>
+        android:gravity="center_horizontal"
+        android:text="Alliance Color" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView4"
-            style="@style/subTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Alliance Color:" />
-
-        <ToggleButton
-            android:id="@+id/alliance_color"
-            style="@style/elementToggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ToggleButton"
-            android:textOff="Blue"
-            android:textOn="Red" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/game_autonomous"
+        android:id="@+id/review_autonomous"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dividerHeight"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
         <TextView
-            style="@style/title"
+            style="@style/subTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="AUTONOMOUS"
@@ -88,21 +61,13 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/game_teleop"
+        android:id="@+id/review_teleop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dividerHeight"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
         <TextView
-            style="@style/title"
+            style="@style/subTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TELE-OP"
@@ -110,21 +75,13 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/game_endgame"
+        android:id="@+id/review_endgame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dividerHeight"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
         <TextView
-            style="@style/title"
+            style="@style/subTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="END GAME"
@@ -132,21 +89,13 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/game_extras"
+        android:id="@+id/review_extras"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dividerHeight"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
         <TextView
-            style="@style/title"
+            style="@style/subTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="EXTRA INFORMATION"
@@ -168,14 +117,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/game_clear"
+            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Clear" />
 
         <Button
-            android:id="@+id/game_save"
+            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

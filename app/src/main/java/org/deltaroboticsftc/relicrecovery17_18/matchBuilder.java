@@ -1,11 +1,14 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Luke Poellet on 9/16/2017.
@@ -188,6 +191,16 @@ public class matchBuilder
         }
 
         return linearLayout;
+    }
+
+    public int save(int location, Context context)
+    {
+        SharedPreferences DRFTCScouting = context.getSharedPreferences("DRFTCScouting", 1);
+        SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
+
+
+
+
     }
 
 }

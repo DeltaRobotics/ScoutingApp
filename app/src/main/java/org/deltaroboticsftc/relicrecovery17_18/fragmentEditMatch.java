@@ -3,9 +3,11 @@ package org.deltaroboticsftc.relicrecovery17_18;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -77,6 +79,39 @@ public class fragmentEditMatch extends Fragment
             layout.addView(match.getExtrasLayout());
         }
 
+        Button saveButton = (Button) rootView.findViewById(R.id.game_save);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveOnClick();
+            }
+        });
+
+        final Button clearButton = (Button) rootView.findViewById(R.id.game_clear);
+        clearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clearOnClick();
+            }
+        });
+
+
         return rootView;
+    }
+
+    public void saveOnClick()
+    {
+        Fragment fragment = new fragmentReview();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.parent_fragment, fragment);
+        transaction.commit();
+    }
+
+    public void clearOnClick()
+    {
+        Fragment fragment = new fragmentSettings();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.parent_fragment, fragment);
+        transaction.commit();
     }
 }

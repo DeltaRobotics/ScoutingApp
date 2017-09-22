@@ -10,14 +10,14 @@ import android.view.ViewGroup;
  * Created by Luke Poellet on 9/19/2017.
  */
 
-public class fragmentSettings extends Fragment
+public class fragmentReview extends Fragment
 {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreateView(inflater, container, savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_review_match, container, false);
 
         return rootView;
     }

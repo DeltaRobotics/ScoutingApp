@@ -1,5 +1,6 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,10 +13,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Fragment fragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 0);
+        SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 1);
         SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
 
         //if(DRFTCScouting.getBoolean("FirstLaunch", true))
@@ -103,7 +107,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        Fragment fragment = null;
+        fragment = null;
 
         if (id == R.id.nav_edit_match)
         {
@@ -115,7 +119,7 @@ public class MainActivity extends AppCompatActivity
         }
         else if(id == R.id.nav_setting)
         {
-
+            fragment = new fragmentSettings();
         }
 
         if(fragment != null)

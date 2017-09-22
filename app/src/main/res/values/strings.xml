@@ -147,7 +147,7 @@
 
             Extras{
                 include=true;
-                itemcount=4;
+                itemcount=5;
 
                 Item1{
                     itemtype=radioGroup;
