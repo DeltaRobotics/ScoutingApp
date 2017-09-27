@@ -109,8 +109,6 @@ public class fragmentEditMatch extends Fragment
 
     public void clearOnClick()
     {
-        //test
-        //test2
         Fragment fragment = new fragmentSettings();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.parent_fragment, fragment);
