@@ -26,6 +26,11 @@ public class elementCheckBox extends matchElement {
         this.elementsChecked = elementsChecked;
     }
 
+    public String getText()
+    {
+        return null;
+    }
+
     public boolean getValue(int index)
     {
         return checkBoxs.get(index).isChecked();

@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -193,13 +195,15 @@ public class matchBuilder
         return linearLayout;
     }
 
-    public int save(int location, Context context)
+    public void save(int location, Context context)
     {
         SharedPreferences DRFTCScouting = context.getSharedPreferences("DRFTCScouting", 1);
         SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
 
+        Gson gson = new Gson();
 
-        return 0;
+
+
     }
 
 }

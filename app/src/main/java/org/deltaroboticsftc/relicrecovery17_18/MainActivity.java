@@ -10,8 +10,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,6 +54,20 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.parent_fragment, new fragmentEditMatch());
         transaction.commit();
+
+        ArrayList<String> test = new ArrayList<>();
+        test.add("Item1");
+        test.add("Item2");
+        test.add("Item3");
+        test.add("Item4");
+        test.add("Item5");
+        test.add("Item6");
+        test.add("Item7");
+        test.add("Item8");
+
+        Gson gson = new Gson();
+        Log.i("Json", gson.toJson(test));
+
 
     }
 
