@@ -40,8 +40,6 @@ public class matchBuilder
         AutonomousElements = new ArrayList<>();
         AutonomousLayout = buildLayout(cut(this.game, "Autonomous{", "}Autonomous"), context, AutonomousElements);
 
-        //test
-
         TeleOpElements = new ArrayList<>();
         TeleOpLayout = buildLayout(cut(this.game, "Tele-Op{", "}Tele-Op"), context, TeleOpElements);
 
@@ -201,8 +199,7 @@ public class matchBuilder
         SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
 
 
-
-
+        return 0;
     }
 
 }
