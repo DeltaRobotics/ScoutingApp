@@ -21,6 +21,8 @@ public class matchBuilder
 {
     private String game;
     private String gameTitle;
+    private String gameYear;
+    private String gameDescription;
     private String gameBy;
     private String mode;
     private LinearLayout AutonomousLayout;
@@ -37,6 +39,8 @@ public class matchBuilder
         this.game = cut(game, "Game{", "}Game");
 
         gameTitle = cutInfo(this.game, "gametitle");
+        gameYear = cutInfo(this.game, "gameyear");
+        gameDescription = cutInfo(this.game, "gamedescription");
         gameBy = cutInfo(this.game, "creator");
         mode = cutInfo(this.game, "mode");
 

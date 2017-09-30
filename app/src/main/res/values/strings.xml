@@ -6,9 +6,13 @@
 
     <string name="action_settings">Settings</string>
 
+    <integer name="OfficialGameCount">2</integer>
+
     <string name="OfficialGame1">
         Game{
             gametitle=Relic Recovery;
+            gameyear=2017-18;
+            gamedescription=Official Game2 Description;
             creator=DR-2015-Official;
             mode=Team;
 
@@ -193,6 +197,178 @@
                     title=Comments;
                     lines=5;
                 }Item5
+
+            }Extras
+
+        }Game
+    </string>
+
+
+    <string name="OfficialGame2">
+        Game{
+            gametitle=Velocity Vortex;
+            gameyear=2016-17;
+            gamedescription=Official Game2 Description;
+            creator=DR-2015-Official;
+            mode=Team;
+
+            Autonomous{
+                itemcount=4;
+
+                Item1{
+                    itemtype=counter;
+                    title=Corner Vortex Particles Scored;
+                    default=0;
+                    modifier=1;
+                    minvalue=0;
+                    maxvalue=10000;
+                }Item1
+
+                Item2{
+                    itemtype=counter;
+                    title=Center Vortex Particles Scored;
+                    default=0;
+                    modifier=1;
+                    minvalue=0;
+                    maxvalue=10000;
+                }Item2
+
+                Item3{
+                    itemtype=toggleButton;
+                    title=Capball Moved;
+                    default=false;
+                    truetext=YES;
+                    falsetext=NO;
+                }Item3
+
+                Item4{
+                    itemtype=radioGroup;
+                    title=Beacons Scored;
+                    radiocount=3;
+                    radio1=No Beacons Scored;
+                    radio2=1 Beacon Scored;
+                    radio3=2 Beacons Scored;
+                    defaultselect=1;
+                }Item4
+
+            }Autonomous
+
+            Tele-Op{
+                itemcount=4;
+
+                Item1{
+                    itemtype=counter;
+                    title=Corner Vortex Particles Scored;
+                    default=0;
+                    modifier=1;
+                    minvalue=0;
+                    maxvalue=10000;
+                }Item1
+
+                Item2{
+                    itemtype=counter;
+                    title=Center Vortex Particles Scored;
+                    default=0;
+                    modifier=1;
+                    minvalue=0;
+                    maxvalue=10000;
+                }Item2
+
+                Item3{
+                    itemtype=counter;
+                    title=Beacons Pressed;
+                    default=0;
+                    modifier=1;
+                    minvalue=0;
+                    maxvalue=10000;
+                }Item3
+
+                Item4{
+                    itemtype=radioGroup;
+                    title=Beacons Scored;
+                    radiocount=3;
+                    radio1=No Beacons Scored;
+                    radio2=1 Beacon Scored;
+                    radio3=2 Beacons Scored;
+                    defaultselect=1;
+                }Item4
+
+            }Tele-Op
+
+            EndGame{
+                itemcount=1;
+
+                Item1{
+                    itemtype=radioGroup;
+                    title=Capball Scored;
+                    radiocount=4;
+                    radio1=Not Scored;
+                    radio2=Low Goal;
+                    radio3=High Goal;
+                    radio4=Capped;
+                    defaultselect=1;
+                }Item1
+
+            }EndGame
+
+            Extras{
+                include=true;
+                itemcount=6;
+
+                Item1{
+                    itemtype=radioGroup;
+                    title=Robot Efficiency at Scoring Particles;
+                    radiocount=3;
+                    radio1=Good;
+                    radio2=So-So;
+                    radio3=Bad;
+                    defaultselect=-1;
+                }Item1
+
+                Item2{
+                    itemtype=radioGroup;
+                    title=Robot Efficiency at Scoring Beacons;
+                    radiocount=3;
+                    radio1=Good;
+                    radio2=So-So;
+                    radio3=Bad;
+                    defaultselect=-1;
+                }Item2
+
+                Item3{
+                    itemtype=radioGroup;
+                    title=Robot Efficiency at Scoring Capball;
+                    radiocount=3;
+                    radio1=Good;
+                    radio2=So-So;
+                    radio3=Bad;
+                    defaultselect=-1;
+                }Item3
+
+                Item4{
+                    itemtype=radioGroup;
+                    title=Robot Speed;
+                    radiocount=2;
+                    radio1=Fast;zsf
+                    radio2=Slow;
+                    defaultselect=-1;
+                }Item4
+
+                Item5{
+                    itemtype=checkBox;
+                    title=Robot Problems;
+                    checkboxcount=2;
+                    checkbox1=Phone Connection Issues;
+                    checkbox1checked=false;
+                    checkbox2=Mechanical Issues;
+                    checkbox2checked=false;
+                }Item5
+
+                Item6{
+                    itemtype=textArea;
+                    title=Comments;
+                    lines=5;
+                }Item6
 
             }Extras
 

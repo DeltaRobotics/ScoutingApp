@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity
         }
         else if(id == R.id.nav_game_selector)
         {
-
+            fragment = new fragmentChangeGame();
         }
         else if(id == R.id.nav_setting)
         {
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity
 
             try
             {
-                File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRScouting");
+                File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRSgame");
                 Log.i("DR-RR File Deleted", Boolean.toString(DRRelicRecoveryFile.delete()));
                 Log.i("DR-RR File Created", Boolean.toString(DRRelicRecoveryFile.createNewFile()));
 
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity
 
         try
         {
-            File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRScouting");
+            File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRSgame");
             InputStream inputStream = new BufferedInputStream(new FileInputStream(DRRelicRecoveryFile));
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             StringBuilder builder = new StringBuilder();
