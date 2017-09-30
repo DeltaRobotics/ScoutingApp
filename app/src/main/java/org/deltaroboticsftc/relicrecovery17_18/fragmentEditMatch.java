@@ -29,7 +29,7 @@ public class fragmentEditMatch extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_edit_match, container, false);
 
         SharedPreferences DRFTCScouting = rootView.getContext().getSharedPreferences("DRFTCScouting", 0);
-        String game = rootView.getResources().getString(R.string.game);
+        String game = rootView.getResources().getString(R.string.OfficialGame1);
 
         match = new matchBuilder(DRFTCScouting.getString("Game", game), rootView.getContext());
 

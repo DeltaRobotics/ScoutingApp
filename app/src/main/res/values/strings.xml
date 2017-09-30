@@ -6,7 +6,7 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="game">
+    <string name="OfficialGame1">
         Game{
             gametitle=Relic Recovery;
             creator=DR-2015-Official;

@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -201,8 +202,6 @@ public class matchBuilder
         SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
 
         Gson gson = new Gson();
-
-
 
     }
 

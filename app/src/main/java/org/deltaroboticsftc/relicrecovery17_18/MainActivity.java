@@ -1,6 +1,9 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -16,6 +19,13 @@ import android.view.MenuItem;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -36,16 +46,8 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 1);
-        SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
-
-        //if(DRFTCScouting.getBoolean("FirstLaunch", true))
-        if(true)
-        {
-            DRFTCScoutingEditor.putBoolean("FirstLaunch", false);
-            DRFTCScoutingEditor.putString("Game", getResources().getString(R.string.game));
-            DRFTCScoutingEditor.apply();
-        }
+        this.defineStorage();
+        this.readStorage();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity
 
         Gson gson = new Gson();
         Log.i("Json", gson.toJson(test));
-
 
     }
 
@@ -148,5 +149,72 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void defineStorage()
+    {
+        SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 1);
+        SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
+        File gamesDir = new File(getFilesDir(), "Games");
+
+        //if(DRFTCScouting.getBoolean("FirstLaunch", true))
+        if(true)
+        {
+            DRFTCScoutingEditor.putBoolean("FirstLaunch", false);
+            DRFTCScoutingEditor.putString("CurrentGame", getResources().getString(R.string.OfficialGame1));
+            DRFTCScoutingEditor.putInt("GameCount", 1);
+            DRFTCScoutingEditor.putBoolean("SettingsOutputReadable", false);
+            DRFTCScoutingEditor.putBoolean("SettingsOutputCSV", true);
+            DRFTCScoutingEditor.apply();
+
+            try
+            {
+                File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRScouting");
+                Log.i("DR-RR File Deleted", Boolean.toString(DRRelicRecoveryFile.delete()));
+                Log.i("DR-RR File Created", Boolean.toString(DRRelicRecoveryFile.createNewFile()));
+
+                FileOutputStream outputStream = new FileOutputStream(DRRelicRecoveryFile);
+                outputStream.write(getResources().getString(R.string.OfficialGame1).getBytes());
+                outputStream.flush();
+                outputStream.close();
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+//            File outputDir = getExternalFilesDir(null);
+//            Log.i("DR-RR Output Deleted", Boolean.toString(outputDir.delete()));
+//
+//            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//            intent.setData(Uri.fromFile(outputDir));
+//            sendBroadcast(intent);
+        }
+    }
+
+    private void readStorage()
+    {
+        File gamesDir = new File(getFilesDir(), "Games");
+
+        try
+        {
+            File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRScouting");
+            InputStream inputStream = new BufferedInputStream(new FileInputStream(DRRelicRecoveryFile));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder builder = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                builder.append(line);
+            }
+            reader.close();
+            inputStream.close();
+
+            Log.i("File", builder.toString());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
