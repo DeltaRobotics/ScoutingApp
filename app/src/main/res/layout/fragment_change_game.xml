@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -29,35 +30,16 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dividerHeight"
         android:background="@color/colorPrimary"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical">
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/selection_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView8"
-            style="@style/subTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Games By: Delta Robotics" />
-
-        <Button
-            android:id="@+id/button3"
-            style="@style/selectionButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Game Title\n20__-__" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dividerHeight"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical">
-
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
