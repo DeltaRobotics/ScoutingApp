@@ -22,24 +22,9 @@ public class elementRadioGroup extends matchElement {
 
     public elementRadioGroup(String title, ArrayList<String> elementsText, int elementChecked)
     {
-        super(title);
+        super(title, "RadioGroup");
         this.elementsText = elementsText;
         this.elementChecked = elementChecked;
-    }
-
-    public int getValue()
-    {
-        int n = 0;
-        for(RadioButton radioButton: radioButtons)
-        {
-            if(radioButton.isChecked())
-            {
-                return n;
-            }
-            n++;
-        }
-
-        return -1;
     }
 
     public LinearLayout getElement(Context context)
@@ -76,5 +61,18 @@ public class elementRadioGroup extends matchElement {
         }
 
         return super.buildElement(radioGroup, context);
+    }
+
+    public String getValue()
+    {
+        for(RadioButton radioButton: radioButtons)
+        {
+            if(radioButton.isChecked())
+            {
+                return radioButton.getText().toString();
+            }
+        }
+
+        return "Non Selected";
     }
 }

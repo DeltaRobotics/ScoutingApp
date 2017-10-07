@@ -18,10 +18,12 @@ import java.security.Policy;
 public abstract class matchElement {
 
     protected String elementTitle = null;
+    protected String elementType = null;
 
-    protected matchElement(String title)
+    protected matchElement(String title, String type)
     {
         elementTitle = title;
+        elementType = type;
     }
 
     public abstract LinearLayout getElement(Context context);
@@ -50,6 +52,16 @@ public abstract class matchElement {
         finalElement.addView(element);
 
         return finalElement;
+    }
+
+    public String getElementTitle()
+    {
+        return elementTitle;
+    }
+
+    public String getElementType()
+    {
+        return elementType;
     }
 
 }

@@ -27,7 +27,7 @@ public class elementCounter extends matchElement {
 
     public elementCounter(String title, int elementDefault, int elementModifier, int elementMinValue, int elementMaxValue)
     {
-        super(title);
+        super(title, "Counter");
         this.elementDefault = elementDefault;
         this.elementModifier = elementModifier;
         this.elementMinValue = elementMinValue;
@@ -41,11 +41,6 @@ public class elementCounter extends matchElement {
             elementDefault = elementMaxValue;
         }
         this.elementCurrentValue = elementDefault;
-    }
-
-    public int getValue()
-    {
-        return Integer.parseInt(textView.getText().toString());
     }
 
     public LinearLayout getElement(Context context)
@@ -144,5 +139,10 @@ public class elementCounter extends matchElement {
             elementCurrentValue = elementMaxValue;
         }
         textView.setText(Integer.toString(elementCurrentValue));
+    }
+
+    public int getValue()
+    {
+        return elementCurrentValue;
     }
 }

@@ -19,13 +19,8 @@ public class elementTextArea extends matchElement {
 
     public elementTextArea(String title, int elementLines)
     {
-        super(title);
+        super(title, "TextArea");
         this.elementLines = elementLines;
-    }
-
-    public String getValue()
-    {
-        return editText.getText().toString();
     }
 
     public LinearLayout getElement(Context context)
@@ -46,5 +41,10 @@ public class elementTextArea extends matchElement {
         }
 
         return super.buildElement(editText, context);
+    }
+
+    public String getValue()
+    {
+        return editText.getText().toString();
     }
 }

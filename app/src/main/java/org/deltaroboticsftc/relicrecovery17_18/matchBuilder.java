@@ -1,14 +1,20 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -200,13 +206,128 @@ public class matchBuilder
         return linearLayout;
     }
 
-    public void save(int location, Context context)
+    public String save(String teamNumber, String matchNumber, String allianceColor, Context context)
     {
-        SharedPreferences DRFTCScouting = context.getSharedPreferences("DRFTCScouting", 1);
-        SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
+        File savePath = new File(context.getExternalFilesDir(null), gameBy + "-" + gameTitle);
+        File saveMatch;
+        int loop = 0;
+        do
+        {
+            if (loop > 0)
+            {
+                if(this.getMode().equals("Alliance"))
+                {
+                    saveMatch = new File(savePath, "Match" + matchNumber + "-" + allianceColor + "-C" + loop + ".json");
+                }
+                else
+                {
+                    saveMatch = new File(savePath, "Match" + matchNumber + "-" + teamNumber + "-C" + loop + ".json");
+                }
+            }
+            else
+            {
+                if(this.getMode().equals("Alliance"))
+                {
+                    saveMatch = new File(savePath, "Match" + matchNumber + "-" + allianceColor + ".json");
+                }
+                else
+                {
+                    saveMatch = new File(savePath, "Match" + matchNumber + "-" + teamNumber + ".json");
+                }
+            }
+            loop++;
+        } while(saveMatch.exists());
 
-        Gson gson = new Gson();
+        savePath.mkdirs();
+        Log.i("saveMatch", saveMatch.getPath());
 
+        JSONObject jsonObject = new JSONObject();
+        try
+        {
+            jsonObject.put("gametitle", this.getGameTitle());
+            jsonObject.put("gameby", this.getGameBy());
+            if (this.getMode().equals("Team"))
+            {
+                jsonObject.put("teamNumber", teamNumber);
+            }
+            jsonObject.put("matchNumber", matchNumber);
+            jsonObject.put("allianceColor", allianceColor);
+
+            for (int x = 0; x < 4; x++)
+            {
+                ArrayList<matchElement> elements = new ArrayList<>();
+                String section = null;
+                switch (x)
+                {
+                    case 0:
+                        elements = AutonomousElements;
+                        section = "Autonomous";
+                        break;
+
+                    case 1:
+                        elements = TeleOpElements;
+                        section = "TeleOpElements";
+                        break;
+
+                    case 2:
+                        elements = EndGameElements;
+                        section = "EndGame";
+                        break;
+
+                    case 3:
+                        elements = ExtrasElements;
+                        section = "Extras";
+                        break;
+                }
+
+                for(matchElement element: elements)
+                {
+                    switch(element.getElementType())
+                    {
+                        case "Counter":
+                            elementCounter elementCounter = (elementCounter) element;
+                            jsonObject.put(section + ":" + element.getElementTitle(), elementCounter.getValue());
+                            break;
+
+                        case "RadioGroup":
+                            elementRadioGroup elementRadioGroup = (elementRadioGroup) element;
+                            jsonObject.put(section + ":" + element.getElementTitle(), elementRadioGroup.getValue());
+                            break;
+
+                        case "TextArea":
+                            elementTextArea elementTextArea = (elementTextArea) element;
+                            jsonObject.put(section + ":" + element.getElementTitle(), elementTextArea.getValue());
+                            break;
+
+                        case "ToggleButton":
+                            elementToggleButton elementToggleButton = (elementToggleButton) element;
+                            jsonObject.put(section + ":" + element.getElementTitle(), elementToggleButton.getValue());
+                            break;
+
+                        case "CheckBox":
+                            elementCheckBox elementCheckBox = (elementCheckBox) element;
+                            jsonObject.put(section + ":" + element.getElementTitle(), elementCheckBox.getValue());
+                            break;
+                    }
+                }
+
+            }
+
+            FileOutputStream outputStream = new FileOutputStream(saveMatch);
+            outputStream.write(jsonObject.toString(1).getBytes());
+            outputStream.flush();
+            outputStream.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.fromFile(saveMatch));
+        context.sendBroadcast(intent);
+
+        return saveMatch.getPath();
     }
 
 }

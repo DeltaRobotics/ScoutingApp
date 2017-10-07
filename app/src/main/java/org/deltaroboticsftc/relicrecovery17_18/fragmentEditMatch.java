@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 /**
  * Created by Luke Poellet on 9/17/2017.
@@ -102,8 +103,24 @@ public class fragmentEditMatch extends Fragment
     public void saveOnClick()
     {
 
+        EditText teamNumber = (EditText) this.getActivity().findViewById(R.id.team_number);
+        EditText matchNumber = (EditText) this.getActivity().findViewById(R.id.match_number);
+        ToggleButton allianceToggle = (ToggleButton) this.getActivity().findViewById(R.id.alliance_color);
+        String allianceColor;
+        if (allianceToggle.isChecked())
+        {
+            allianceColor = "Red";
+        }
+        else
+        {
+            allianceColor = "Blue";
+        }
+
+        Bundle reviewBundle = new Bundle();
+        reviewBundle.putString("matchPath", match.save(teamNumber.getText().toString(), matchNumber.getText().toString(), allianceColor, this.getContext()));
 
         Fragment fragment = new fragmentReview();
+        fragment.setArguments(reviewBundle);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.parent_fragment, fragment);
         transaction.commit();

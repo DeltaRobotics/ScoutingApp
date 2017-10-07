@@ -114,7 +114,6 @@ public class fragmentChangeGame extends Fragment
             testButton.setTextAppearance(this.getContext(), this.getContext().getResources().getIdentifier("selectionButton", "style", this.getContext().getPackageName()));
         }
         testButton.setText("GAME TITLE\n20__-__");
-        testButton.setVisibility(View.GONE);
         DRContentLinearLayout.addView(testButton);
 
         DRTitleLinearLayout.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +134,7 @@ public class fragmentChangeGame extends Fragment
             }
         });
 
+        DRContentLinearLayout.setVisibility(View.GONE);
         DRLinearLayout.addView(DRTitleLinearLayout);
         DRLinearLayout.addView(DRContentLinearLayout);
 

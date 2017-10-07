@@ -8,7 +8,7 @@
     android:weightSum="1">
 
     <TextView
-        android:id="@+id/game_title"
+        android:id="@+id/review_game_title"
         style="@style/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,6 +56,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="AUTONOMOUS"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/review_autonomous_info"
+            style="@style/subText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Info"
             android:textAlignment="center" />
 
     </LinearLayout>

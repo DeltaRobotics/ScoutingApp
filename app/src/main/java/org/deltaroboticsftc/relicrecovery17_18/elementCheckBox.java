@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 /**
@@ -21,7 +23,7 @@ public class elementCheckBox extends matchElement {
 
     public elementCheckBox(String title, ArrayList<String> elementsText, ArrayList<Boolean> elementsChecked)
     {
-        super(title);
+        super(title, "CheckBox");
         this.elementsText = elementsText;
         this.elementsChecked = elementsChecked;
     }
@@ -29,11 +31,6 @@ public class elementCheckBox extends matchElement {
     public String getText()
     {
         return null;
-    }
-
-    public boolean getValue(int index)
-    {
-        return checkBoxs.get(index).isChecked();
     }
 
     public LinearLayout getElement(Context context)
@@ -69,5 +66,25 @@ public class elementCheckBox extends matchElement {
         }
 
         return super.buildElement(checkBoxLayout, context);
+    }
+
+    public JSONArray getValue()
+    {
+        JSONArray jsonArray = new JSONArray();
+        int index = 0;
+
+        for(CheckBox checkBox: checkBoxs)
+        {
+            try
+            {
+                jsonArray.put(index, checkBox.getText() + ": " + checkBox.isChecked());
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            index++;
+        }
+        return jsonArray;
     }
 }

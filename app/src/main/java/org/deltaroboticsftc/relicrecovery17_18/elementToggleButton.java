@@ -20,15 +20,10 @@ public class elementToggleButton extends matchElement
 
     public elementToggleButton(String title, boolean elementDefaultToggle, String elementToggledTrueText, String elementToggledFalseText)
     {
-        super(title);
+        super(title, "ToggleButton");
         this.elementDefaultToggle = elementDefaultToggle;
         this.elementToggledTrueText = elementToggledTrueText;
         this.elementToggledFalseText = elementToggledFalseText;
-    }
-
-    public boolean getValue()
-    {
-        return toggleButton.isChecked();
     }
 
     public LinearLayout getElement(Context context)
@@ -51,5 +46,19 @@ public class elementToggleButton extends matchElement
         }
 
         return super.buildElement(toggleButton, context);
+    }
+
+    public String getValue()
+    {
+        switch (Boolean.toString(toggleButton.isChecked()))
+        {
+            case "false":
+                return toggleButton.getTextOff().toString();
+
+            case "true":
+                return toggleButton.getTextOn().toString();
+        }
+
+        return "No Value Found";
     }
 }
