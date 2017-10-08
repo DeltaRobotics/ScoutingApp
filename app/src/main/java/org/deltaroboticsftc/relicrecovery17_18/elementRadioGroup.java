@@ -6,6 +6,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -20,11 +22,23 @@ public class elementRadioGroup extends matchElement {
 
     private ArrayList<RadioButton> radioButtons;
 
-    public elementRadioGroup(String title, ArrayList<String> elementsText, int elementChecked)
+    public elementRadioGroup(String title, JSONObject elementInfo)
     {
         super(title, "RadioGroup");
-        this.elementsText = elementsText;
-        this.elementChecked = elementChecked;
+        try
+        {
+            elementsText = new ArrayList<>();
+
+            for(int x = 0; x < elementInfo.getInt("count"); x++)
+            {
+                elementsText.add(elementInfo.getString("radio" + x));
+                elementChecked = elementInfo.getInt("default");
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public LinearLayout getElement(Context context)
@@ -63,16 +77,30 @@ public class elementRadioGroup extends matchElement {
         return super.buildElement(radioGroup, context);
     }
 
-    public String getValue()
+    public JSONObject getValue()
     {
-        for(RadioButton radioButton: radioButtons)
-        {
-            if(radioButton.isChecked())
-            {
-                return radioButton.getText().toString();
-            }
-        }
+        JSONObject item = new JSONObject();
 
-        return "Non Selected";
+        try
+        {
+            item.put("itemType", elementType);
+            item.put("title", elementTitle);
+            int x = 0;
+            for(RadioButton radioButton: radioButtons)
+            {
+                if(radioButton.isChecked())
+                {
+                    item.put("value", x);
+                    return item;
+                }
+                x++;
+            }
+            item.put("value", -1);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return item;
     }
 }

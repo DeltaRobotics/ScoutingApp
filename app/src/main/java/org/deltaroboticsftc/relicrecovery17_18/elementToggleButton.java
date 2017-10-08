@@ -5,6 +5,8 @@ import android.os.Build;
 import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
+import org.json.JSONObject;
+
 /**
  * Created by Luke Poellet on 9/13/2017.
  */
@@ -18,12 +20,19 @@ public class elementToggleButton extends matchElement
 
     private ToggleButton toggleButton;
 
-    public elementToggleButton(String title, boolean elementDefaultToggle, String elementToggledTrueText, String elementToggledFalseText)
+    public elementToggleButton(String title, JSONObject elementInfo)
     {
         super(title, "ToggleButton");
-        this.elementDefaultToggle = elementDefaultToggle;
-        this.elementToggledTrueText = elementToggledTrueText;
-        this.elementToggledFalseText = elementToggledFalseText;
+        try
+        {
+            elementDefaultToggle = elementInfo.getBoolean("default");
+            elementToggledTrueText = elementInfo.getString("trueText");
+            elementToggledFalseText = elementInfo.getString("falseText");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public LinearLayout getElement(Context context)
@@ -48,17 +57,21 @@ public class elementToggleButton extends matchElement
         return super.buildElement(toggleButton, context);
     }
 
-    public String getValue()
+    public JSONObject getValue()
     {
-        switch (Boolean.toString(toggleButton.isChecked()))
-        {
-            case "false":
-                return toggleButton.getTextOff().toString();
+        JSONObject item = new JSONObject();
 
-            case "true":
-                return toggleButton.getTextOn().toString();
+        try
+        {
+            item.put("itemType", elementType);
+            item.put("title", elementTitle);
+            item.put("value", toggleButton.isChecked());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
 
-        return "No Value Found";
+        return item;
     }
 }

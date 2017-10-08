@@ -3,7 +3,6 @@ package org.deltaroboticsftc.relicrecovery17_18;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.LinearLayout;
 
 import org.json.JSONObject;
@@ -18,12 +17,12 @@ import java.util.ArrayList;
 
 public class matchBuilder
 {
-    private String game;
+    private JSONObject game;
     private String gameTitle;
-    private String gameYear;
+    private int gameYear;
     private String gameDescription;
     private String gameBy;
-    private String mode;
+    private String gameMode;
     private LinearLayout AutonomousLayout;
     private ArrayList<matchElement> AutonomousElements;
     private LinearLayout TeleOpLayout;
@@ -32,34 +31,44 @@ public class matchBuilder
     private ArrayList<matchElement> EndGameElements;
     private LinearLayout ExtrasLayout;
     private ArrayList<matchElement> ExtrasElements;
+    private boolean includeExtras;
 
-    public matchBuilder(String game, Context context)
+    public matchBuilder(JSONObject game, Context context)
     {
-        this.game = cut(game, "Game{", "}Game");
+        this.game = game;
 
-        gameTitle = cutInfo(this.game, "gametitle");
-        gameYear = cutInfo(this.game, "gameyear");
-        gameDescription = cutInfo(this.game, "gamedescription");
-        gameBy = cutInfo(this.game, "creator");
-        mode = cutInfo(this.game, "mode");
-
-        AutonomousElements = new ArrayList<>();
-        AutonomousLayout = buildLayout(cut(this.game, "Autonomous{", "}Autonomous"), context, AutonomousElements);
-
-        TeleOpElements = new ArrayList<>();
-        TeleOpLayout = buildLayout(cut(this.game, "Tele-Op{", "}Tele-Op"), context, TeleOpElements);
-
-        EndGameElements = new ArrayList<>();
-        EndGameLayout = buildLayout(cut(this.game, "EndGame{", "}EndGame"), context, EndGameElements);
-
-        if(Boolean.parseBoolean(cutInfo(cut(this.game, "Extras{", "}Extras"), "include")))
+        try
         {
-            ExtrasElements = new ArrayList<>();
-            ExtrasLayout = buildLayout(cut(this.game, "Extras{", "}Extras"), context, ExtrasElements);
+            gameTitle = game.getString("gameTitle");
+            gameYear = (int) game.get("gameYear");
+            gameDescription = game.getString("gameDescription");
+            gameBy = game.getString("gameBy");
+            gameMode = game.getString("gameMode");
+
+            AutonomousElements = new ArrayList<>();
+            AutonomousLayout = buildLayout(game.getJSONObject("Autonomous"), context, AutonomousElements);
+
+            TeleOpElements = new ArrayList<>();
+            TeleOpLayout = buildLayout(game.getJSONObject("TeleOp"), context, TeleOpElements);
+
+            EndGameElements = new ArrayList<>();
+            EndGameLayout = buildLayout(game.getJSONObject("EndGame"), context, EndGameElements);
+
+            if(game.getJSONObject("Extras").getBoolean("include"))
+            {
+                includeExtras = true;
+                ExtrasElements = new ArrayList<>();
+                ExtrasLayout = buildLayout(game.getJSONObject("Extras"), context, ExtrasElements);
+            }
+            else
+            {
+                includeExtras = false;
+            }
+
         }
-        else
+        catch (Exception e)
         {
-            ExtrasLayout = null;
+            e.printStackTrace();
         }
     }
 
@@ -75,7 +84,7 @@ public class matchBuilder
 
     public String getGameMode()
     {
-        return mode;
+        return gameMode;
     }
 
     public LinearLayout getAutonomousLayout()
@@ -98,19 +107,7 @@ public class matchBuilder
         return ExtrasLayout;
     }
 
-    private String cut(String text, String start, String end)
-    {
-        return text.substring(text.indexOf(start), text.indexOf(end));
-    }
-
-    private String cutInfo(String text, String attribute)
-    {
-        String temp = text.substring(text.indexOf(attribute + "="));
-        String temp2 = temp.substring(0, temp.indexOf(";"));
-        return temp2.substring(temp2.indexOf("=") + 1);
-    }
-
-    private LinearLayout buildLayout(String text, Context context, ArrayList<matchElement> elements)
+    private LinearLayout buildLayout(JSONObject jsonObject, Context context, ArrayList<matchElement> elements)
     {
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -118,82 +115,48 @@ public class matchBuilder
         linearLayout.setLayoutParams(layoutParams);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        String temp = cutInfo(text, "itemcount");
-        int itemCount = Integer.parseInt(temp.substring(temp.indexOf("=") + 1));
-
-        for(int n = 1; n <= itemCount; n++)
+        try
         {
-            String item = cut(text, "Item" + Integer.toString(n) + "{", "}Item" + Integer.toString(n));
-
-            switch (cutInfo(item, "itemtype"))
+            for(int n = 0; n < jsonObject.getInt("itemCount"); n++)
             {
-                case "checkBox":
-                    String checkBoxTitle = cutInfo(item, "title");
-                    int checkBoxCount = Integer.parseInt(cutInfo(item, "checkboxcount"));
+                JSONObject item = jsonObject.getJSONObject("item" + n);
+                switch (item.getString("itemType"))
+                {
+                    case "checkBox":
+                        elementCheckBox checkBox = new elementCheckBox(item.getString("title"), item);
+                        elements.add(checkBox);
+                        linearLayout.addView(checkBox.getElement(context));
+                        break;
 
-                    ArrayList<String> checkBoxText = new ArrayList<>();
-                    ArrayList<Boolean> checkBoxChecked = new ArrayList<>();
+                    case "counter":
+                        elementCounter counter = new elementCounter(item.getString("title"), item);
+                        elements.add(counter);
+                        linearLayout.addView(counter.getElement(context));
+                        break;
 
-                    for(int x = 1; x <= checkBoxCount; x++)
-                    {
-                        checkBoxText.add(cutInfo(item, "checkbox" + Integer.toString(x)));
-                        checkBoxChecked.add(Boolean.parseBoolean(cutInfo(item, "checkbox" + Integer.toString(x) + "checked")));
-                    }
+                    case "radioGroup":
+                        elementRadioGroup radioGroup = new elementRadioGroup(item.getString("title"), item);
+                        elements.add(radioGroup);
+                        linearLayout.addView(radioGroup.getElement(context));
+                        break;
 
-                    elementCheckBox checkBox = new elementCheckBox(checkBoxTitle, checkBoxText, checkBoxChecked);
-                    elements.add(checkBox);
-                    linearLayout.addView(checkBox.getElement(context));
-                    break;
+                    case "textArea":
+                        elementTextArea textArea = new elementTextArea(item.getString("title"), item);
+                        elements.add(textArea);
+                        linearLayout.addView(textArea.getElement(context));
+                        break;
 
-                case "counter":
-                    String counterTitle = cutInfo(item, "title");
-                    int defaultValue = Integer.parseInt(cutInfo(item, "default"));
-                    int modifier = Integer.parseInt(cutInfo(item, "modifier"));
-                    int minValue = Integer.parseInt(cutInfo(item, "minvalue"));
-                    int maxValue = Integer.parseInt(cutInfo(item, "maxvalue"));
-
-                    elementCounter counter = new elementCounter(counterTitle, defaultValue, modifier, minValue, maxValue);
-                    elements.add(counter);
-                    linearLayout.addView(counter.getElement(context));
-                    break;
-
-                case "radioGroup":
-                    String radioGroupTitle = cutInfo(item, "title");
-                    int radioCount = Integer.parseInt(cutInfo(item, "radiocount"));
-                    int defaultSelect = Integer.parseInt(cutInfo(item, "defaultselect")) - 1;
-
-                    ArrayList<String> radioGroupText = new ArrayList<>();
-
-                    for(int x = 1; x <= radioCount; x++)
-                    {
-                        radioGroupText.add(cutInfo(item, "radio" + Integer.toString(x)));
-                    }
-
-                    elementRadioGroup radioGroup = new elementRadioGroup(radioGroupTitle, radioGroupText, defaultSelect);
-                    elements.add(radioGroup);
-                    linearLayout.addView(radioGroup.getElement(context));
-                    break;
-
-                case "textArea":
-                    String textAreaTitle = cutInfo(item, "title");
-                    int lines = Integer.parseInt(cutInfo(item, "lines"));
-
-                    elementTextArea textArea = new elementTextArea(textAreaTitle, lines);
-                    elements.add(textArea);
-                    linearLayout.addView(textArea.getElement(context));
-                    break;
-
-                case "toggleButton":
-                    String toggleButtonTitle = cutInfo(item, "title");
-                    boolean defaultToggle = Boolean.parseBoolean(cutInfo(item, "default"));
-                    String trueText = cutInfo(item, "truetext");
-                    String falseText = cutInfo(item, "falsetext");
-
-                    elementToggleButton toggleButton = new elementToggleButton(toggleButtonTitle, defaultToggle, trueText, falseText);
-                    elements.add(toggleButton);
-                    linearLayout.addView(toggleButton.getElement(context));
-                    break;
+                    case "toggleButton":
+                        elementToggleButton toggleButton = new elementToggleButton(item.getString("title"), item);
+                        elements.add(toggleButton);
+                        linearLayout.addView(toggleButton.getElement(context));
+                        break;
+                }
             }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
 
         return linearLayout;
@@ -238,9 +201,14 @@ public class matchBuilder
         {
             jsonObject.put("gameTitle", this.getGameTitle());
             jsonObject.put("gameBy", this.getGameBy());
+            jsonObject.put("gameMode", this.getGameMode());
             if (this.getGameMode().equals("Team"))
             {
                 jsonObject.put("teamNumber", teamNumber);
+            }
+            else
+            {
+                jsonObject.put("teamNumber", "Team");
             }
             jsonObject.put("matchNumber", matchNumber);
             jsonObject.put("allianceColor", allianceColor);
@@ -248,6 +216,8 @@ public class matchBuilder
             for (int x = 0; x < 4; x++)
             {
                 ArrayList<matchElement> elements = new ArrayList<>();
+                JSONObject jsonSection = new JSONObject();
+                jsonSection.put("itemCount", elements.size());
                 String section = null;
                 switch (x)
                 {
@@ -258,7 +228,7 @@ public class matchBuilder
 
                     case 1:
                         elements = TeleOpElements;
-                        section = "TeleOpElements";
+                        section = "TeleOp";
                         break;
 
                     case 2:
@@ -272,37 +242,41 @@ public class matchBuilder
                         break;
                 }
 
+                int y = 0;
                 for(matchElement element: elements)
                 {
                     switch(element.getElementType())
                     {
+                        case "CheckBox":
+                            elementCheckBox elementCheckBox = (elementCheckBox) element;
+                            jsonSection.put("item" + y, elementCheckBox.getValue());
+                            break;
+
                         case "Counter":
                             elementCounter elementCounter = (elementCounter) element;
-                            jsonObject.put(section + ":" + element.getElementTitle(), elementCounter.getValue());
+                            jsonSection.put("item" + y, elementCounter.getValue());
                             break;
 
                         case "RadioGroup":
                             elementRadioGroup elementRadioGroup = (elementRadioGroup) element;
-                            jsonObject.put(section + ":" + element.getElementTitle(), elementRadioGroup.getValue());
+                            jsonSection.put("item" + y, elementRadioGroup.getValue());
                             break;
 
                         case "TextArea":
                             elementTextArea elementTextArea = (elementTextArea) element;
-                            jsonObject.put(section + ":" + element.getElementTitle(), elementTextArea.getValue());
+                            jsonSection.put("item" + y, elementTextArea.getValue());
                             break;
 
                         case "ToggleButton":
                             elementToggleButton elementToggleButton = (elementToggleButton) element;
-                            jsonObject.put(section + ":" + element.getElementTitle(), elementToggleButton.getValue());
+                            jsonSection.put("item" + y, elementToggleButton.getValue());
                             break;
 
-                        case "CheckBox":
-                            elementCheckBox elementCheckBox = (elementCheckBox) element;
-                            jsonObject.put(section + ":" + element.getElementTitle(), elementCheckBox.getValue());
-                            break;
                     }
+                    y++;
                 }
 
+                jsonObject.put(section, jsonSection);
             }
 
             FileOutputStream outputStream = new FileOutputStream(saveMatch);

@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 /**
  * Created by Luke Poellet on 9/16/2017.
  */
@@ -25,22 +27,22 @@ public class elementCounter extends matchElement {
 
     private TextView textView;
 
-    public elementCounter(String title, int elementDefault, int elementModifier, int elementMinValue, int elementMaxValue)
+    public elementCounter(String title, JSONObject elementInfo)
     {
         super(title, "Counter");
-        this.elementDefault = elementDefault;
-        this.elementModifier = elementModifier;
-        this.elementMinValue = elementMinValue;
-        this.elementMaxValue = elementMaxValue;
-        if(elementDefault < elementMinValue)
+        try
         {
-            elementDefault = elementMinValue;
+            elementDefault = elementInfo.getInt("default");
+            elementModifier = elementInfo.getInt("modifier");
+            elementMinValue = elementInfo.getInt("minValue");
+            elementMaxValue = elementInfo.getInt("maxValue");
         }
-        else if(elementDefault > elementMaxValue)
+        catch (Exception e)
         {
-            elementDefault = elementMaxValue;
+            e.printStackTrace();
         }
-        this.elementCurrentValue = elementDefault;
+
+        elementCurrentValue = elementDefault;
     }
 
     public LinearLayout getElement(Context context)
@@ -141,8 +143,21 @@ public class elementCounter extends matchElement {
         textView.setText(Integer.toString(elementCurrentValue));
     }
 
-    public int getValue()
+    public JSONObject getValue()
     {
-        return elementCurrentValue;
+        JSONObject item = new JSONObject();
+
+        try
+        {
+            item.put("itemType", elementType);
+            item.put("title", elementTitle);
+            item.put("value", elementCurrentValue);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return item;
     }
 }

@@ -189,30 +189,30 @@ public class MainActivity extends AppCompatActivity
         File gamesDir = new File(getFilesDir(), "Games");
 
         //if(DRFTCScouting.getBoolean("FirstLaunch", true))
-        if(true)
-        {
-            DRFTCScoutingEditor.putBoolean("FirstLaunch", false);
-            DRFTCScoutingEditor.putString("CurrentGame", getResources().getString(R.string.OfficialGame1));
-            DRFTCScoutingEditor.putInt("GameCount", 1);
-            DRFTCScoutingEditor.putBoolean("SettingsOutputReadable", false);
-            DRFTCScoutingEditor.putBoolean("SettingsOutputCSV", true);
-            DRFTCScoutingEditor.apply();
-
-            try
-            {
-                File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRSgame");
-                Log.i("DR-RR File Deleted", Boolean.toString(DRRelicRecoveryFile.delete()));
-                Log.i("DR-RR File Created", Boolean.toString(DRRelicRecoveryFile.createNewFile()));
-
-                FileOutputStream outputStream = new FileOutputStream(DRRelicRecoveryFile);
-                outputStream.write(getResources().getString(R.string.OfficialGame1).getBytes());
-                outputStream.flush();
-                outputStream.close();
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+//        if(true)
+//        {
+//            DRFTCScoutingEditor.putBoolean("FirstLaunch", false);
+//            DRFTCScoutingEditor.putString("CurrentGame", getResources().getString(R.string.OfficialGame1));
+//            DRFTCScoutingEditor.putInt("GameCount", 1);
+//            DRFTCScoutingEditor.putBoolean("SettingsOutputReadable", false);
+//            DRFTCScoutingEditor.putBoolean("SettingsOutputCSV", true);
+//            DRFTCScoutingEditor.apply();
+//
+//            try
+//            {
+//                File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRSgame");
+//                Log.i("DR-RR File Deleted", Boolean.toString(DRRelicRecoveryFile.delete()));
+//                Log.i("DR-RR File Created", Boolean.toString(DRRelicRecoveryFile.createNewFile()));
+//
+//                FileOutputStream outputStream = new FileOutputStream(DRRelicRecoveryFile);
+//                outputStream.write(getResources().getString(R.string.OfficialGame1).getBytes());
+//                outputStream.flush();
+//                outputStream.close();
+//            }
+//            catch (Exception e)
+//            {
+//                e.printStackTrace();
+//            }
 
 //            File outputDir = getExternalFilesDir(null);
 //            Log.i("DR-RR Output Deleted", Boolean.toString(outputDir.delete()));
@@ -220,32 +220,32 @@ public class MainActivity extends AppCompatActivity
 //            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
 //            intent.setData(Uri.fromFile(outputDir));
 //            sendBroadcast(intent);
-        }
+//        }
     }
 
     private void readStorage()
     {
         File gamesDir = new File(getFilesDir(), "Games");
 
-        try
-        {
-            File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRSgame");
-            InputStream inputStream = new BufferedInputStream(new FileInputStream(DRRelicRecoveryFile));
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder builder = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null)
-            {
-                builder.append(line);
-            }
-            reader.close();
-            inputStream.close();
-
-            Log.i("File", builder.toString());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+//        try
+//        {
+//            File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRSgame");
+//            InputStream inputStream = new BufferedInputStream(new FileInputStream(DRRelicRecoveryFile));
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+//            StringBuilder builder = new StringBuilder();
+//            String line;
+//            while ((line = reader.readLine()) != null)
+//            {
+//                builder.append(line);
+//            }
+//            reader.close();
+//            inputStream.close();
+//
+//            Log.i("File", builder.toString());
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
     }
 }

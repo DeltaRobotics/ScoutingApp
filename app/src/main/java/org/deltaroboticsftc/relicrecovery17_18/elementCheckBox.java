@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -21,16 +22,24 @@ public class elementCheckBox extends matchElement {
 
     private ArrayList<CheckBox> checkBoxs;
 
-    public elementCheckBox(String title, ArrayList<String> elementsText, ArrayList<Boolean> elementsChecked)
+    public elementCheckBox(String title, JSONObject elementInfo)
     {
         super(title, "CheckBox");
-        this.elementsText = elementsText;
-        this.elementsChecked = elementsChecked;
-    }
+        try
+        {
+            elementsText = new ArrayList<>();
+            elementsChecked = new ArrayList<>();
 
-    public String getText()
-    {
-        return null;
+            for(int x = 0; x < elementInfo.getInt("count"); x++)
+            {
+                elementsText.add(elementInfo.getString("box" + x));
+                elementsChecked.add(elementInfo.getBoolean("box" + x + "Checked"));
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public LinearLayout getElement(Context context)
@@ -68,23 +77,27 @@ public class elementCheckBox extends matchElement {
         return super.buildElement(checkBoxLayout, context);
     }
 
-    public JSONArray getValue()
+    public JSONObject getValue()
     {
-        JSONArray jsonArray = new JSONArray();
-        int index = 0;
+        JSONObject item = new JSONObject();
 
-        for(CheckBox checkBox: checkBoxs)
+        try
         {
-            try
+            item.put("itemType", elementType);
+            item.put("title", elementTitle);
+            item.put("count", elementsText.size());
+
+            for(int x = 0;x < elementsText.size(); x++)
             {
-                jsonArray.put(index, checkBox.getText() + ": " + checkBox.isChecked());
+                item.put("box" + x, elementsText.get(x));
+                item.put("box" + x + "Checked", checkBoxs.get(x).isChecked());
             }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-            index++;
         }
-        return jsonArray;
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return item;
     }
 }

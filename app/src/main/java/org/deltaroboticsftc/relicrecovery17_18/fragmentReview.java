@@ -57,14 +57,17 @@ public class fragmentReview extends Fragment
             Log.i("Json", builder.toString());
             matchInfo = new JSONObject(builder.toString());
 
-            AutonomousInfo.append(matchInfo.getJSONArray("Autonomous:Jewel").get(0).toString());
-            AutonomousInfo.append(matchInfo.getJSONArray("Autonomous:Jewel").get(1).toString());
-            AutonomousInfo.append(matchInfo.getInt("Autonomous:Glyphs Scored"));
-
             TextView gameTitle = (TextView) rootView.findViewById(R.id.review_game_title);
             gameTitle.setText(matchInfo.getString("gameTitle"));
             TextView teamNumber = (TextView) rootView.findViewById(R.id.review_team_number);
-            teamNumber.setText(matchInfo.getString("teamNumber"));
+            if (matchInfo.getString("teamNumber").equals("Team"))
+            {
+                teamNumber.setVisibility(View.GONE);
+            }
+            else
+            {
+                teamNumber.setText(matchInfo.getString("teamNumber"));
+            }
             TextView matchNumber = (TextView) rootView.findViewById(R.id.review_match_number);
             matchNumber.setText(matchInfo.getString("matchNumber"));
             TextView allianceColor = (TextView) rootView.findViewById(R.id.review_alliance_color);
@@ -76,10 +79,6 @@ public class fragmentReview extends Fragment
         {
             e.printStackTrace();
         }
-
-        TextView AutonomousInfoText = (TextView) rootView.findViewById(R.id.review_autonomous_info);
-        Log.i("info", AutonomousInfo.toString());
-        AutonomousInfoText.setText(AutonomousInfo.toString());
 
         return rootView;
     }

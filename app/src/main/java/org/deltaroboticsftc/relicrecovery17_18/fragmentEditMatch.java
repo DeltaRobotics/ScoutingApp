@@ -14,6 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 /**
  * Created by Luke Poellet on 9/17/2017.
  */
@@ -32,7 +38,25 @@ public class fragmentEditMatch extends Fragment
         SharedPreferences DRFTCScouting = rootView.getContext().getSharedPreferences("DRFTCScouting", 0);
         String game = rootView.getResources().getString(R.string.OfficialGame1);
 
-        match = new matchBuilder(DRFTCScouting.getString("Game", game), rootView.getContext());
+        try
+        {
+            InputStream inputStream = rootView.getResources().openRawResource(R.raw.relic_recovery_delta);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder builder = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                builder.append(line);
+            }
+            reader.close();
+            inputStream.close();
+
+            match = new matchBuilder(new JSONObject(builder.toString()), rootView.getContext());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
         TextView gameTitle = (TextView) rootView.findViewById(R.id.game_title);
         gameTitle.setText(match.getGameTitle());

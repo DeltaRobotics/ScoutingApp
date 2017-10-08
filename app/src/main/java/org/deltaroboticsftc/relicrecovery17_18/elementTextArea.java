@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ToggleButton;
 
+import org.json.JSONObject;
+
 /**
  * Created by Luke Poellet on 9/16/2017.
  */
@@ -17,10 +19,17 @@ public class elementTextArea extends matchElement {
 
     private EditText editText;
 
-    public elementTextArea(String title, int elementLines)
+    public elementTextArea(String title, JSONObject elementInfo)
     {
         super(title, "TextArea");
-        this.elementLines = elementLines;
+        try
+        {
+            elementLines = elementInfo.getInt("lines");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public LinearLayout getElement(Context context)
@@ -43,8 +52,21 @@ public class elementTextArea extends matchElement {
         return super.buildElement(editText, context);
     }
 
-    public String getValue()
+    public JSONObject getValue()
     {
-        return editText.getText().toString();
+        JSONObject item = new JSONObject();
+
+        try
+        {
+            item.put("itemType", elementType);
+            item.put("title", elementTitle);
+            item.put("value", editText.getText().toString());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return item;
     }
 }

@@ -67,7 +67,8 @@
     "item3": {
       "itemType": "radioGroup",
       "title": "Completed Cipher",
-      "radioCount": 3,
+      "count": 3,
+      "default": 0,
       "radio0": "No Ciphers Completed",
       "radio1": "1 Cipher Completed",
       "radio2": "2 Ciphers Completed"
@@ -78,7 +79,8 @@
     "item0": {
       "itemType": "radioGroup",
       "title": "First Relic Scored",
-      "radioCount": 4,
+      "count": 4,
+      "default": 0,
       "radio0": "Not Scored",
       "radio1": "Zone 1",
       "radio2": "Zone 2",
@@ -94,7 +96,8 @@
     "item2": {
       "itemType": "radioGroup",
       "title": "Second Relic Scored",
-      "radioCount": 4,
+      "count": 4,
+      "default": 0,
       "radio0": "Not Scored",
       "radio1": "Zone 1",
       "radio2": "Zone 2",
@@ -116,11 +119,13 @@
     }
   },
   "Extras": {
+    "include": true,
     "itemCount": 5,
     "item0": {
       "itemType": "radioGroup",
       "title": "Robot Efficiency at Scoring Glyphs",
-      "radioCount": 3,
+      "count": 3,
+      "default": -1,
       "radio0": "Good",
       "radio1": "So-So",
       "radio2": "Bad"
@@ -128,7 +133,8 @@
     "item1": {
       "itemType": "radioGroup",
       "title": "Robot Efficiency at Scoring Relics",
-      "radioCount": 3,
+      "count": 3,
+      "default": -1,
       "radio0": "Good",
       "radio1": "So-So",
       "radio2": "Bad"
@@ -136,9 +142,10 @@
     "item2": {
       "itemType": "radioGroup",
       "title": "Robot Speed",
-      "radioCount": 2,
+      "count": 2,
+      "default": -1,
       "radio0": "Fast",
-      "radio1": "Slow",
+      "radio1": "Slow"
     },
     "item3": {
       "itemType": "checkBox",
@@ -146,7 +153,7 @@
       "count": 2,
       "box0": "Phone Connection Issues",
       "box0Checked": false,
-      "box1": "Machanical Issues",
+      "box1": "Mechanical Issues",
       "box1Checked": false
     },
     "item4": {
