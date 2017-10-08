@@ -2,22 +2,15 @@ package org.deltaroboticsftc.relicrecovery17_18;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.LinearLayout;
 
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Luke Poellet on 9/16/2017.
@@ -80,7 +73,7 @@ public class matchBuilder
         return gameBy;
     }
 
-    public String getMode()
+    public String getGameMode()
     {
         return mode;
     }
@@ -215,7 +208,7 @@ public class matchBuilder
         {
             if (loop > 0)
             {
-                if(this.getMode().equals("Alliance"))
+                if(this.getGameMode().equals("Alliance"))
                 {
                     saveMatch = new File(savePath, "Match" + matchNumber + "-" + allianceColor + "-C" + loop + ".json");
                 }
@@ -226,7 +219,7 @@ public class matchBuilder
             }
             else
             {
-                if(this.getMode().equals("Alliance"))
+                if(this.getGameMode().equals("Alliance"))
                 {
                     saveMatch = new File(savePath, "Match" + matchNumber + "-" + allianceColor + ".json");
                 }
@@ -239,14 +232,13 @@ public class matchBuilder
         } while(saveMatch.exists());
 
         savePath.mkdirs();
-        Log.i("saveMatch", saveMatch.getPath());
 
         JSONObject jsonObject = new JSONObject();
         try
         {
-            jsonObject.put("gametitle", this.getGameTitle());
-            jsonObject.put("gameby", this.getGameBy());
-            if (this.getMode().equals("Team"))
+            jsonObject.put("gameTitle", this.getGameTitle());
+            jsonObject.put("gameBy", this.getGameBy());
+            if (this.getGameMode().equals("Team"))
             {
                 jsonObject.put("teamNumber", teamNumber);
             }

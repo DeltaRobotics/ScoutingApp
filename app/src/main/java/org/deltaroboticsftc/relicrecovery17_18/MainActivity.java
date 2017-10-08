@@ -19,6 +19,8 @@ import android.view.MenuItem;
 
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -57,18 +59,47 @@ public class MainActivity extends AppCompatActivity
         transaction.replace(R.id.parent_fragment, new fragmentEditMatch());
         transaction.commit();
 
-        ArrayList<String> test = new ArrayList<>();
-        test.add("Item1");
-        test.add("Item2");
-        test.add("Item3");
-        test.add("Item4");
-        test.add("Item5");
-        test.add("Item6");
-        test.add("Item7");
-        test.add("Item8");
+        try
+        {
+            JSONObject game = new JSONObject();
 
-        Gson gson = new Gson();
-        Log.i("Json", gson.toJson(test));
+            game.put("gameTitle", "Relic Recovery");
+            game.put("gameYear", 17);
+            game.put("gameDescription", "Official Game2 Description");
+            game.put("gameBy", "DR-2015-Official");
+            game.put("gameMode", "Team");
+
+            JSONObject auto = new JSONObject();
+            auto.put("itemCount", 4);
+
+            JSONObject autoItem1 = new JSONObject();
+            autoItem1.put("itemType", "checkBox");
+            autoItem1.put("title", "Jewel");
+            autoItem1.put("count", 2);
+            autoItem1.put("box1", "Blue Jewel Moved");
+            autoItem1.put("box1Checked", false);
+            autoItem1.put("box2", "Red Jewel Moved");
+            autoItem1.put("box2Checked", false);
+            auto.put("item1", autoItem1);
+
+            JSONObject autoItem2 = new JSONObject();
+            autoItem2.put("itemType", "counter");
+            autoItem2.put("title", "Glyphs Scored");
+            autoItem2.put("default", 0);
+            autoItem2.put("modifier", 1);
+            autoItem2.put("minValue", 0);
+            autoItem2.put("maxValue", 24);
+            auto.put("item2", autoItem2);
+
+            game.put("Autonomous", auto);
+
+            Log.i("Game", game.toString(1));
+        }
+        catch (Exception e)
+        {
+
+        }
+
 
     }
 

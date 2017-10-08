@@ -52,7 +52,7 @@ public class fragmentEditMatch extends Fragment
         }
 
         EditText teamNumber = (EditText) rootView.findViewById(R.id.team_number);
-        if(match.getMode().equals("Alliance"))
+        if(match.getGameMode().equals("Alliance"))
         {
             teamNumber.setVisibility(View.GONE);
         }

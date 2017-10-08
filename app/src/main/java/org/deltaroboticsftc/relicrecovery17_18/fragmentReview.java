@@ -38,6 +38,7 @@ public class fragmentReview extends Fragment
         StringBuilder TeleOpInfo = new StringBuilder();
         StringBuilder EndGameInfo = new StringBuilder();
         StringBuilder ExtraInfo = new StringBuilder();
+        JSONObject matchInfo = new JSONObject();
 
         try
         {
@@ -54,11 +55,20 @@ public class fragmentReview extends Fragment
             inputStream.close();
 
             Log.i("Json", builder.toString());
-            JSONObject matchInfo = new JSONObject(builder.toString());
+            matchInfo = new JSONObject(builder.toString());
 
             AutonomousInfo.append(matchInfo.getJSONArray("Autonomous:Jewel").get(0).toString());
             AutonomousInfo.append(matchInfo.getJSONArray("Autonomous:Jewel").get(1).toString());
             AutonomousInfo.append(matchInfo.getInt("Autonomous:Glyphs Scored"));
+
+            TextView gameTitle = (TextView) rootView.findViewById(R.id.review_game_title);
+            gameTitle.setText(matchInfo.getString("gameTitle"));
+            TextView teamNumber = (TextView) rootView.findViewById(R.id.review_team_number);
+            teamNumber.setText(matchInfo.getString("teamNumber"));
+            TextView matchNumber = (TextView) rootView.findViewById(R.id.review_match_number);
+            matchNumber.setText(matchInfo.getString("matchNumber"));
+            TextView allianceColor = (TextView) rootView.findViewById(R.id.review_alliance_color);
+            allianceColor.setText(matchInfo.getString("allianceColor"));
 
 
         }
@@ -67,13 +77,9 @@ public class fragmentReview extends Fragment
             e.printStackTrace();
         }
 
-        TextView gameTitle = (TextView) getActivity().findViewById(R.id.review_game_title);
-        TextView teamNumber = (TextView) getActivity().findViewById(R.id.review_team_number);
-        TextView matchNumber = (TextView) getActivity().findViewById(R.id.review_match_number);
-        TextView allianceColor = (TextView) getActivity().findViewById(R.id.review_alliance_color);
-
-        TextView AutonomousInfoText = (TextView) getActivity().findViewById(R.id.review_autonomous_info);
-        //AutonomousInfoText.setText(AutonomousInfo.toString());
+        TextView AutonomousInfoText = (TextView) rootView.findViewById(R.id.review_autonomous_info);
+        Log.i("info", AutonomousInfo.toString());
+        AutonomousInfoText.setText(AutonomousInfo.toString());
 
         return rootView;
     }

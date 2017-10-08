@@ -175,7 +175,7 @@
                     itemtype=radioGroup;
                     title=Robot Speed;
                     radiocount=2;
-                    radio1=Fast;zsf
+                    radio1=Fast;
                     radio2=Slow;
                     defaultselect=-1;
                 }Item3
