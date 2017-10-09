@@ -62,6 +62,7 @@ public class matchBuilder
             }
             else
             {
+                ExtrasElements = new ArrayList<>();
                 includeExtras = false;
             }
 
@@ -217,7 +218,6 @@ public class matchBuilder
             {
                 ArrayList<matchElement> elements = new ArrayList<>();
                 JSONObject jsonSection = new JSONObject();
-                jsonSection.put("itemCount", elements.size());
                 String section = null;
                 switch (x)
                 {
@@ -239,9 +239,11 @@ public class matchBuilder
                     case 3:
                         elements = ExtrasElements;
                         section = "Extras";
+                        jsonSection.put("include", includeExtras);
                         break;
                 }
 
+                jsonSection.put("itemCount", elements.size());
                 int y = 0;
                 for(matchElement element: elements)
                 {

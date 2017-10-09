@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/review_team_number"
-        style="@style/subTitle"
+        style="@style/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -31,7 +31,7 @@
 
     <TextView
         android:id="@+id/review_match_number"
-        style="@style/editText"
+        style="@style/subTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -39,7 +39,7 @@
 
     <TextView
         android:id="@+id/review_alliance_color"
-        style="@style/elementToggleButton"
+        style="@style/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -52,18 +52,10 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/subTitle"
+            style="@style/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="AUTONOMOUS"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/review_autonomous_info"
-            style="@style/subText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Info"
             android:textAlignment="center" />
 
     </LinearLayout>
@@ -75,7 +67,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/subTitle"
+            style="@style/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TELE-OP"
@@ -89,7 +81,8 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/subTitle"
+            android:id="@+id/textView2"
+            style="@style/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="END GAME"
@@ -103,7 +96,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/subTitle"
+            style="@style/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="EXTRA INFORMATION"

@@ -17,33 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dividerHeight"
         android:background="@color/colorPrimary"
-        android:orientation="vertical"></LinearLayout>
-
-    <TextView
-        android:id="@+id/textView8"
-        style="@style/subTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="File Output" />
-
-    <Switch
-        android:id="@+id/settings_file_readable"
-        style="@style/settingsSwitch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Output Readable File" />
-
-    <Switch
-        android:id="@+id/settings_file_csv"
-        style="@style/settingsSwitch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Output CSV File" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerHeight"
-        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
     </LinearLayout>

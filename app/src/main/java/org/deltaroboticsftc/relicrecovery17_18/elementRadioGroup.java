@@ -91,6 +91,7 @@ public class elementRadioGroup extends matchElement {
                 if(radioButton.isChecked())
                 {
                     item.put("value", x);
+                    item.put("textValue", radioButton.getText());
                     return item;
                 }
                 x++;
