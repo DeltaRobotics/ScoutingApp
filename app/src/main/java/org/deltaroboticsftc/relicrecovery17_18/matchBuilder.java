@@ -165,7 +165,7 @@ public class matchBuilder
 
     public String save(String teamNumber, String matchNumber, String allianceColor, Context context)
     {
-        File savePath = new File(context.getExternalFilesDir(null), gameBy + "-" + gameTitle);
+        File savePath = new File(context.getExternalFilesDir(null), "MatchData" +  File.separator + gameBy + " - " + gameTitle);
         File saveMatch;
         int loop = 0;
         do

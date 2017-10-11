@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Settings"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textAllCaps="false" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +23,23 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/settings_delete_data"
+        android:id="@+id/settings_event_data"
+        style="@style/elementCounterButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Schedules"
+        android:textColor="@android:color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dividerHeight"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/settings_delete_matches"
         style="@style/elementCounterButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,11 +55,11 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/settings_reset_app"
+        android:id="@+id/settings_delete_games"
         style="@style/elementCounterButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reset App To Default"
+        android:text="Delete all games"
         android:textColor="@android:color/holo_red_dark" />
 
 </LinearLayout>

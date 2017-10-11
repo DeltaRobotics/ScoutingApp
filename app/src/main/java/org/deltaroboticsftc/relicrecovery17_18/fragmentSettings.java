@@ -1,10 +1,21 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Spinner;
+
+import java.io.File;
 
 /**
  * Created by Luke Poellet on 9/19/2017.
@@ -19,7 +30,166 @@ public class fragmentSettings extends Fragment
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
+        final Button eventData = (Button) rootView.findViewById(R.id.settings_event_data);
+        eventData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eventData();
+            }
+        });
+
+        final Button deleteMatches = (Button) rootView.findViewById(R.id.settings_delete_matches);
+        deleteMatches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteMatches();
+            }
+        });
+
+        final Button deleteGames = (Button) rootView.findViewById(R.id.settings_delete_games);
+        deleteGames.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteGames();
+            }
+        });
+
         return rootView;
+    }
+
+    private void eventData()
+    {
+
+    }
+
+    private void deleteMatches()
+    {
+        final File matchData = new File(this.getContext().getExternalFilesDir(null), "MatchData");
+
+        final ProgressDialog progressDialog = new ProgressDialog(this.getContext());
+        progressDialog.setTitle("Deleting Match Data");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+
+        final AlertDialog.Builder postDelete = new AlertDialog.Builder(this.getContext());
+        postDelete.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog.Builder warning = new AlertDialog.Builder(this.getContext());
+        warning.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        warning.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                progressDialog.show();
+
+                boolean successful;
+                if(matchData.exists())
+                {
+                        Log.i("File", matchData.getPath());
+                        successful = matchData.delete();
+                        Log.i("Delete", Boolean.toString(matchData.delete()));
+                }
+                else
+                {
+                    successful = true;
+                }
+
+                if(successful)
+                {
+                    progressDialog.dismiss();
+                    postDelete.setTitle("Delete Successful");
+                    postDelete.setIcon(R.drawable.ic_done_black_24dp);
+                    postDelete.setMessage("All match data deleted");
+                }
+                else
+                {
+                    progressDialog.dismiss();
+                    postDelete.setTitle("Delete Failed");
+                    postDelete.setIcon(R.drawable.ic_error_outline_black_24dp);
+                    postDelete.setMessage("Failed to delete match data");
+                }
+
+                postDelete.show();
+            }
+        });
+        warning.setTitle("WARNING");
+        warning.setMessage("Are you sure you want to permanently delete all saved match data?");
+        warning.setIcon(R.drawable.ic_warning_black_24dp);
+        warning.show();
+    }
+
+    private void deleteGames()
+    {
+        final ProgressDialog progressDialog = new ProgressDialog(this.getContext());
+        progressDialog.setTitle("Deleting Imported Games");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Please Wait...");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+
+        final AlertDialog.Builder postDelete = new AlertDialog.Builder(this.getContext());
+        postDelete.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        final AlertDialog.Builder warning = new AlertDialog.Builder(this.getContext());
+        warning.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        warning.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                progressDialog.show();
+
+                boolean successful;
+                if(false)
+                {
+                    //successful = matchData.delete();
+                }
+                else
+                {
+                    successful = true;
+                }
+
+                if(successful)
+                {
+                    progressDialog.dismiss();
+                    postDelete.setTitle("Delete Successful");
+                    postDelete.setIcon(R.drawable.ic_done_black_24dp);
+                    postDelete.setMessage("All imported games deleted");
+                }
+                else
+                {
+                    progressDialog.dismiss();
+                    postDelete.setTitle("Delete Failed");
+                    postDelete.setIcon(R.drawable.ic_error_outline_black_24dp);
+                    postDelete.setMessage("Failed to delete imported games");
+                }
+
+                postDelete.show();
+            }
+        });
+        warning.setTitle("WARNING");
+        warning.setMessage("Are you sure you want to permanently delete all imported games?");
+        warning.setIcon(R.drawable.ic_warning_black_24dp);
+        warning.show();
     }
 
 }
