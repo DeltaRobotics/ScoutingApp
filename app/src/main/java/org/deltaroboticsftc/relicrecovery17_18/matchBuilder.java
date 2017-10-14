@@ -1,8 +1,10 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.widget.LinearLayout;
 
 import org.json.JSONObject;
@@ -33,7 +35,7 @@ public class matchBuilder
     private ArrayList<matchElement> ExtrasElements;
     private boolean includeExtras;
 
-    public matchBuilder(JSONObject game, Context context)
+    public matchBuilder(JSONObject game, Context context, boolean newMatch, JSONObject loadMatch)
     {
         this.game = game;
 
@@ -45,20 +47,49 @@ public class matchBuilder
             gameBy = game.getString("gameBy");
             gameMode = game.getString("gameMode");
 
+            JSONObject loadAutonomous = new JSONObject();
+            JSONObject loadTeleOp = new JSONObject();
+            JSONObject loadEndGame = new JSONObject();
+            JSONObject loadExtras = new JSONObject();
+
+            if(!newMatch && (!gameTitle.equals(loadMatch.getString("gameTitle")) || !gameBy.equals(loadMatch.getString("gameBy")) || !gameMode.equals(loadMatch.getString("gameMode"))))
+            {
+                newMatch = true;
+
+                AlertDialog.Builder warning = new AlertDialog.Builder(context);
+                warning.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                warning.setTitle("ERROR");
+                warning.setMessage("Match to load does not match the format of the currently loaded game.");
+                warning.setIcon(R.drawable.ic_error_outline_black_24dp);
+                warning.show();
+            }
+            else if(!newMatch)
+            {
+                loadAutonomous = loadMatch.getJSONObject("Autonomous");
+                loadTeleOp = loadMatch.getJSONObject("TeleOp");
+                loadEndGame = loadMatch.getJSONObject("EndGame");
+                loadExtras = loadMatch.getJSONObject("Extras");
+            }
+
             AutonomousElements = new ArrayList<>();
-            AutonomousLayout = buildLayout(game.getJSONObject("Autonomous"), context, AutonomousElements);
+            AutonomousLayout = buildLayout(game.getJSONObject("Autonomous"), context, AutonomousElements, newMatch, loadAutonomous);
 
             TeleOpElements = new ArrayList<>();
-            TeleOpLayout = buildLayout(game.getJSONObject("TeleOp"), context, TeleOpElements);
+            TeleOpLayout = buildLayout(game.getJSONObject("TeleOp"), context, TeleOpElements, newMatch, loadTeleOp);
 
             EndGameElements = new ArrayList<>();
-            EndGameLayout = buildLayout(game.getJSONObject("EndGame"), context, EndGameElements);
+            EndGameLayout = buildLayout(game.getJSONObject("EndGame"), context, EndGameElements, newMatch, loadEndGame);
 
             if(game.getJSONObject("Extras").getBoolean("include"))
             {
                 includeExtras = true;
                 ExtrasElements = new ArrayList<>();
-                ExtrasLayout = buildLayout(game.getJSONObject("Extras"), context, ExtrasElements);
+                ExtrasLayout = buildLayout(game.getJSONObject("Extras"), context, ExtrasElements, newMatch, loadExtras);
             }
             else
             {
@@ -108,7 +139,7 @@ public class matchBuilder
         return ExtrasLayout;
     }
 
-    private LinearLayout buildLayout(JSONObject jsonObject, Context context, ArrayList<matchElement> elements)
+    private LinearLayout buildLayout(JSONObject jsonObject, Context context, ArrayList<matchElement> elements, boolean newMatch, JSONObject loadMatchSection)
     {
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);

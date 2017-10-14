@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,10 @@ import android.widget.ToggleButton;
 
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -35,8 +39,7 @@ public class fragmentEditMatch extends Fragment
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_edit_match, container, false);
 
-        SharedPreferences DRFTCScouting = rootView.getContext().getSharedPreferences("DRFTCScouting", 0);
-        String game = rootView.getResources().getString(R.string.OfficialGame1);
+        final Bundle bundle = getArguments();
 
         try
         {
@@ -51,7 +54,26 @@ public class fragmentEditMatch extends Fragment
             reader.close();
             inputStream.close();
 
-            match = new matchBuilder(new JSONObject(builder.toString()), rootView.getContext());
+            StringBuilder builder2;
+            if(!bundle.getBoolean("newMatch"))
+            {
+                File loadFile = new File(bundle.getString("matchPath"));
+                InputStream inputStream2 = new BufferedInputStream(new FileInputStream(loadFile));
+                BufferedReader reader2 = new BufferedReader(new InputStreamReader(inputStream));
+                builder2 = new StringBuilder();
+                while ((line = reader.readLine()) != null)
+                {
+                    builder2.append(line);
+                }
+                reader.close();
+                inputStream.close();
+            }
+            else
+            {
+                builder2 = new StringBuilder();
+            }
+
+            match = new matchBuilder(new JSONObject(builder.toString()), rootView.getContext(), true, new JSONObject(builder2.toString()));
         }
         catch (Exception e)
         {
@@ -126,6 +148,7 @@ public class fragmentEditMatch extends Fragment
 
     public void saveOnClick()
     {
+        this.getActivity().findViewById(R.id.scroll_view).setScrollY(0);
 
         EditText teamNumber = (EditText) this.getActivity().findViewById(R.id.team_number);
         EditText matchNumber = (EditText) this.getActivity().findViewById(R.id.match_number);
@@ -152,7 +175,13 @@ public class fragmentEditMatch extends Fragment
 
     public void clearOnClick()
     {
-        Fragment fragment = new fragmentSettings();
+        this.getActivity().findViewById(R.id.scroll_view).setScrollY(0);
+
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("newMatch", true);
+
+        Fragment fragment = new fragmentEditMatch();
+        fragment.setArguments(bundle);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.parent_fragment, fragment);
         transaction.commit();

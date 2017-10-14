@@ -93,12 +93,10 @@ public class fragmentSettings extends Fragment
             public void onClick(DialogInterface dialogInterface, int i) {
                 progressDialog.show();
 
-                boolean successful;
+                boolean successful = false;
                 if(matchData.exists())
                 {
-                        Log.i("File", matchData.getPath());
-                        successful = matchData.delete();
-                        Log.i("Delete", Boolean.toString(matchData.delete()));
+                    successful = deleteDir(matchData);
                 }
                 else
                 {
@@ -159,9 +157,9 @@ public class fragmentSettings extends Fragment
                 progressDialog.show();
 
                 boolean successful;
-                if(false)
+                if(true)
                 {
-                    //successful = matchData.delete();
+                    successful = false;
                 }
                 else
                 {
@@ -190,6 +188,32 @@ public class fragmentSettings extends Fragment
         warning.setMessage("Are you sure you want to permanently delete all imported games?");
         warning.setIcon(R.drawable.ic_warning_black_24dp);
         warning.show();
+    }
+
+    private boolean deleteDir(File file)
+    {
+        boolean successful;
+        String[] childFile = file.list();
+        for(int x = 0; x < childFile.length; x++)
+        {
+            if(new File(file, childFile[x]).isDirectory())
+            {
+                successful = deleteDir(new File(file, childFile[x]));
+                Log.i("DeleteDir", Boolean.toString(successful));
+            }
+            else
+            {
+                successful = new File(file, childFile[x]).delete();
+                Log.i("DeleteFile", Boolean.toString(successful));
+            }
+
+            if(!successful)
+            {
+                return false;
+            }
+        }
+        successful = file.delete();
+        return successful;
     }
 
 }
