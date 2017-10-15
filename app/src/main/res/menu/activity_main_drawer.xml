@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_edit_black_24dp"
             android:title="Edit Match" />
         <item
-            android:id="@+id/nav_review_match"
+            android:id="@+id/nav_saved_matches"
             android:icon="@drawable/ic_format_list_numbered_black_24dp"
-            android:title="Review Matches" />
+            android:title="Saved Matches" />
         <item
             android:id="@+id/nav_game_selector"
             android:icon="@drawable/ic_apps_black_24dp"

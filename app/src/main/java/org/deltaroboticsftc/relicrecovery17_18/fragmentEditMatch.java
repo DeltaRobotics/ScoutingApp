@@ -1,9 +1,11 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,37 +45,52 @@ public class fragmentEditMatch extends Fragment
 
         try
         {
-            InputStream inputStream = rootView.getResources().openRawResource(R.raw.relic_recovery_delta);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder builder = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null)
-            {
-                builder.append(line);
-            }
-            reader.close();
-            inputStream.close();
+            SharedPreferences DRFTCScouting = rootView.getContext().getSharedPreferences("DRFTCScouting", 1);
 
-            StringBuilder builder2;
+            JSONObject loadMatch;
+            File loadFile;
             if(!bundle.getBoolean("newMatch"))
             {
-                File loadFile = new File(bundle.getString("matchPath"));
-                InputStream inputStream2 = new BufferedInputStream(new FileInputStream(loadFile));
-                BufferedReader reader2 = new BufferedReader(new InputStreamReader(inputStream));
-                builder2 = new StringBuilder();
+                StringBuilder builder;
+                loadFile = new File(bundle.getString("matchPath"));
+                InputStream inputStream = new BufferedInputStream(new FileInputStream(loadFile));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                builder = new StringBuilder();
+                String line;
                 while ((line = reader.readLine()) != null)
                 {
-                    builder2.append(line);
+                    builder.append(line);
                 }
                 reader.close();
                 inputStream.close();
+
+                loadMatch = new JSONObject(builder.toString());
+
+                EditText loadTeamNumber = (EditText) rootView.findViewById(R.id.team_number);
+                loadTeamNumber.setText(loadMatch.getString("teamNumber"));
+                loadTeamNumber.setKeyListener(null);
+                EditText loadMatchNumber = (EditText) rootView.findViewById(R.id.match_number);
+                loadMatchNumber.setText(loadMatch.getString("matchNumber"));
+                loadMatchNumber.setKeyListener(null);
+                ToggleButton loadAllianceToggle = (ToggleButton) rootView.findViewById(R.id.alliance_color);
+                loadAllianceToggle.setKeyListener(null);
+                if(loadMatch.getString("allianceColor").equals("Blue"))
+                {
+                    loadAllianceToggle.setChecked(false);
+                }
+                else
+                {
+                    loadAllianceToggle.setChecked(true);
+                }
+
             }
             else
             {
-                builder2 = new StringBuilder();
+                loadFile = new File(this.getContext().getExternalFilesDir(null), "");
+                loadMatch = new JSONObject();
             }
 
-            match = new matchBuilder(new JSONObject(builder.toString()), rootView.getContext(), true, new JSONObject(builder2.toString()));
+            match = new matchBuilder(new JSONObject(DRFTCScouting.getString("CurrentGame", "Failed")), rootView.getContext(), bundle.getBoolean("newMatch"), loadMatch, loadFile);
         }
         catch (Exception e)
         {
@@ -152,6 +169,33 @@ public class fragmentEditMatch extends Fragment
 
         EditText teamNumber = (EditText) this.getActivity().findViewById(R.id.team_number);
         EditText matchNumber = (EditText) this.getActivity().findViewById(R.id.match_number);
+
+        final AlertDialog.Builder warning = new AlertDialog.Builder(this.getContext());
+        warning.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        warning.setIcon(R.drawable.ic_error_outline_black_24dp);
+
+        if(teamNumber.getText().toString().equals("") && teamNumber.getVisibility() == View.VISIBLE)
+        {
+            warning.setTitle("Alert");
+            warning.setMessage("Please enter a team number before saving.");
+            warning.show();
+            teamNumber.requestFocus();
+            return;
+        }
+
+        if(matchNumber.getText().toString().equals(""))
+        {
+            warning.setTitle("Alert");
+            warning.setMessage("Please enter a match number before saving.");
+            warning.show();
+            matchNumber.requestFocus();
+            return;
+        }
+
         ToggleButton allianceToggle = (ToggleButton) this.getActivity().findViewById(R.id.alliance_color);
         String allianceColor;
         if (allianceToggle.isChecked())

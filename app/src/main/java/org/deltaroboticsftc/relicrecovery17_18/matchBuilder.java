@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.LinearLayout;
 
 import org.json.JSONObject;
@@ -34,8 +35,10 @@ public class matchBuilder
     private LinearLayout ExtrasLayout;
     private ArrayList<matchElement> ExtrasElements;
     private boolean includeExtras;
+    private boolean newMatch;
+    private File replaceMatch;
 
-    public matchBuilder(JSONObject game, Context context, boolean newMatch, JSONObject loadMatch)
+    public matchBuilder(JSONObject game, Context context, boolean newMatchPass, JSONObject loadMatch, File replaceMatchPass)
     {
         this.game = game;
 
@@ -46,6 +49,8 @@ public class matchBuilder
             gameDescription = game.getString("gameDescription");
             gameBy = game.getString("gameBy");
             gameMode = game.getString("gameMode");
+            newMatch = newMatchPass;
+            replaceMatch = replaceMatchPass;
 
             JSONObject loadAutonomous = new JSONObject();
             JSONObject loadTeleOp = new JSONObject();
@@ -68,7 +73,7 @@ public class matchBuilder
                 warning.setIcon(R.drawable.ic_error_outline_black_24dp);
                 warning.show();
             }
-            else if(!newMatch)
+            else if (!newMatch)
             {
                 loadAutonomous = loadMatch.getJSONObject("Autonomous");
                 loadTeleOp = loadMatch.getJSONObject("TeleOp");
@@ -139,7 +144,7 @@ public class matchBuilder
         return ExtrasLayout;
     }
 
-    private LinearLayout buildLayout(JSONObject jsonObject, Context context, ArrayList<matchElement> elements, boolean newMatch, JSONObject loadMatchSection)
+    private LinearLayout buildLayout(JSONObject section, Context context, ArrayList<matchElement> elements, boolean newMatch, JSONObject loadSection)
     {
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -149,37 +154,79 @@ public class matchBuilder
 
         try
         {
-            for(int n = 0; n < jsonObject.getInt("itemCount"); n++)
+            for(int n = 0; n < section.getInt("itemCount"); n++)
             {
-                JSONObject item = jsonObject.getJSONObject("item" + n);
+                JSONObject item = section.getJSONObject("item" + n);
+
+                JSONObject loadItem =  new JSONObject();
+                if(!newMatch)
+                {
+                    loadItem = loadSection.getJSONObject("item" + n);
+                }
+
                 switch (item.getString("itemType"))
                 {
                     case "checkBox":
                         elementCheckBox checkBox = new elementCheckBox(item.getString("title"), item);
+                        if(!newMatch)
+                        {
+                            if(loadItem.getString("itemType").equals("CheckBox"))
+                            {
+                                checkBox.load(loadItem);
+                            }
+                        }
                         elements.add(checkBox);
                         linearLayout.addView(checkBox.getElement(context));
                         break;
 
                     case "counter":
                         elementCounter counter = new elementCounter(item.getString("title"), item);
+                        if(!newMatch)
+                        {
+                            if(loadItem.getString("itemType").equals("Counter"))
+                            {
+                                counter.load(loadItem);
+                            }
+                        }
                         elements.add(counter);
                         linearLayout.addView(counter.getElement(context));
                         break;
 
                     case "radioGroup":
                         elementRadioGroup radioGroup = new elementRadioGroup(item.getString("title"), item);
+                        if(!newMatch)
+                        {
+                            if(loadItem.getString("itemType").equals("RadioGroup"))
+                            {
+                                radioGroup.load(loadItem);
+                            }
+                        }
                         elements.add(radioGroup);
                         linearLayout.addView(radioGroup.getElement(context));
                         break;
 
                     case "textArea":
                         elementTextArea textArea = new elementTextArea(item.getString("title"), item);
+                        if(!newMatch)
+                        {
+                            if(loadItem.getString("itemType").equals("TextArea"))
+                            {
+                                textArea.load(loadItem);
+                            }
+                        }
                         elements.add(textArea);
                         linearLayout.addView(textArea.getElement(context));
                         break;
 
                     case "toggleButton":
                         elementToggleButton toggleButton = new elementToggleButton(item.getString("title"), item);
+                        if(!newMatch)
+                        {
+                            if(loadItem.getString("itemType").equals("ToggleButton"))
+                            {
+                                toggleButton.load(loadItem);
+                            }
+                        }
                         elements.add(toggleButton);
                         linearLayout.addView(toggleButton.getElement(context));
                         break;
@@ -198,33 +245,42 @@ public class matchBuilder
     {
         File savePath = new File(context.getExternalFilesDir(null), "MatchData" +  File.separator + gameBy + " - " + gameTitle);
         File saveMatch;
-        int loop = 0;
-        do
+
+        if(!newMatch)
         {
-            if (loop > 0)
+            saveMatch = replaceMatch;
+            Log.i("Delete", Boolean.toString(saveMatch.delete()));
+        }
+        else
+        {
+            int loop = 0;
+            do
             {
-                if(this.getGameMode().equals("Alliance"))
+                if (loop > 0)
                 {
-                    saveMatch = new File(savePath, "Match" + matchNumber + "-" + allianceColor + "-C" + loop + ".json");
+                    if(this.getGameMode().equals("Alliance"))
+                    {
+                        saveMatch = new File(savePath, "Match" + matchNumber + "-" + allianceColor + "-C" + loop + ".json");
+                    }
+                    else
+                    {
+                        saveMatch = new File(savePath, "Match" + matchNumber + "-" + teamNumber + "-C" + loop + ".json");
+                    }
                 }
                 else
                 {
-                    saveMatch = new File(savePath, "Match" + matchNumber + "-" + teamNumber + "-C" + loop + ".json");
+                    if(this.getGameMode().equals("Alliance"))
+                    {
+                        saveMatch = new File(savePath, "Match" + matchNumber + "-" + allianceColor + ".json");
+                    }
+                    else
+                    {
+                        saveMatch = new File(savePath, "Match" + matchNumber + "-" + teamNumber + ".json");
+                    }
                 }
-            }
-            else
-            {
-                if(this.getGameMode().equals("Alliance"))
-                {
-                    saveMatch = new File(savePath, "Match" + matchNumber + "-" + allianceColor + ".json");
-                }
-                else
-                {
-                    saveMatch = new File(savePath, "Match" + matchNumber + "-" + teamNumber + ".json");
-                }
-            }
-            loop++;
-        } while(saveMatch.exists());
+                loop++;
+            } while(saveMatch.exists());
+        }
 
         savePath.mkdirs();
 

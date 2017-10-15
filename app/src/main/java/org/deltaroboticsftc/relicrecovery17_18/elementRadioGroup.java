@@ -41,6 +41,18 @@ public class elementRadioGroup extends matchElement {
         }
     }
 
+    public void load(JSONObject toLoad)
+    {
+        try
+        {
+            elementChecked = toLoad.getInt("value");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public LinearLayout getElement(Context context)
     {
         int radioGroupStyle = context.getResources().getIdentifier("radioGroup", "style", context.getPackageName());

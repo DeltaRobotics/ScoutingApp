@@ -16,6 +16,7 @@ import org.json.JSONObject;
 public class elementTextArea extends matchElement {
 
     private int elementLines;
+    private String elementText;
 
     private EditText editText;
 
@@ -25,6 +26,19 @@ public class elementTextArea extends matchElement {
         try
         {
             elementLines = elementInfo.getInt("lines");
+            elementText = "";
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void load(JSONObject toLoad)
+    {
+        try
+        {
+            elementText = toLoad.getString("value");
         }
         catch (Exception e)
         {
@@ -48,6 +62,7 @@ public class elementTextArea extends matchElement {
         {
             editText.setTextAppearance(context, editTextStyle);
         }
+        editText.setText(elementText);
 
         return super.buildElement(editText, context);
     }

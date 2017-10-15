@@ -35,6 +35,18 @@ public class elementToggleButton extends matchElement
         }
     }
 
+    public void load(JSONObject toLoad)
+    {
+        try
+        {
+            elementDefaultToggle = toLoad.getBoolean("value");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public LinearLayout getElement(Context context)
     {
         int toggleButtonStyle = context.getResources().getIdentifier("toggleButton", "style", context.getPackageName());

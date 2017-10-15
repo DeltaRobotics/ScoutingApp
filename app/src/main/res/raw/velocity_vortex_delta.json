@@ -1,0 +1,146 @@
+{
+"gameTitle": "Velocity Vortex",
+"gameYear": 16,
+"gameDescription": "This layout was released by Delta Robotics for the 2016-2017 FTC game, Velocity Vortex.",
+"gameBy": "DR-2015-Official",
+"gameMode": "Team",
+  "Autonomous": {
+    "itemCount": 4,
+    "item0": {
+      "itemType": "counter",
+      "title": "Corner Vortex Particles Scored",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 10000
+    },
+    "item1": {
+      "itemType": "counter",
+      "title": "Center Vortex Particles Scored",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 10000
+    },
+    "item2": {
+      "itemType": "toggleButton",
+      "title": "Capball Moved",
+      "default": false,
+      "trueText": "YES",
+      "falseText": "NO"
+    },
+    "item3": {
+      "itemType": "radioGroup",
+      "title": "Beacons Scored",
+      "count": 3,
+      "default": 0,
+      "radio0": "No Beacons Scored",
+      "radio1": "1 Beacon Scored",
+      "radio2": "2 Beacons Scored"
+    }
+  },
+  "TeleOp": {
+    "itemCount": 4,
+    "item0": {
+      "itemType": "counter",
+      "title": "Corner Vortex Particles Scored",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 10000
+    },
+    "item1": {
+      "itemType": "counter",
+      "title": "Center Vortex Particles Scored",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 10000
+    },
+    "item2": {
+      "itemType": "counter",
+      "title": "Beacons Pressed",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 10000
+    },
+    "item3": {
+      "itemType": "radioGroup",
+      "title": "Beacons Scored",
+      "count": 5,
+      "default": 0,
+      "radio0": "No Beacons Scored",
+      "radio1": "1 Beacon Scored",
+      "radio2": "2 Beacons Scored",
+      "radio3": "3 Beacons Scored",
+      "radio4": "4 Beacons Scored"
+    }
+  },
+  "EndGame": {
+    "itemCount": 1,
+    "item0": {
+      "itemType": "radioGroup",
+      "title": "Capball Scored",
+      "count": 4,
+      "default": 0,
+      "radio0": "Not Scored",
+      "radio1": "Low Goal",
+      "radio2": "High Goal",
+      "radio3": "Capped"
+    }
+  },
+  "Extras": {
+    "include": true,
+    "itemCount": 6,
+    "item0": {
+      "itemType": "radioGroup",
+      "title": "Robot Efficiency at Scoring Particles",
+      "count": 3,
+      "default": -1,
+      "radio0": "Good",
+      "radio1": "So-So",
+      "radio2": "Bad"
+    },
+    "item1": {
+      "itemType": "radioGroup",
+      "title": "Robot Efficiency at Scoring Beacons",
+      "count": 3,
+      "default": -1,
+      "radio0": "Good",
+      "radio1": "So-So",
+      "radio2": "Bad"
+    },
+    "item2": {
+      "itemType": "radioGroup",
+      "title": "Robot Efficiency at Scoring Capball",
+      "count": 3,
+      "default": -1,
+      "radio0": "Good",
+      "radio1": "So-So",
+      "radio2": "Bad"
+    },
+    "item3": {
+      "itemType": "radioGroup",
+      "title": "Robot Speed",
+      "count": 2,
+      "default": -1,
+      "radio0": "Fast",
+      "radio1": "Slow"
+    },
+    "item4": {
+      "itemType": "checkBox",
+      "title": "Robot Problems",
+      "count": 2,
+      "box0": "Phone Connection Issues",
+      "box0Checked": false,
+      "box1": "Mechanical Issues",
+      "box1Checked": false
+    },
+    "item5": {
+      "itemType": "textArea",
+      "title": "Comments",
+      "lines": 5
+    }
+  }
+}

@@ -42,6 +42,21 @@ public class elementCheckBox extends matchElement {
         }
     }
 
+    public void load(JSONObject toLoad)
+    {
+        try
+        {
+            for(int x = 0; x < toLoad.getInt("count"); x++)
+            {
+                elementsChecked.set(x, toLoad.getBoolean("box" + x + "Checked"));
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public LinearLayout getElement(Context context)
     {
         int checkBoxStyle = context.getResources().getIdentifier("checkBox", "style", context.getPackageName());

@@ -47,14 +47,18 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         this.defineStorage();
-        this.readStorage();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setChecked(true);
 
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("newMatch", true);
+
+        Fragment fragment = new fragmentEditMatch();
+        fragment.setArguments(bundle);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.parent_fragment, new fragmentEditMatch());
+        transaction.replace(R.id.parent_fragment, fragment);
         transaction.commit();
     }
 
@@ -79,6 +83,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        // Hi Luke!! Tell me when you find this note.
         if(id == R.id.action_new_match)
         {
             findViewById(R.id.scroll_view).setScrollY(0);
@@ -114,6 +119,10 @@ public class MainActivity extends AppCompatActivity
             bundle.putBoolean("newMatch", true);
             fragment = new fragmentEditMatch();
         }
+        else if(id == R.id.nav_saved_matches)
+        {
+            fragment = new fragmentSavedMatches();
+        }
         else if(id == R.id.nav_game_selector)
         {
             fragment = new fragmentChangeGame();
@@ -142,66 +151,33 @@ public class MainActivity extends AppCompatActivity
     {
         SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 1);
         SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
-        File gamesDir = new File(getFilesDir(), "Games");
 
-        //if(DRFTCScouting.getBoolean("FirstLaunch", true))
-//        if(true)
-//        {
-//            DRFTCScoutingEditor.putBoolean("FirstLaunch", false);
-//            DRFTCScoutingEditor.putString("CurrentGame", getResources().getString(R.string.OfficialGame1));
-//            DRFTCScoutingEditor.putInt("GameCount", 1);
-//            DRFTCScoutingEditor.putBoolean("SettingsOutputReadable", false);
-//            DRFTCScoutingEditor.putBoolean("SettingsOutputCSV", true);
-//            DRFTCScoutingEditor.apply();
-//
-//            try
-//            {
-//                File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRSgame");
-//                Log.i("DR-RR File Deleted", Boolean.toString(DRRelicRecoveryFile.delete()));
-//                Log.i("DR-RR File Created", Boolean.toString(DRRelicRecoveryFile.createNewFile()));
-//
-//                FileOutputStream outputStream = new FileOutputStream(DRRelicRecoveryFile);
-//                outputStream.write(getResources().getString(R.string.OfficialGame1).getBytes());
-//                outputStream.flush();
-//                outputStream.close();
-//            }
-//            catch (Exception e)
-//            {
-//                e.printStackTrace();
-//            }
+        if(DRFTCScouting.getBoolean("FirstLaunch", true))
+        {
+            DRFTCScoutingEditor.putBoolean("FirstLaunch", false);
 
-//            File outputDir = getExternalFilesDir(null);
-//            Log.i("DR-RR Output Deleted", Boolean.toString(outputDir.delete()));
-//
-//            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-//            intent.setData(Uri.fromFile(outputDir));
-//            sendBroadcast(intent);
-//        }
-    }
+            try
+            {
+                InputStream inputStream = getResources().openRawResource(R.raw.relic_recovery_delta);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder builder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null)
+                {
+                    builder.append(line);
+                }
+                reader.close();
+                inputStream.close();
 
-    private void readStorage()
-    {
-        File gamesDir = new File(getFilesDir(), "Games");
+                DRFTCScoutingEditor.putString("CurrentGame", builder.toString());
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
 
-//        try
-//        {
-//            File DRRelicRecoveryFile = new File(gamesDir, "OfficialGame1.DRSgame");
-//            InputStream inputStream = new BufferedInputStream(new FileInputStream(DRRelicRecoveryFile));
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-//            StringBuilder builder = new StringBuilder();
-//            String line;
-//            while ((line = reader.readLine()) != null)
-//            {
-//                builder.append(line);
-//            }
-//            reader.close();
-//            inputStream.close();
-//
-//            Log.i("File", builder.toString());
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
+        }
+
+        DRFTCScoutingEditor.apply();
     }
 }

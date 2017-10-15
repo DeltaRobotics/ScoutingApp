@@ -147,7 +147,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/game_by"
+        android:id="@+id/review_game_by"
         style="@style/subText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/delta_banner"
+        android:id="@+id/review_delta_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"

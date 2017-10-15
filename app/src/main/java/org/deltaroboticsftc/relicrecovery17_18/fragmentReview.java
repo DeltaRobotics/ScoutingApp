@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -67,7 +68,7 @@ public class fragmentReview extends Fragment
                 bundle.putBoolean("newMatch", false);
                 bundle.putString("matchPath", reviewBundle.getString("matchPath"));
 
-                Fragment fragment = new fragmentReview();
+                Fragment fragment = new fragmentEditMatch();
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.parent_fragment, fragment);
@@ -110,6 +111,21 @@ public class fragmentReview extends Fragment
             {
                 teamNumber.setText("Team: " + matchInfo.getString("teamNumber"));
             }
+
+            TextView gameBy = (TextView) rootView.findViewById(R.id.review_game_by);
+            ImageView banner = (ImageView) rootView.findViewById(R.id.review_delta_banner);
+            if(matchInfo.getString("gameBy").equals("DR-2015-Official"))
+            {
+                gameBy.setVisibility(View.GONE);
+                banner.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                gameBy.setVisibility(View.VISIBLE);
+                gameBy.setText(matchInfo.getString("gameTitle") + " By: " + matchInfo.getString("gameBy"));
+                banner.setVisibility(View.GONE);
+            }
+
             TextView matchNumber = (TextView) rootView.findViewById(R.id.review_match_number);
             matchNumber.setText("Match: " + matchInfo.getString("matchNumber"));
             TextView allianceColor = (TextView) rootView.findViewById(R.id.review_alliance_color);
@@ -277,7 +293,7 @@ public class fragmentReview extends Fragment
                     progressDialog.dismiss();
                     postDelete.setTitle("Delete Successful");
                     postDelete.setIcon(R.drawable.ic_done_black_24dp);
-                    postDelete.setMessage("All match data deleted");
+                    postDelete.setMessage("Match data deleted");
 
                     getActivity().findViewById(R.id.scroll_view).setScrollY(0);
 

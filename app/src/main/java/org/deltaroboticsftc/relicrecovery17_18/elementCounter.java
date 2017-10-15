@@ -45,6 +45,18 @@ public class elementCounter extends matchElement {
         elementCurrentValue = elementDefault;
     }
 
+    public void load(JSONObject toLoad)
+    {
+        try
+        {
+            elementCurrentValue = toLoad.getInt("value");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     public LinearLayout getElement(Context context)
     {
         int counterNumberStyle = context.getResources().getIdentifier("counterNumber", "style", context.getPackageName());
@@ -60,7 +72,7 @@ public class elementCounter extends matchElement {
         textView = new TextView(context);
         textView.setLayoutParams(layoutParams);
         textView.setGravity(Gravity.CENTER);
-        textView.setText(Integer.toString(elementDefault));
+        textView.setText(Integer.toString(elementCurrentValue));
         if (Build.VERSION.SDK_INT >= 23) {
             textView.setTextAppearance(counterNumberStyle);
         }
