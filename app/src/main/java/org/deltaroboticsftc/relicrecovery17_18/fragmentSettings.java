@@ -55,6 +55,18 @@ public class fragmentSettings extends Fragment
 
     private void eventData()
     {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this.getContext());
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alert.setTitle("Under Construction");
+        alert.setIcon(R.drawable.ic_build_black_24dp);
+        alert.setMessage("Sorry, but this feature has not yet been added.");
+        alert.show();
+
 
     }
 
@@ -104,14 +116,14 @@ public class fragmentSettings extends Fragment
                     progressDialog.dismiss();
                     postDelete.setTitle("Delete Successful");
                     postDelete.setIcon(R.drawable.ic_done_black_24dp);
-                    postDelete.setMessage("All match data deleted");
+                    postDelete.setMessage("All match data deleted.");
                 }
                 else
                 {
                     progressDialog.dismiss();
                     postDelete.setTitle("Delete Failed");
                     postDelete.setIcon(R.drawable.ic_error_outline_black_24dp);
-                    postDelete.setMessage("Failed to delete match data");
+                    postDelete.setMessage("Failed to delete match data.");
                 }
 
                 postDelete.show();

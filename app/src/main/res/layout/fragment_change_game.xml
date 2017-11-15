@@ -18,13 +18,15 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dividerHeight"
         android:background="@color/colorPrimary"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"
+        android:visibility="gone"></LinearLayout>
 
     <Button
         android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Import New Game" />
+        android:text="Import New Game"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
