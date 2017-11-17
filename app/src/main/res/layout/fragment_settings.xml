@@ -63,4 +63,13 @@
         android:textColor="@android:color/holo_red_dark"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/subText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="5dp"
+        android:text="@string/appVersion"
+        android:textAlignment="textEnd" />
+
 </LinearLayout>

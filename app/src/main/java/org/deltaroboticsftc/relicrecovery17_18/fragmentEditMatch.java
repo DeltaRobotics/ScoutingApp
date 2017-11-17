@@ -219,15 +219,31 @@ public class fragmentEditMatch extends Fragment
 
     public void clearOnClick()
     {
-        this.getActivity().findViewById(R.id.scroll_view).setScrollY(0);
+        AlertDialog.Builder warning = new AlertDialog.Builder(this.getContext());
+        warning.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
-        Bundle bundle = new Bundle();
-        bundle.putBoolean("newMatch", true);
+            }
+        });
+        warning.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                getActivity().findViewById(R.id.scroll_view).setScrollY(0);
 
-        Fragment fragment = new fragmentEditMatch();
-        fragment.setArguments(bundle);
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.parent_fragment, fragment);
-        transaction.commit();
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("newMatch", true);
+
+                Fragment fragment = new fragmentEditMatch();
+                fragment.setArguments(bundle);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.parent_fragment, fragment);
+                transaction.commit();
+            }
+        });
+        warning.setTitle("WARNING");
+        warning.setMessage("Are you sure you want to clear this match without saving?");
+        warning.setIcon(R.drawable.ic_warning_black_24dp);
+        warning.show();
     }
 }

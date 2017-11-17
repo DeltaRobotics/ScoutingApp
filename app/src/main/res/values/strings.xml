@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Relic Recovery 17-18</string>
+    <string name="app_name">FTC Scouting</string>
+    <string name="appVersion">Version Alpha 1.0.0</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

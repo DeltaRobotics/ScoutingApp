@@ -260,22 +260,22 @@ public class matchBuilder
                 {
                     if(this.getGameMode().equals("Alliance"))
                     {
-                        saveMatch = new File(savePath, "Match" + matchNumber + "-" + allianceColor + "-C" + loop + ".json");
+                        saveMatch = new File(savePath, allianceColor + "-Match" + matchNumber + "-C" + loop + ".json");
                     }
                     else
                     {
-                        saveMatch = new File(savePath, "Match" + matchNumber + "-" + teamNumber + "-C" + loop + ".json");
+                        saveMatch = new File(savePath, teamNumber + "-Match" + matchNumber + "-C" + loop + ".json");
                     }
                 }
                 else
                 {
                     if(this.getGameMode().equals("Alliance"))
                     {
-                        saveMatch = new File(savePath, "Match" + matchNumber + "-" + allianceColor + ".json");
+                        saveMatch = new File(savePath, allianceColor + "-Match" + matchNumber + ".json");
                     }
                     else
                     {
-                        saveMatch = new File(savePath, "Match" + matchNumber + "-" + teamNumber + ".json");
+                        saveMatch = new File(savePath, teamNumber + "-Match" + matchNumber + ".json");
                     }
                 }
                 loop++;

@@ -1,9 +1,11 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 public class fragmentSavedMatches extends Fragment
 {
 
+    ArrayList<File> saveMatchesFiles;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -63,11 +66,34 @@ public class fragmentSavedMatches extends Fragment
         linearLayout.setLayoutParams(layoutParams);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        File savePath = new File(this.getContext().getExternalFilesDir(null), "MatchData" +  File.separator + gameBy + " - " + gameTitle);
-        //if(savePath.exists())
-        if(false)
+        File savePath = new File(this.getContext().getExternalFilesDir(null), "MatchData" +  File.separator + gameTitle + " - " + gameBy);
+        if(savePath.exists())
         {
-            ArrayList<File> savedMatches = getMatches(savePath);
+            ArrayList<JSONObject> savedMatches = getMatches(savePath);
+            if(savedMatches.size() <= 0)
+            {
+                linearLayout.addView(savedMatchesError(layoutParams));
+            }
+            else
+            {
+                ArrayList<String> teamsDone = new ArrayList<>();
+                for(int x = 0; x < savedMatches.size(); x++)
+                {
+                    try
+                    {
+                        String teamNumber = savedMatches.get(x).getString("teamNumber");
+                        if (!teamsDone.contains(teamNumber))
+                        {
+                            teamsDone.add(teamNumber);
+                            linearLayout.addView(buildDropDown(savedMatches, teamNumber));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
         }
         else
@@ -93,24 +119,26 @@ public class fragmentSavedMatches extends Fragment
         return savedMatchesNotFound;
     }
 
-    private ArrayList<File> getMatches(File file)
+    private ArrayList<JSONObject> getMatches(File file)
     {
-        ArrayList<File> matchesFiles = new ArrayList<>();
+        saveMatchesFiles = new ArrayList<>();
+        ArrayList<JSONObject> matchesFiles = new ArrayList<>();
         String[] childFile = file.list();
         for(int x = 0; x < childFile.length; x++)
         {
             if(!new File(file, childFile[x]).isDirectory())
             {
-                if(checkFile(new File(file, childFile[x])))
+                if(checkFile(new File(file, childFile[x])) != null)
                 {
-                    matchesFiles.add(new File(file, childFile[x]));
+                    saveMatchesFiles.add(new File(file, childFile[x]));
+                    matchesFiles.add(checkFile(new File(file, childFile[x])));
                 }
             }
         }
         return matchesFiles;
     }
 
-    private boolean checkFile(File file)
+    private JSONObject checkFile(File file)
     {
         try
         {
@@ -125,27 +153,17 @@ public class fragmentSavedMatches extends Fragment
             reader.close();
             inputStream.close();
 
+            return new JSONObject(builder.toString());
 
-            Log.i("Json", builder.toString());
-            new JSONObject(builder.toString());
-            return true;
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
-
-
-
-
-
-
-
-/*
-    private LinearLayout buildLayout()
+    private LinearLayout buildDropDown(ArrayList<JSONObject> savedMatches, String teamNumber)
     {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout linearLayout = new LinearLayout(this.getContext());
@@ -184,7 +202,7 @@ public class fragmentSavedMatches extends Fragment
         {
             DRTitle.setTextAppearance(this.getContext(), this.getContext().getResources().getIdentifier("subTitle", "style", this.getContext().getPackageName()));
         }
-        DRTitle.setText("Team: 9925");
+        DRTitle.setText("Team: " + teamNumber);
         DRTitleLinearLayout.addView(DRTitle);
 
         final ImageView dropDownIcon = new ImageView(this.getContext());
@@ -213,21 +231,23 @@ public class fragmentSavedMatches extends Fragment
         DRTitleLinearLayout.addView(dropUpIcon);
 
         final LinearLayout DRContentLinearLayout = new LinearLayout(this.getContext());
-        DRLinearLayout.setLayoutParams(layoutParams);
-        DRLinearLayout.setOrientation(LinearLayout.VERTICAL);
+        DRContentLinearLayout.setLayoutParams(layoutParams);
+        DRContentLinearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        Button testButton = new Button(this.getContext());
-        testButton.setLayoutParams(layoutParams);
-        if (Build.VERSION.SDK_INT >= 23)
+        for(int x = 0; x < savedMatches.size(); x++)
         {
-            testButton.setTextAppearance(this.getContext().getResources().getIdentifier("selectionButton", "style", this.getContext().getPackageName()));
+            try
+            {
+                if(savedMatches.get(x).getString("teamNumber").equals(teamNumber))
+                {
+                    DRContentLinearLayout.addView(buildElement(savedMatches.get(x), x));
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
-        else
-        {
-            testButton.setTextAppearance(this.getContext(), this.getContext().getResources().getIdentifier("selectionButton", "style", this.getContext().getPackageName()));
-        }
-        testButton.setText("Match: __");
-        DRContentLinearLayout.addView(testButton);
 
         DRTitleLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,6 +276,54 @@ public class fragmentSavedMatches extends Fragment
 
         return linearLayout;
     }
-*/
+
+    private Button buildElement(JSONObject matchJson, final int index)
+    {
+        String matchNumber = "Error";
+        try
+        {
+            matchNumber = matchJson.getString("matchNumber");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        Button matchButton = new Button(this.getContext());
+        matchButton.setLayoutParams(layoutParams);
+        if (Build.VERSION.SDK_INT >= 23)
+        {
+            matchButton.setTextAppearance(this.getContext().getResources().getIdentifier("selectionButton", "style", this.getContext().getPackageName()));
+        }
+        else
+        {
+            matchButton.setTextAppearance(this.getContext(), this.getContext().getResources().getIdentifier("selectionButton", "style", this.getContext().getPackageName()));
+        }
+        if(saveMatchesFiles.get(index).getPath().contains("-C"))
+        {
+
+        }
+        else
+        {
+            matchButton.setText("Match: " + matchNumber);
+        }
+        matchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle reviewBundle = new Bundle();
+                reviewBundle.putString("matchPath", saveMatchesFiles.get(index).getPath());
+
+                Fragment fragment = new fragmentReview();
+                fragment.setArguments(reviewBundle);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.parent_fragment, fragment);
+                transaction.commit();
+            }
+        });
+
+        return matchButton;
+    }
 
 }
