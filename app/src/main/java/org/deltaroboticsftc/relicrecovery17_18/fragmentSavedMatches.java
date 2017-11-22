@@ -303,7 +303,8 @@ public class fragmentSavedMatches extends Fragment
         }
         if(saveMatchesFiles.get(index).getPath().contains("-C"))
         {
-
+            String copy = saveMatchesFiles.get(index).getPath().substring(saveMatchesFiles.get(index).getPath().indexOf("-C") + 2, saveMatchesFiles.get(index).getPath().indexOf("-C") + 3);
+            matchButton.setText("Match: " + matchNumber + " - Copy " + copy);
         }
         else
         {
