@@ -45,7 +45,7 @@ public class fragmentEditMatch extends Fragment
 
         try
         {
-            SharedPreferences DRFTCScouting = rootView.getContext().getSharedPreferences("DRFTCScouting", 1);
+            SharedPreferences DRFTCScouting = rootView.getContext().getSharedPreferences("DRFTCScouting", 0);
 
             JSONObject loadMatch;
             File loadFile;

@@ -40,7 +40,7 @@ public class fragmentSavedMatches extends Fragment
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_saved_matches, container, false);
 
-        SharedPreferences DRFTCScouting = this.getContext().getSharedPreferences("DRFTCScouting", 1);
+        SharedPreferences DRFTCScouting = this.getContext().getSharedPreferences("DRFTCScouting", 0);
         try
         {
             JSONObject game = new JSONObject(DRFTCScouting.getString("CurrentGame", "Failed"));

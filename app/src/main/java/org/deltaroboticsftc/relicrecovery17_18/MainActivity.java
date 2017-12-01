@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity
 
     private void defineStorage()
     {
-        SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 1);
+        SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 0);
         SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
 
         if(DRFTCScouting.getBoolean("FirstLaunch", true))

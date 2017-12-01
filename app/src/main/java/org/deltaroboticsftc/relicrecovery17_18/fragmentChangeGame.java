@@ -214,7 +214,7 @@ public class fragmentChangeGame extends Fragment
 
     private void changeGame(String jsonString)
     {
-        SharedPreferences DRFTCScouting = this.getContext().getSharedPreferences("DRFTCScouting", 1);
+        SharedPreferences DRFTCScouting = this.getContext().getSharedPreferences("DRFTCScouting", 0);
         SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
         DRFTCScoutingEditor.putString("CurrentGame", jsonString);
         DRFTCScoutingEditor.apply();
