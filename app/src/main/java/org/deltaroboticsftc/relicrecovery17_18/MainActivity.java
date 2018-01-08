@@ -159,6 +159,8 @@ public class MainActivity extends AppCompatActivity
         {
             DRFTCScoutingEditor.putBoolean("FirstLaunch", false);
 
+            DRFTCScoutingEditor.putBoolean("SettingsDefaultColorRed", true);
+
             try
             {
                 InputStream inputStream = getResources().openRawResource(R.raw.relic_recovery_delta);
