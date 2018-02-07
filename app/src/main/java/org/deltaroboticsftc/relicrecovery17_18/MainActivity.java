@@ -17,8 +17,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
+import android.widget.ToggleButton;
 
 import com.google.gson.Gson;
 
@@ -159,7 +161,7 @@ public class MainActivity extends AppCompatActivity
         {
             DRFTCScoutingEditor.putBoolean("FirstLaunch", false);
 
-            DRFTCScoutingEditor.putBoolean("SettingsDefaultColorRed", true);
+            DRFTCScoutingEditor.putBoolean("DefaultAllianceColor", false);
 
             try
             {
@@ -183,6 +185,17 @@ public class MainActivity extends AppCompatActivity
 
         }
 
+        DRFTCScoutingEditor.apply();
+    }
+
+    public void allianceColorChanger(View v)
+    {
+        ToggleButton allianceColor = (ToggleButton) findViewById(R.id.alliance_color);
+        Log.i("Alliance Color Changer", Boolean.toString(allianceColor.isChecked()));
+
+        SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 0);
+        SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
+        DRFTCScoutingEditor.putBoolean("DefaultAllianceColor", allianceColor.isChecked());
         DRFTCScoutingEditor.apply();
     }
 }

@@ -124,28 +124,32 @@
     "item0": {
       "itemType": "radioGroup",
       "title": "Robot Efficiency at Scoring Glyphs",
-      "count": 3,
-      "default": -1,
+      "count": 4,
+      "default": 3,
       "radio0": "Good",
       "radio1": "So-So",
-      "radio2": "Bad"
+      "radio2": "Bad",
+      "radio3": "NA"
     },
     "item1": {
       "itemType": "radioGroup",
       "title": "Robot Efficiency at Scoring Relics",
-      "count": 3,
-      "default": -1,
+      "count": 4,
+      "default": 3,
       "radio0": "Good",
       "radio1": "So-So",
-      "radio2": "Bad"
+      "radio2": "Bad",
+      "radio3": "NA"
     },
     "item2": {
       "itemType": "radioGroup",
       "title": "Robot Speed",
-      "count": 2,
-      "default": -1,
+      "count": 4,
+      "default": 3,
       "radio0": "Fast",
-      "radio1": "Slow"
+      "radio1": "Medium",
+      "radio2": "Slow",
+      "radio3": "NA"
     },
     "item3": {
       "itemType": "checkBox",

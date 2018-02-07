@@ -59,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="allianceColorChanger"
             android:text="ToggleButton"
             android:textOff="Blue"
             android:textOn="Red" />

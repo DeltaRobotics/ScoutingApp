@@ -22,44 +22,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView5"
-        style="@style/subTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Default Alliance Color" />
-
-    <RadioGroup
-        android:id="@+id/settings_default_color"
-        style="@style/elementRadioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/settings_default_color_red"
-            style="@style/elementRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Red" />
-
-        <RadioButton
-            android:id="@+id/settings_default_color_blue"
-            style="@style/elementRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Blue" />
-    </RadioGroup>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dividerHeight"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
     <Button
         android:id="@+id/settings_event_data"
         style="@style/elementCounterButton"

@@ -86,6 +86,10 @@ public class fragmentEditMatch extends Fragment
             }
             else
             {
+                Boolean defaultAllianceColor = DRFTCScouting.getBoolean("DefaultAllianceColor", false);
+                ToggleButton allianceColor = (ToggleButton) rootView.findViewById(R.id.alliance_color);
+                allianceColor.setChecked(defaultAllianceColor);
+
                 loadFile = new File(this.getContext().getExternalFilesDir(null), "");
                 loadMatch = new JSONObject();
             }

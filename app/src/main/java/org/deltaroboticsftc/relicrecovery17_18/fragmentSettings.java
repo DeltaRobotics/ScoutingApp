@@ -52,19 +52,6 @@ public class fragmentSettings extends Fragment
             }
         });
 
-        RadioGroup settingsDefaultColor = (RadioGroup) rootView.findViewById(R.id.settings_default_color);
-
-        SharedPreferences DRFTCScouting = rootView.getContext().getSharedPreferences("DRFTCScouting", 0);
-
-        if(DRFTCScouting.getBoolean("SettingsDefaultColorRed", true))
-        {
-            settingsDefaultColor.check(R.id.settings_default_color_red);
-        }
-        else
-        {
-            settingsDefaultColor.check(R.id.settings_default_color_blue);
-        }
-
         return rootView;
     }
 
