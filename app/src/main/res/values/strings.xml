@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FTC Scouting</string>
     <string name="appVersion">Version 1.3</string>
-    <!--Last Google Play Store Push on 2/6/18-->
+    <!--Last Google Play Store Push on 2/6/18 with app Version 1.3, version code 4-->
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
