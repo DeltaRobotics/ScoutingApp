@@ -129,7 +129,7 @@
       "radio0": "Good",
       "radio1": "So-So",
       "radio2": "Bad",
-      "radio3": "NA"
+      "radio3": "Did Not Attempt"
     },
     "item1": {
       "itemType": "radioGroup",
@@ -139,7 +139,7 @@
       "radio0": "Good",
       "radio1": "So-So",
       "radio2": "Bad",
-      "radio3": "NA"
+      "radio3": "Did Not Attempt"
     },
     "item2": {
       "itemType": "radioGroup",
@@ -149,7 +149,7 @@
       "radio0": "Fast",
       "radio1": "Medium",
       "radio2": "Slow",
-      "radio3": "NA"
+      "radio3": "Did Not Move"
     },
     "item3": {
       "itemType": "checkBox",

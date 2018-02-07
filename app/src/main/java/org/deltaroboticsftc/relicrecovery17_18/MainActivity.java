@@ -191,7 +191,6 @@ public class MainActivity extends AppCompatActivity
     public void allianceColorChanger(View v)
     {
         ToggleButton allianceColor = (ToggleButton) findViewById(R.id.alliance_color);
-        Log.i("Alliance Color Changer", Boolean.toString(allianceColor.isChecked()));
 
         SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 0);
         SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
