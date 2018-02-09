@@ -26,6 +26,7 @@ public class matchBuilder
     private String gameDescription;
     private String gameBy;
     private String gameMode;
+    private int gameVersion;
     private LinearLayout AutonomousLayout;
     private ArrayList<matchElement> AutonomousElements;
     private LinearLayout TeleOpLayout;
@@ -49,6 +50,7 @@ public class matchBuilder
             gameDescription = game.getString("gameDescription");
             gameBy = game.getString("gameBy");
             gameMode = game.getString("gameMode");
+            gameVersion = game.getInt("version");
             newMatch = newMatchPass;
             replaceMatch = replaceMatchPass;
 
@@ -243,7 +245,8 @@ public class matchBuilder
 
     public String save(String teamNumber, String matchNumber, String allianceColor, Context context)
     {
-        File savePath = new File(context.getExternalFilesDir(null), "MatchData" +  File.separator + gameBy + " - " + gameTitle);
+        File savePath = new File(context.getExternalFilesDir(null), "MatchData" +  File.separator + gameBy + " - " + gameTitle + File.separator + "Version" + gameVersion);
+        Log.i("SavePath-Builder", savePath.toString());
         File saveMatch;
 
         if(!newMatch)

@@ -1,6 +1,7 @@
 {
 "gameTitle": "Relic Recovery",
 "gameYear": 17,
+"version": 3,
 "gameDescription": "This layout was released by Delta Robotics for the 2017-2018 FTC game, Relic Recovery.",
 "gameBy": "DR-2015-Official",
 "gameMode": "Team",

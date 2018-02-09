@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import java.io.File;
 
@@ -51,6 +52,10 @@ public class fragmentSettings extends Fragment
                 deleteGames();
             }
         });
+
+        TextView appVersion = (TextView) rootView.findViewById(R.id.settings_app_version);
+        SharedPreferences DRFTCScouting = rootView.getContext().getSharedPreferences("DRFTCScouting", 0);
+        appVersion.setText(DRFTCScouting.getString("VersionName", ""));
 
         return rootView;
     }

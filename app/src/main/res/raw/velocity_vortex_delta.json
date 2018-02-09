@@ -1,6 +1,7 @@
 {
 "gameTitle": "Velocity Vortex",
 "gameYear": 16,
+"version": 1,
 "gameDescription": "This layout was released by Delta Robotics for the 2016-2017 FTC game, Velocity Vortex.",
 "gameBy": "DR-2015-Official",
 "gameMode": "Team",

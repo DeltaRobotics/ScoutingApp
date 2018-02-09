@@ -49,7 +49,7 @@ public class fragmentSavedMatches extends Fragment
             gameTitle.setText(game.getString("gameTitle"));
 
             LinearLayout menu = (LinearLayout) rootView.findViewById(R.id.selection_menu_saved_matches);
-            menu.addView(buildLayout(game.getString("gameTitle"), game.getString("gameBy")));
+            menu.addView(buildLayout(game.getString("gameTitle"), game.getString("gameBy"), game.getInt("version")));
         }
         catch (Exception e)
         {
@@ -59,14 +59,15 @@ public class fragmentSavedMatches extends Fragment
         return rootView;
     }
 
-    private LinearLayout buildLayout(String gameBy, String gameTitle)
+    private LinearLayout buildLayout(String gameTitle, String gameBy, int gameVersion)
     {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout linearLayout = new LinearLayout(this.getContext());
         linearLayout.setLayoutParams(layoutParams);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        File savePath = new File(this.getContext().getExternalFilesDir(null), "MatchData" +  File.separator + gameTitle + " - " + gameBy);
+        File savePath = new File(this.getContext().getExternalFilesDir(null), "MatchData" +  File.separator + gameBy + " - " + gameTitle + File.separator + "Version" + gameVersion);
+        Log.i("SavePath-Saved", savePath.toString());
         if(savePath.exists())
         {
             ArrayList<JSONObject> savedMatches = getMatches(savePath);

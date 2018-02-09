@@ -1,8 +1,10 @@
 package org.deltaroboticsftc.relicrecovery17_18;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -154,17 +157,33 @@ public class MainActivity extends AppCompatActivity
 
     private void defineStorage()
     {
-        SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 0);
-        SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
 
-        if(DRFTCScouting.getBoolean("FirstLaunch", true))
+        boolean displayAlert = true;
+
+        try
         {
-            DRFTCScoutingEditor.putBoolean("FirstLaunch", false);
+            SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 0);
+            SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
 
-            DRFTCScoutingEditor.putBoolean("DefaultAllianceColor", false);
+            PackageInfo packageInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            int versionCode = packageInfo.versionCode;
+            String versionName = packageInfo.versionName;
+            Log.i("Version Code", Integer.toString(versionCode));
+            Log.i("Version Name", versionName);
 
-            try
+
+            if(DRFTCScouting.getBoolean("DefineStorage", true) || DRFTCScouting.getInt("VersionCode", 0) != versionCode)
             {
+                DRFTCScoutingEditor.putBoolean("DefineStorage", false);
+                DRFTCScoutingEditor.putInt("VersionCode", versionCode);
+                DRFTCScoutingEditor.putString("VersionName", versionName);
+                DRFTCScoutingEditor.putBoolean("DefaultAllianceColor", false);
+
+                if(displayAlert == true)
+                {
+                    onLoadAlert();
+                }
+
                 InputStream inputStream = getResources().openRawResource(R.raw.relic_recovery_delta);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder builder = new StringBuilder();
@@ -177,15 +196,58 @@ public class MainActivity extends AppCompatActivity
                 inputStream.close();
 
                 DRFTCScoutingEditor.putString("CurrentGame", builder.toString());
+
             }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+
+            DRFTCScoutingEditor.apply();
 
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
-        DRFTCScoutingEditor.apply();
+    }
+
+    private void onLoadAlert()
+    {
+        String negativeButton = "Wait";
+        String positiveButton = "Delete";
+        String title = "Update Conflict";
+        String message = "Update Version 1.3.1 changed the saved matches file structure.  Because of this we recommend deleting all saved match data, to prevent conflict.";
+        int icon = R.drawable.ic_info_black_24dp;
+
+        try
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setNegativeButton(negativeButton, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            alert.setPositiveButton(positiveButton, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    Fragment fragment = new fragmentSettings();
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.parent_fragment, fragment);
+                    transaction.commit();
+
+                }
+            });
+            alert.setTitle(title);
+            alert.setMessage(message);
+            alert.setIcon(icon);
+            alert.show();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void allianceColorChanger(View v)
