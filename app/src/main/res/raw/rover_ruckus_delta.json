@@ -1,0 +1,158 @@
+{
+  "gameTitle": "Rover Ruckus",
+  "gameYear": 18,
+  "version": 1,
+  "gameDescription": "This layout was released by Delta Robotics for the 2018-2019 FTC game, Relic Recovery.",
+  "gameBy": "DR-2015-Official",
+  "gameMode": "Team",
+  "Autonomous": {
+    "itemCount": 4,
+    "item0": {
+      "itemType": "checkBox",
+      "title": "Landing",
+      "count": 3,
+      "box0": "Landed",
+      "box0Checked": false,
+      "box1": "Atempted",
+      "box1Checked": false,
+      "box2": "Did Not Land",
+      "box2Checked": false
+    },
+    "item1": {
+      "itemType": "checkBox",
+      "title": "Sampling",
+      "count": 3,
+      "box0": "Achieved",
+      "box0Checked": false,
+      "box1": "Atempted",
+      "box1Checked": false,
+      "box2": "No Attempt",
+      "box2Checked": false
+    },
+    "item2": {
+      "itemType": "checkBox",
+      "title": "Claiming",
+      "count": 3,
+      "box0": "Claimed",
+      "box0Checked": false,
+      "box1": "Atempted",
+      "box1Checked": false,
+      "box2": "No Attempt",
+      "box2Checked": false
+    },
+    "item3": {
+      "itemType": "checkBox",
+      "title": "Parking",
+      "count": 3,
+      "box0": "Parked",
+      "box0Checked": false,
+      "box1": "Atempted",
+      "box1Checked": false,
+      "box2": "No Attempt",
+      "box2Checked": false
+    },
+    "TeleOp": {
+      "itemCount": 4,
+      "item0": {
+        "itemType": "counter",
+        "title": "Minerals In Depot",
+        "default": 0,
+        "modifier": 1,
+        "minValue": 0,
+        "maxValue": 150
+      },
+      "item1": {
+        "itemType": "counter",
+        "title": "Gold In Correct Lander",
+        "default": 0,
+        "modifier": 1,
+        "minValue": 0,
+        "maxValue": 90
+      },
+      "item2": {
+        "itemType": "counter",
+        "title": "Silver In Correct Lander",
+        "default": 0,
+        "modifier": 1,
+        "minValue": 0,
+        "maxValue": 60
+      },
+      "item3": {
+        "itemType": "counter",
+        "title": "Mineral In Incorrect Lander",
+        "default": 0,
+        "modifier": 1,
+        "minValue": 0,
+        "maxValue": 150
+      }
+    },
+    "EndGame": {
+      "itemCount": 2,
+      "item0": {
+        "itemType": "radioGroup",
+        "title": "Parking",
+        "count": 4,
+        "default": 0,
+        "radio0": "No Park",
+        "radio1": "Partial Park",
+        "radio2": "Compelte Park",
+        "radio3": "Attempt"
+      },
+      "item1": {
+        "itemType": "toggleButton",
+        "title": "Lift Off",
+        "default": false,
+        "trueText": "Hanging",
+        "falseText": "Grounded"
+      }
+    },
+    "Extras": {
+      "include": true,
+      "itemCount": 5,
+      "item0": {
+        "itemType": "radioGroup",
+        "title": "Robot Efficiency at Scoring Minerals",
+        "count": 4,
+        "default": 3,
+        "radio0": "Good",
+        "radio1": "So-So",
+        "radio2": "Bad",
+        "radio3": "Did Not Attempt"
+      },
+      "item1": {
+        "itemType": "radioGroup",
+        "title": "Robot Efficiency at Hanging",
+        "count": 4,
+        "default": 3,
+        "radio0": "Good",
+        "radio1": "So-So",
+        "radio2": "Bad",
+        "radio3": "Did Not Attempt"
+      },
+      "item2": {
+        "itemType": "radioGroup",
+        "title": "Robot Speed",
+        "count": 4,
+        "default": 3,
+        "radio0": "Fast",
+        "radio1": "Medium",
+        "radio2": "Slow",
+        "radio3": "Did Not Move"
+      },
+      "item3": {
+        "itemType": "checkBox",
+        "title": "Robot Problems",
+        "count": 2,
+        "box0": "Phone Connection Issues",
+        "box0Checked": false,
+        "box1": "Mechanical Issues",
+        "box1Checked": false
+      },
+      "item4": {
+        "itemType": "textArea",
+        "title": "Comments",
+        "lines": 5
+      }
+    }
+  }
+}
