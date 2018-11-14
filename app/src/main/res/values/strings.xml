@@ -4,7 +4,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <integer name="OfficialGameCount">2</integer>
+    <integer name="OfficialGameCount">3</integer>
+
+    <string name="Game2Title">Rover Ruckus</string>
+    <string name="Game2Year">2018&#8211;2019</string>
+    <string name="Game2File">rover_ruckus_delta</string>
 
     <string name="Game1Title">Relic Recovery</string>
     <string name="Game1Year">2017&#8211;2018</string>
