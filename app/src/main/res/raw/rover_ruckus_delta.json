@@ -26,26 +26,22 @@
       "radio2": "No Attempt"
     },
     "item2": {
-      "itemType": "checkBox",
+      "itemType": "radioGroup",
       "title": "Claiming",
       "count": 3,
-      "box0": "Claimed",
-      "box0Checked": false,
-      "box1": "Attempted",
-      "box1Checked": false,
-      "box2": "No Attempt",
-      "box2Checked": false
+      "default": 0,
+      "radio0": "Claimed",
+      "radio1": "Attempted",
+      "radio2": "No Attempt"
     },
     "item3": {
-      "itemType": "checkBox",
+      "itemType": "radioGroup",
       "title": "Parking",
       "count": 3,
-      "box0": "Parked",
-      "box0Checked": false,
-      "box1": "Attempted",
-      "box1Checked": false,
-      "box2": "No Attempt",
-      "box2Checked": false
+      "default": 0,
+      "radio0": "Parked",
+      "radio1": "Attempted",
+      "radio2": "No Attempt"
     }
   },
     "TeleOp": {
