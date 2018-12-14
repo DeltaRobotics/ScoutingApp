@@ -17,15 +17,13 @@
       "radio2": "Did Not Land"
     },
     "item1": {
-      "itemType": "checkBox",
+      "itemType": "radioGroup",
       "title": "Sampling",
       "count": 3,
-      "box0": "Achieved",
-      "box0Checked": false,
-      "box1": "Atempted",
-      "box1Checked": false,
-      "box2": "No Attempt",
-      "box2Checked": false
+      "default": 0,
+      "radio0": "Achieved",
+      "radio1": "Attempted",
+      "radio2": "No Attempt"
     },
     "item2": {
       "itemType": "checkBox",
@@ -33,7 +31,7 @@
       "count": 3,
       "box0": "Claimed",
       "box0Checked": false,
-      "box1": "Atempted",
+      "box1": "Attempted",
       "box1Checked": false,
       "box2": "No Attempt",
       "box2Checked": false
@@ -44,7 +42,7 @@
       "count": 3,
       "box0": "Parked",
       "box0Checked": false,
-      "box1": "Atempted",
+      "box1": "Attempted",
       "box1Checked": false,
       "box2": "No Attempt",
       "box2Checked": false
@@ -94,7 +92,7 @@
         "default": 0,
         "radio0": "No Park",
         "radio1": "Partial Park",
-        "radio2": "Compelte Park",
+        "radio2": "Complete Park",
         "radio3": "Attempt"
       },
       "item1": {
