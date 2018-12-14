@@ -8,15 +8,13 @@
   "Autonomous": {
     "itemCount": 4,
     "item0": {
-      "itemType": "checkBox",
+      "itemType": "radioGroup",
       "title": "Landing",
       "count": 3,
-      "box0": "Landed",
-      "box0Checked": false,
-      "box1": "Atempted",
-      "box1Checked": false,
-      "box2": "Did Not Land",
-      "box2Checked": false
+      "default": 0,
+      "radio0": "Landed",
+      "radio1": "Attempted",
+      "radio2": "Did Not Land"
     },
     "item1": {
       "itemType": "checkBox",
