@@ -34,12 +34,14 @@ public class fragmentEditMatch extends Fragment
 {
 
     private matchBuilder match;
+    private ToggleButton startingPositionToggle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_edit_match, container, false);
+        startingPositionToggle = (ToggleButton) rootView.findViewById(R.id.starting_position);
 
         final Bundle bundle = getArguments();
 
@@ -82,13 +84,23 @@ public class fragmentEditMatch extends Fragment
                 {
                     loadAllianceToggle.setChecked(true);
                 }
-
+                startingPositionToggle.setKeyListener(null);
+                if(loadMatch.getString("Starting Position").equals("Depot"))
+                {
+                    startingPositionToggle.setChecked(false);
+                }
+                else
+                {
+                    startingPositionToggle.setChecked(true);
+                }
             }
             else
             {
                 Boolean defaultAllianceColor = DRFTCScouting.getBoolean("DefaultAllianceColor", false);
                 ToggleButton allianceColor = (ToggleButton) rootView.findViewById(R.id.alliance_color);
                 allianceColor.setChecked(defaultAllianceColor);
+                Boolean defaultStartingPosition = DRFTCScouting.getBoolean("defaultStartingPosition", false);
+                startingPositionToggle.setChecked(defaultStartingPosition);
 
                 loadFile = new File(this.getContext().getExternalFilesDir(null), "");
                 loadMatch = new JSONObject();
@@ -210,9 +222,20 @@ public class fragmentEditMatch extends Fragment
         {
             allianceColor = "Blue";
         }
+        String startingPosition;
+        if (startingPositionToggle.isChecked())
+        {
+            startingPosition = "Red";
+        }
+        else
+        {
+            startingPosition = "Blue";
+        }
 
         Bundle reviewBundle = new Bundle();
         reviewBundle.putString("matchPath", match.save(teamNumber.getText().toString(), matchNumber.getText().toString(), allianceColor, this.getContext()));
+        reviewBundle.putString("matchPath", match.save(teamNumber.getText().toString(), matchNumber.getText().toString(), startingPosition, this.getContext()));
+
 
         Fragment fragment = new fragmentReview();
         fragment.setArguments(reviewBundle);
