@@ -130,6 +130,8 @@ public class fragmentReview extends Fragment
             matchNumber.setText("Match: " + matchInfo.getString("matchNumber"));
             TextView allianceColor = (TextView) rootView.findViewById(R.id.review_alliance_color);
             allianceColor.setText(matchInfo.getString("allianceColor") + " Alliance");
+            TextView startingPosition = (TextView) rootView.findViewById(R.id.review_starting_position);
+            startingPosition.setText(matchInfo.getString("startingPosition") + " starting position");
 
             LinearLayout Autonomous = (LinearLayout) rootView.findViewById(R.id.review_autonomous);
             Autonomous.addView(buildSection(matchInfo.getJSONObject("Autonomous")));

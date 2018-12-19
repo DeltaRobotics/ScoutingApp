@@ -59,7 +59,8 @@ public class matchBuilder
             JSONObject loadEndGame = new JSONObject();
             JSONObject loadExtras = new JSONObject();
 
-            if(!newMatch && (!gameTitle.equals(loadMatch.getString("gameTitle")) || !gameBy.equals(loadMatch.getString("gameBy")) || !gameMode.equals(loadMatch.getString("gameMode"))))
+            if(!newMatch && (!gameTitle.equals(loadMatch.getString("gameTitle")) || !gameBy.equals(loadMatch.getString("gameBy")) || !
+                    gameMode.equals(loadMatch.getString("gameMode"))))
             {
                 newMatch = true;
 
@@ -303,7 +304,7 @@ public class matchBuilder
             }
             jsonObject.put("matchNumber", matchNumber);
             jsonObject.put("allianceColor", allianceColor);
-
+            jsonObject.put("startingPosition", startingPosition);
             for (int x = 0; x < 4; x++)
             {
                 ArrayList<matchElement> elements = new ArrayList<>();

@@ -259,4 +259,14 @@ public class MainActivity extends AppCompatActivity
         DRFTCScoutingEditor.putBoolean("DefaultAllianceColor", allianceColor.isChecked());
         DRFTCScoutingEditor.apply();
     }
+
+    public void startingPositionChanger(View v)
+    {
+        ToggleButton startingPosition = (ToggleButton) findViewById(R.id.starting_position);
+
+        SharedPreferences DRFTCScouting = getSharedPreferences("DRFTCScouting", 0);
+        SharedPreferences.Editor DRFTCScoutingEditor = DRFTCScouting.edit();
+        DRFTCScoutingEditor.putBoolean("DefaultStartingPosition", startingPosition.isChecked());
+        DRFTCScoutingEditor.apply();
+    }
 }

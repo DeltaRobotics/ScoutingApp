@@ -32,6 +32,8 @@ import java.io.InputStreamReader;
 
 public class fragmentEditMatch extends Fragment
 {
+    public static final String STARTING_POSITION_DEPOT = "depot";
+    public static final String STARTING_POSITION_CRATER = "crater";
 
     private matchBuilder match;
     private ToggleButton startingPositionToggle;
@@ -85,7 +87,7 @@ public class fragmentEditMatch extends Fragment
                     loadAllianceToggle.setChecked(true);
                 }
                 startingPositionToggle.setKeyListener(null);
-                if(loadMatch.getString("Starting Position").equals("Depot"))
+                if(loadMatch.getString("Starting Position").equals(STARTING_POSITION_DEPOT))
                 {
                     startingPositionToggle.setChecked(false);
                 }
@@ -99,7 +101,7 @@ public class fragmentEditMatch extends Fragment
                 Boolean defaultAllianceColor = DRFTCScouting.getBoolean("DefaultAllianceColor", false);
                 ToggleButton allianceColor = (ToggleButton) rootView.findViewById(R.id.alliance_color);
                 allianceColor.setChecked(defaultAllianceColor);
-                Boolean defaultStartingPosition = DRFTCScouting.getBoolean("defaultStartingPosition", false);
+                Boolean defaultStartingPosition = DRFTCScouting.getBoolean("DefaultStartingPosition", false);
                 startingPositionToggle.setChecked(defaultStartingPosition);
 
                 loadFile = new File(this.getContext().getExternalFilesDir(null), "");
@@ -225,16 +227,15 @@ public class fragmentEditMatch extends Fragment
         String startingPosition;
         if (startingPositionToggle.isChecked())
         {
-            startingPosition = "Red";
+            startingPosition = STARTING_POSITION_DEPOT;
         }
         else
         {
-            startingPosition = "Blue";
+            startingPosition = STARTING_POSITION_CRATER;
         }
 
         Bundle reviewBundle = new Bundle();
-        reviewBundle.putString("matchPath", match.save(teamNumber.getText().toString(), matchNumber.getText().toString(), allianceColor, this.getContext()));
-        reviewBundle.putString("matchPath", match.save(teamNumber.getText().toString(), matchNumber.getText().toString(), startingPosition, this.getContext()));
+        reviewBundle.putString("matchPath", match.save(teamNumber.getText().toString(), matchNumber.getText().toString(), allianceColor, startingPosition, this.getContext()));
 
 
         Fragment fragment = new fragmentReview();

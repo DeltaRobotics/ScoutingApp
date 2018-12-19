@@ -45,6 +45,14 @@
         android:gravity="center_horizontal"
         android:text="Alliance Color" />
 
+    <TextView
+        android:id="@+id/review_starting_position"
+        style="@style/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Starting Position" />
+
     <LinearLayout
         android:id="@+id/review_autonomous"
         android:layout_width="match_parent"
