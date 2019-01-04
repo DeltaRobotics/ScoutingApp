@@ -37,6 +37,7 @@ public class fragmentEditMatch extends Fragment
 
     private matchBuilder match;
     private ToggleButton startingPositionToggle;
+    private TextView startingPositionTextBox;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -44,6 +45,9 @@ public class fragmentEditMatch extends Fragment
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_edit_match, container, false);
         startingPositionToggle = (ToggleButton) rootView.findViewById(R.id.starting_position);
+        startingPositionTextBox = (TextView) rootView.findViewById(R.id.textView5);
+
+
 
         final Bundle bundle = getArguments();
 
@@ -109,6 +113,11 @@ public class fragmentEditMatch extends Fragment
             }
 
             match = new matchBuilder(new JSONObject(DRFTCScouting.getString("CurrentGame", "Failed")), rootView.getContext(), bundle.getBoolean("newMatch"), loadMatch, loadFile);
+            if (!match.getGameTitle().equals("Rover Ruckus")) {
+                startingPositionToggle.setVisibility(View.GONE);
+                startingPositionTextBox.setVisibility(View.GONE);
+            }
+
         }
         catch (Exception e)
         {
