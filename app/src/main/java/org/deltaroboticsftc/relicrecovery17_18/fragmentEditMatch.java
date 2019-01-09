@@ -236,11 +236,11 @@ public class fragmentEditMatch extends Fragment
         String startingPosition;
         if (startingPositionToggle.isChecked())
         {
-            startingPosition = STARTING_POSITION_DEPOT;
+            startingPosition = STARTING_POSITION_CRATER;
         }
         else
         {
-            startingPosition = STARTING_POSITION_CRATER;
+            startingPosition = STARTING_POSITION_DEPOT;
         }
 
         Bundle reviewBundle = new Bundle();
