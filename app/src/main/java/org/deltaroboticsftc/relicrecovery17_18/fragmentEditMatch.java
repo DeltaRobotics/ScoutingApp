@@ -91,7 +91,7 @@ public class fragmentEditMatch extends Fragment
                     loadAllianceToggle.setChecked(true);
                 }
                 startingPositionToggle.setKeyListener(null);
-                if(loadMatch.getString("Starting Position").equals(STARTING_POSITION_DEPOT))
+                if(loadMatch.getString("startingPosition").equals(STARTING_POSITION_DEPOT))
                 {
                     startingPositionToggle.setChecked(false);
                 }
