@@ -10,38 +10,42 @@
     "item0": {
       "itemType": "radioGroup",
       "title": "Landing",
-      "count": 3,
+      "count": 4,
       "default": 0,
       "radio0": "Landed",
       "radio1": "Attempted",
-      "radio2": "Did Not Land"
+      "radio2": "Did Not Land",
+      "radio3": "Unsure"
     },
     "item1": {
       "itemType": "radioGroup",
       "title": "Sampling",
-      "count": 3,
+      "count": 4,
       "default": 0,
       "radio0": "Achieved",
       "radio1": "Attempted",
-      "radio2": "No Attempt"
+      "radio2": "No Attempt",
+      "radio3": "Unsure"
     },
     "item2": {
       "itemType": "radioGroup",
       "title": "Claiming",
-      "count": 3,
+      "count": 4,
       "default": 0,
       "radio0": "Claimed",
       "radio1": "Attempted",
-      "radio2": "No Attempt"
+      "radio2": "No Attempt",
+      "radio3": "Unsure"
     },
     "item3": {
       "itemType": "radioGroup",
       "title": "Parking",
-      "count": 3,
+      "count": 4,
       "default": 0,
       "radio0": "Parked",
       "radio1": "Attempted",
-      "radio2": "No Attempt"
+      "radio2": "No Attempt",
+      "radio3": "Unsure"
     }
   },
     "TeleOp": {
@@ -84,12 +88,13 @@
       "item0": {
         "itemType": "radioGroup",
         "title": "Parking",
-        "count": 4,
+        "count": 5,
         "default": 0,
         "radio0": "No Park",
         "radio1": "Partial Park",
         "radio2": "Complete Park",
-        "radio3": "Attempt"
+        "radio3": "Attempt",
+        "radio4": "Unsure"
       },
       "item1": {
         "itemType": "toggleButton",
@@ -105,32 +110,35 @@
       "item0": {
         "itemType": "radioGroup",
         "title": "Robot Efficiency at Scoring Minerals",
-        "count": 4,
+        "count": 5,
         "default": 3,
         "radio0": "Good",
         "radio1": "So-So",
         "radio2": "Bad",
-        "radio3": "Did Not Attempt"
+        "radio3": "Did Not Attempt",
+        "radio4": "Unsure"
       },
       "item1": {
         "itemType": "radioGroup",
         "title": "Robot Efficiency at Hanging",
-        "count": 4,
+        "count": 5,
         "default": 3,
         "radio0": "Good",
         "radio1": "So-So",
         "radio2": "Bad",
-        "radio3": "Did Not Attempt"
+        "radio3": "Did Not Attempt",
+        "radio4": "Unsure"
       },
       "item2": {
         "itemType": "radioGroup",
         "title": "Robot Speed",
-        "count": 4,
+        "count": 5,
         "default": 3,
         "radio0": "Fast",
         "radio1": "Medium",
         "radio2": "Slow",
-        "radio3": "Did Not Move"
+        "radio3": "Did Not Move",
+        "radio4": "Unsure"
       },
       "item3": {
         "itemType": "checkBox",
