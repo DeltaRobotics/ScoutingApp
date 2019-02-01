@@ -88,13 +88,12 @@
       "item0": {
         "itemType": "radioGroup",
         "title": "Parking",
-        "count": 5,
+        "count": 4,
         "default": 0,
         "radio0": "No Park",
         "radio1": "Partial Park",
         "radio2": "Complete Park",
-        "radio3": "Attempt",
-        "radio4": "Unsure"
+        "radio3": "Attempt"
       },
       "item1": {
         "itemType": "toggleButton",
@@ -110,35 +109,32 @@
       "item0": {
         "itemType": "radioGroup",
         "title": "Robot Efficiency at Scoring Minerals",
-        "count": 5,
+        "count": 4,
         "default": 3,
         "radio0": "Good",
         "radio1": "So-So",
         "radio2": "Bad",
-        "radio3": "Did Not Attempt",
-        "radio4": "Unsure"
+        "radio3": "Did Not Attempt"
       },
       "item1": {
         "itemType": "radioGroup",
         "title": "Robot Efficiency at Hanging",
-        "count": 5,
+        "count": 4,
         "default": 3,
         "radio0": "Good",
         "radio1": "So-So",
         "radio2": "Bad",
-        "radio3": "Did Not Attempt",
-        "radio4": "Unsure"
+        "radio3": "Did Not Attempt"
       },
       "item2": {
         "itemType": "radioGroup",
         "title": "Robot Speed",
-        "count": 5,
+        "count": 4,
         "default": 3,
         "radio0": "Fast",
         "radio1": "Medium",
         "radio2": "Slow",
-        "radio3": "Did Not Move",
-        "radio4": "Unsure"
+        "radio3": "Did Not Move"
       },
       "item3": {
         "itemType": "checkBox",
