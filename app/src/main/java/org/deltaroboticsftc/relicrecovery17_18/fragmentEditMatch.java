@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,19 +36,29 @@ public class fragmentEditMatch extends Fragment
 {
     public static final String STARTING_POSITION_DEPOT = "depot";
     public static final String STARTING_POSITION_CRATER = "crater";
+    private static final String[] TEAM_NUMBERS = new String[] {
+            "2465", "4042", "101112", "9925", "35421", "9945","99999"
+    };
 
+    private AutoCompleteTextView mTeamNumberAutoCompleteView;
     private matchBuilder match;
     private ToggleButton startingPositionToggle;
     private TextView startingPositionTextBox;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_edit_match, container, false);
+        //setting up auto complete
+        mTeamNumberAutoCompleteView = (AutoCompleteTextView)  rootView.findViewById(R.id.team_number);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, TEAM_NUMBERS);
+        mTeamNumberAutoCompleteView.setAdapter(adapter);
+        mTeamNumberAutoCompleteView.setThreshold(1);
+
         startingPositionToggle = (ToggleButton) rootView.findViewById(R.id.starting_position);
         startingPositionTextBox = (TextView) rootView.findViewById(R.id.textView5);
-
 
 
         final Bundle bundle = getArguments();
@@ -74,9 +86,8 @@ public class fragmentEditMatch extends Fragment
 
                 loadMatch = new JSONObject(builder.toString());
 
-                EditText loadTeamNumber = (EditText) rootView.findViewById(R.id.team_number);
-                loadTeamNumber.setText(loadMatch.getString("teamNumber"));
-                loadTeamNumber.setKeyListener(null);
+                mTeamNumberAutoCompleteView.setText(loadMatch.getString("teamNumber"));
+                mTeamNumberAutoCompleteView.setKeyListener(null);
                 EditText loadMatchNumber = (EditText) rootView.findViewById(R.id.match_number);
                 loadMatchNumber.setText(loadMatch.getString("matchNumber"));
                 loadMatchNumber.setKeyListener(null);
@@ -141,14 +152,13 @@ public class fragmentEditMatch extends Fragment
             banner.setVisibility(View.GONE);
         }
 
-        EditText teamNumber = (EditText) rootView.findViewById(R.id.team_number);
         if(match.getGameMode().equals("Alliance"))
         {
-            teamNumber.setVisibility(View.GONE);
+            mTeamNumberAutoCompleteView.setVisibility(View.GONE);
         }
         else
         {
-            teamNumber.setVisibility(View.VISIBLE);
+            mTeamNumberAutoCompleteView.setVisibility(View.VISIBLE);
         }
 
         LinearLayout layout = (LinearLayout) rootView.findViewById(R.id.game_autonomous);
@@ -194,7 +204,6 @@ public class fragmentEditMatch extends Fragment
     {
         this.getActivity().findViewById(R.id.scroll_view).setScrollY(0);
 
-        EditText teamNumber = (EditText) this.getActivity().findViewById(R.id.team_number);
         EditText matchNumber = (EditText) this.getActivity().findViewById(R.id.match_number);
 
         final AlertDialog.Builder warning = new AlertDialog.Builder(this.getContext());
@@ -205,12 +214,12 @@ public class fragmentEditMatch extends Fragment
         });
         warning.setIcon(R.drawable.ic_error_outline_black_24dp);
 
-        if(teamNumber.getText().toString().equals("") && teamNumber.getVisibility() == View.VISIBLE)
+        if(mTeamNumberAutoCompleteView.getText().toString().equals("") && mTeamNumberAutoCompleteView.getVisibility() == View.VISIBLE)
         {
             warning.setTitle("Alert");
             warning.setMessage("Please enter a team number before saving.");
             warning.show();
-            teamNumber.requestFocus();
+            mTeamNumberAutoCompleteView.requestFocus();
             return;
         }
 
@@ -244,7 +253,7 @@ public class fragmentEditMatch extends Fragment
         }
 
         Bundle reviewBundle = new Bundle();
-        reviewBundle.putString("matchPath", match.save(teamNumber.getText().toString(), matchNumber.getText().toString(), allianceColor, startingPosition, this.getContext()));
+        reviewBundle.putString("matchPath", match.save(mTeamNumberAutoCompleteView.getText().toString(), matchNumber.getText().toString(), allianceColor, startingPosition, this.getContext()));
 
 
         Fragment fragment = new fragmentReview();

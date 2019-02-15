@@ -21,7 +21,7 @@
         android:background="@color/colorPrimary"
         android:orientation="vertical"></LinearLayout>
 
-    <EditText
+    <android.support.v7.widget.AppCompatAutoCompleteTextView
         android:id="@+id/team_number"
         style="@style/editText"
         android:layout_width="match_parent"
