@@ -37,7 +37,7 @@ public class fragmentEditMatch extends Fragment
     public static final String STARTING_POSITION_DEPOT = "depot";
     public static final String STARTING_POSITION_CRATER = "crater";
     private static final String[] TEAM_NUMBERS = new String[] {
-            "2465", "4042", "101112", "9925", "35421", "9945","99999"
+            "4156", "4175", "5143", "5975", "6121", "6189", "6661", "7332", "7618", "8650", "9052", "9925", "9974", "10012", "10214", "10435", "11142", "11222", "11316", "12754", "13186", "13497", "13532", "15523"
     };
 
     private AutoCompleteTextView mTeamNumberAutoCompleteView;
