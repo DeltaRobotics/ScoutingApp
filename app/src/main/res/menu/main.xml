@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         android:title="New Match"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_edit_teams"
+        android:orderInCategory="100"
+        android:title="Edit Teams"
+        app:showAsAction="never" />
 </menu>
