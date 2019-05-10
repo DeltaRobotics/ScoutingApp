@@ -44,6 +44,7 @@ public class fragmentEditMatch extends Fragment
     private matchBuilder match;
     private ToggleButton startingPositionToggle;
     private TextView startingPositionTextBox;
+    private ToggleButton mAllianceColor;
 
 
     @Override
@@ -51,6 +52,15 @@ public class fragmentEditMatch extends Fragment
     {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_edit_match, container, false);
+        mAllianceColor = (ToggleButton) rootView.findViewById(R.id.alliance_color);
+        mAllianceColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Log.w("Test", "Test message");
+            }
+        });
         //setting up auto complete
         mTeamNumberAutoCompleteView = (AutoCompleteTextView)  rootView.findViewById(R.id.team_number);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, TEAM_NUMBERS);
@@ -91,15 +101,15 @@ public class fragmentEditMatch extends Fragment
                 EditText loadMatchNumber = (EditText) rootView.findViewById(R.id.match_number);
                 loadMatchNumber.setText(loadMatch.getString("matchNumber"));
                 loadMatchNumber.setKeyListener(null);
-                ToggleButton loadAllianceToggle = (ToggleButton) rootView.findViewById(R.id.alliance_color);
-                loadAllianceToggle.setKeyListener(null);
+
+                mAllianceColor.setKeyListener(null);
                 if(loadMatch.getString("allianceColor").equals("Blue"))
                 {
-                    loadAllianceToggle.setChecked(false);
+                    mAllianceColor.setChecked(false);
                 }
                 else
                 {
-                    loadAllianceToggle.setChecked(true);
+                    mAllianceColor.setChecked(true);
                 }
                 startingPositionToggle.setKeyListener(null);
                 if(loadMatch.getString("startingPosition").equals(STARTING_POSITION_DEPOT))
@@ -114,8 +124,7 @@ public class fragmentEditMatch extends Fragment
             else
             {
                 Boolean defaultAllianceColor = DRFTCScouting.getBoolean("DefaultAllianceColor", false);
-                ToggleButton allianceColor = (ToggleButton) rootView.findViewById(R.id.alliance_color);
-                allianceColor.setChecked(defaultAllianceColor);
+                mAllianceColor.setChecked(defaultAllianceColor);
                 Boolean defaultStartingPosition = DRFTCScouting.getBoolean("DefaultStartingPosition", false);
                 startingPositionToggle.setChecked(defaultStartingPosition);
 
@@ -232,9 +241,8 @@ public class fragmentEditMatch extends Fragment
             return;
         }
 
-        ToggleButton allianceToggle = (ToggleButton) this.getActivity().findViewById(R.id.alliance_color);
         String allianceColor;
-        if (allianceToggle.isChecked())
+        if (mAllianceColor.isChecked())
         {
             allianceColor = "Red";
         }
