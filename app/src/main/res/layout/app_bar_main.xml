@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.deltaroboticsftc.relicrecovery17_18.MainActivity">
+    tools:context="org.deltaroboticsftc.scoutingapp.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

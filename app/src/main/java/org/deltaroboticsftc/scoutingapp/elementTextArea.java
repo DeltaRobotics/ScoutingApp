@@ -1,11 +1,9 @@
-package org.deltaroboticsftc.relicrecovery17_18;
+package org.deltaroboticsftc.scoutingapp;
 
 import android.content.Context;
 import android.os.Build;
-import android.text.InputFilter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ToggleButton;
 
 import org.json.JSONObject;
 

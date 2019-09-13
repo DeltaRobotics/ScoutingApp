@@ -1,15 +1,11 @@
-package org.deltaroboticsftc.relicrecovery17_18;
+package org.deltaroboticsftc.scoutingapp;
 
-import android.app.Notification;
 import android.content.Context;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-
-import java.security.Policy;
 
 /**
  * Created by Luke Poellet on 9/13/2017.

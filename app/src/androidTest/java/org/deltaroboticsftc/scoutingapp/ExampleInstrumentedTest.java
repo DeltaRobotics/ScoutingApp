@@ -1,4 +1,4 @@
-package org.deltaroboticsftc.relicrecovery17_18;
+package org.deltaroboticsftc.scoutingapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("org.deltaroboticsftc.relicrecovery17_18", appContext.getPackageName());
+        assertEquals("org.deltaroboticsftc.scoutingapp", appContext.getPackageName());
     }
 }

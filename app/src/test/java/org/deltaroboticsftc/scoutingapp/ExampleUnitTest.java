@@ -1,4 +1,4 @@
-package org.deltaroboticsftc.relicrecovery17_18;
+package org.deltaroboticsftc.scoutingapp;
 
 import org.junit.Test;
 
