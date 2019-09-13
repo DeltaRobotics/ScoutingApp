@@ -1,7 +1,6 @@
-package org.deltaroboticsftc.relicrecovery17_18;
+package org.deltaroboticsftc.scoutingapp;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.view.Gravity;
 import android.view.View;
