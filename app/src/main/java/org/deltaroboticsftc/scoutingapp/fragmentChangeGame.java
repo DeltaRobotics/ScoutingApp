@@ -42,7 +42,9 @@ public class fragmentChangeGame extends Fragment
         ArrayList<String> json = new ArrayList<>();
         for(int x = rootView.getResources().getInteger(R.integer.OfficialGameCount) - 1; x >= 0; x--)
         {
-            titles.add(rootView.getResources().getString(rootView.getContext().getResources().getIdentifier(("Game" + x + "Title"), "string", rootView.getContext().getPackageName())));
+            titles.add(rootView.getResources().getString(rootView.getContext().getResources().getIdentifier(("Game" + x + "Title"), "string",
+                    rootView.getContext().getPackageName())));
+
             years.add(rootView.getResources().getString(rootView.getContext().getResources().getIdentifier(("Game" + x + "Year"), "string", rootView.getContext().getPackageName())));
             String file = rootView.getResources().getString(rootView.getContext().getResources().getIdentifier(("Game" + x + "File"), "string", rootView.getContext().getPackageName()));
             json.add(getGameJsonFromRaw(rootView.getResources().openRawResource(rootView.getContext().getResources().getIdentifier((file), "raw", rootView.getContext().getPackageName()))));

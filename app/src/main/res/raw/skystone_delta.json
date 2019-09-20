@@ -1,25 +1,26 @@
 {
-  "gameTitle": "Rover Ruckus",
-  "gameYear": 18,
+  "gameTitle": "Skystone",
+  "gameYear": 19,
   "version": 1,
   "gameDescription": "This layout was released by Delta Robotics for the 2018-2019 FTC game, Relic Recovery.",
   "gameBy": "DR-2015-Official",
   "gameMode": "Team",
   "Autonomous": {
-    "itemCount": 4,
+    "itemCount": 5,
     "item0": {
       "itemType": "radioGroup",
-      "title": "Landing",
-      "count": 4,
+      "title": "Skystones",
+      "count": 5,
       "default": 0,
-      "radio0": "Landed",
-      "radio1": "Attempted",
-      "radio2": "Did Not Land",
-      "radio3": "Unsure"
+      "radio0": "1",
+      "radio1": "2",
+      "radio2": "Attempted",
+      "radio3": "No Attempt",
+      "radio4": "Unsure"
     },
     "item1": {
       "itemType": "radioGroup",
-      "title": "Sampling",
+      "title": "Moving Foundation",
       "count": 4,
       "default": 0,
       "radio0": "Achieved",
@@ -28,19 +29,25 @@
       "radio3": "Unsure"
     },
     "item2": {
-      "itemType": "radioGroup",
-      "title": "Claiming",
-      "count": 4,
+      "itemType": "counter",
+      "title": "Stones in Building Zone",
       "default": 0,
-      "radio0": "Claimed",
-      "radio1": "Attempted",
-      "radio2": "No Attempt",
-      "radio3": "Unsure"
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
     },
     "item3": {
+      "itemType": "counter",
+      "title": "Stones on Foundation",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
+    },
+    "item4": {
       "itemType": "radioGroup",
       "title": "Parking",
-      "count": 4,
+      "count": 3,
       "default": 0,
       "radio0": "Parked",
       "radio1": "Attempted",
@@ -49,58 +56,62 @@
     }
   },
     "TeleOp": {
-      "itemCount": 4,
+      "itemCount": 3,
       "item0": {
         "itemType": "counter",
-        "title": "Minerals In Depot",
-        "default": 0,
-        "modifier": 1,
-        "minValue": 0,
-        "maxValue": 150
-      },
-      "item1": {
-        "itemType": "counter",
-        "title": "Gold In Correct Lander",
-        "default": 0,
-        "modifier": 1,
-        "minValue": 0,
-        "maxValue": 90
-      },
-      "item2": {
-        "itemType": "counter",
-        "title": "Silver In Correct Lander",
+        "title": "Stones in Building Zone",
         "default": 0,
         "modifier": 1,
         "minValue": 0,
         "maxValue": 60
       },
-      "item3": {
+      "item1": {
         "itemType": "counter",
-        "title": "Mineral In Incorrect Lander",
+        "title": "Stones on Foundation",
         "default": 0,
         "modifier": 1,
         "minValue": 0,
-        "maxValue": 150
+        "maxValue": 60
+      },
+      "item2": {
+        "itemType": "counter",
+        "title": "Tallest Tower",
+        "default": 0,
+        "modifier": 1,
+        "minValue": 0,
+        "maxValue": 60
       }
     },
     "EndGame": {
-      "itemCount": 2,
+      "itemCount": 4,
       "item0": {
-        "itemType": "radioGroup",
-        "title": "Parking",
-        "count": 4,
-        "default": 0,
-        "radio0": "No Park",
-        "radio1": "Partial Park",
-        "radio2": "Complete Park",
-        "radio3": "Attempt"
+        "itemType": "toggleButton",
+        "title": "Capstone",
+        "default": false,
+        "trueText": "Placed",
+        "falseText": "Not placed"
       },
       "item1": {
+        "itemType": "counter",
+        "title": "Capstone Levels",
+        "default": 0,
+        "modifier": 1,
+        "minValue": 0,
+        "maxValue": 60
+      },
+      "item2": {
         "itemType": "toggleButton",
-        "title": "Lift Off",
+        "title": "Moving Foundation",
         "default": false,
-        "trueText": "Hanging",
-        "falseText": "Grounded"
+        "trueText": "Moved",
+        "falseText": "Did Not Move"
+      },
+      "item3": {
+        "itemType": "toggleButton",
+        "title": "Parking",
+        "default": false,
+        "trueText": "Parked",
+        "falseText": "Not Parked"
       }
     },
     "Extras": {
@@ -108,7 +119,7 @@
       "itemCount": 5,
       "item0": {
         "itemType": "radioGroup",
-        "title": "Robot Efficiency at Scoring Minerals",
+        "title": "Robot Efficiency at Transporting Stones",
         "count": 4,
         "default": 3,
         "radio0": "Good",
@@ -118,7 +129,7 @@
       },
       "item1": {
         "itemType": "radioGroup",
-        "title": "Robot Efficiency at Hanging",
+        "title": "Robot Efficiency at Placing Stones",
         "count": 4,
         "default": 3,
         "radio0": "Good",

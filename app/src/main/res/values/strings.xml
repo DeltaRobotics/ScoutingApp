@@ -4,7 +4,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <integer name="OfficialGameCount">3</integer>
+    <integer name="OfficialGameCount">4</integer>
+
+    <string name="Game3Title">Skystone</string>
+    <string name="Game3Year">2019&#8211;2020</string>
+    <string name="Game3File">skystone_delta</string>
 
     <string name="Game2Title">Rover Ruckus</string>
     <string name="Game2Year">2018&#8211;2019</string>
