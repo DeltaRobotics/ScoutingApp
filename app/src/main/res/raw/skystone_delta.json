@@ -56,14 +56,14 @@
     }
   },
     "TeleOp": {
-      "itemCount": 3,
+      "itemCount": 4,
       "item0": {
         "itemType": "counter",
         "title": "Stones in Building Zone",
         "default": 0,
         "modifier": 1,
         "minValue": 0,
-        "maxValue": 60
+        "maxValue": 36
       },
       "item1": {
         "itemType": "counter",
@@ -71,15 +71,24 @@
         "default": 0,
         "modifier": 1,
         "minValue": 0,
-        "maxValue": 60
+        "maxValue": 36
       },
       "item2": {
+        "itemType": "checkBox",
+        "title": "Team Role",
+        "count": 2,
+        "box0": "Deliver",
+        "box0Checked": false,
+        "box1": "Build",
+        "box1Checked": false
+      },
+      "item3": {
         "itemType": "counter",
-        "title": "Tallest Tower",
+        "title": "Highest Stone Placed",
         "default": 0,
         "modifier": 1,
         "minValue": 0,
-        "maxValue": 60
+        "maxValue": 36
       }
     },
     "EndGame": {
