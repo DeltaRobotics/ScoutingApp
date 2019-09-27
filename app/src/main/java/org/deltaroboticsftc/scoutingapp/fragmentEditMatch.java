@@ -2,6 +2,7 @@ package org.deltaroboticsftc.scoutingapp;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -25,8 +26,12 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 /**
  * Created by Luke Poellet on 9/17/2017.
@@ -36,10 +41,7 @@ public class fragmentEditMatch extends Fragment
 {
     public static final String STARTING_POSITION_DEPOT = "depot";
     public static final String STARTING_POSITION_CRATER = "crater";
-    private static final String[] TEAM_NUMBERS = new String[] {
-            "4156", "4175", "5143", "5975", "6121", "6189", "6661", "7332", "7618", "8650", "9052", "9925", "9974", "10012", "10214", "10435", "11142", "11222", "11316", "12754", "13186", "13497", "13532", "15523"
-    };
-
+    private String[] mTeamNumbers;
     private AutoCompleteTextView mTeamNumberAutoCompleteView;
     private matchBuilder match;
     private ToggleButton startingPositionToggle;
@@ -50,6 +52,7 @@ public class fragmentEditMatch extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        mTeamNumbers = getTeamNumbers();
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_edit_match, container, false);
         mAllianceColor = (ToggleButton) rootView.findViewById(R.id.alliance_color);
@@ -63,7 +66,7 @@ public class fragmentEditMatch extends Fragment
         });
         //setting up auto complete
         mTeamNumberAutoCompleteView = (AutoCompleteTextView)  rootView.findViewById(R.id.team_number);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, TEAM_NUMBERS);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, mTeamNumbers);
         mTeamNumberAutoCompleteView.setAdapter(adapter);
         mTeamNumberAutoCompleteView.setThreshold(1);
 
@@ -123,9 +126,9 @@ public class fragmentEditMatch extends Fragment
             }
             else
             {
-                Boolean defaultAllianceColor = DRFTCScouting.getBoolean("DefaultAllianceColor", false);
+                boolean defaultAllianceColor = DRFTCScouting.getBoolean("DefaultAllianceColor", false);
                 mAllianceColor.setChecked(defaultAllianceColor);
-                Boolean defaultStartingPosition = DRFTCScouting.getBoolean("DefaultStartingPosition", false);
+                boolean defaultStartingPosition = DRFTCScouting.getBoolean("DefaultStartingPosition", false);
                 startingPositionToggle.setChecked(defaultStartingPosition);
 
                 loadFile = new File(this.getContext().getExternalFilesDir(null), "");
@@ -299,5 +302,30 @@ public class fragmentEditMatch extends Fragment
         warning.setMessage("Are you sure you want to clear this match without saving?");
         warning.setIcon(R.drawable.ic_warning_black_24dp);
         warning.show();
+    }
+
+    private static String[] getTeamNumbers() {
+        File fileDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        File fileToGet = new File(fileDirectory,"team_numbers.txt");
+
+        BufferedReader br;
+        try
+        {
+            br = new BufferedReader(new FileReader(fileToGet));
+        } catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            return new String[0];
+        }
+        String line;
+        try
+        {
+            line = br.readLine();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+            return new String[0];
+        }
+        return line.split(",");
     }
 }
