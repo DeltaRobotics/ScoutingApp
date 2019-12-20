@@ -31,7 +31,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 /**
  * Created by Luke Poellet on 9/17/2017.
@@ -40,7 +39,7 @@ import java.util.ArrayList;
 public class fragmentEditMatch extends Fragment
 {
     public static final String STARTING_POSITION_DEPOT = "depot";
-    public static final String STARTING_POSITION_CRATER = "crater";
+    public static final String STARTING_POSITION_FOUNDATION = "foundation";
     private String[] mTeamNumbers;
     private AutoCompleteTextView mTeamNumberAutoCompleteView;
     private matchBuilder match;
@@ -71,6 +70,8 @@ public class fragmentEditMatch extends Fragment
         mTeamNumberAutoCompleteView.setThreshold(1);
 
         startingPositionToggle = (ToggleButton) rootView.findViewById(R.id.starting_position);
+        startingPositionToggle.setTextOn(STARTING_POSITION_FOUNDATION);
+        startingPositionToggle.setTextOff(STARTING_POSITION_DEPOT);
         startingPositionTextBox = (TextView) rootView.findViewById(R.id.textView5);
 
 
@@ -136,7 +137,8 @@ public class fragmentEditMatch extends Fragment
             }
 
             match = new matchBuilder(new JSONObject(DRFTCScouting.getString("CurrentGame", "Failed")), rootView.getContext(), bundle.getBoolean("newMatch"), loadMatch, loadFile);
-            if (!match.getGameTitle().equals("Rover Ruckus")) {
+            String gameTitle = match.getGameTitle();
+            if (!(gameTitle.equals("Rover Ruckus") || gameTitle.equals("Skystone"))) {
                 startingPositionToggle.setVisibility(View.GONE);
                 startingPositionTextBox.setVisibility(View.GONE);
             }
@@ -256,7 +258,7 @@ public class fragmentEditMatch extends Fragment
         String startingPosition;
         if (startingPositionToggle.isChecked())
         {
-            startingPosition = STARTING_POSITION_CRATER;
+            startingPosition = STARTING_POSITION_FOUNDATION;
         }
         else
         {

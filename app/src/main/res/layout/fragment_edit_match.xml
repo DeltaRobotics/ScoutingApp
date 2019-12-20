@@ -84,9 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="startingPositionChanger"
-            android:text="ToggleButton"
-            android:textOff="Depot"
-            android:textOn="Crater" />
+            android:text="ToggleButton" />
      </LinearLayout>
 
     <LinearLayout
