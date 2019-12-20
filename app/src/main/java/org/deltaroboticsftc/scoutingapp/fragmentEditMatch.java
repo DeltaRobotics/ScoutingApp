@@ -298,6 +298,7 @@ public class fragmentEditMatch extends Fragment
                 transaction.commit();
             }
         });
+
         warning.setTitle("WARNING");
         warning.setMessage("Are you sure you want to clear this match without saving?");
         warning.setIcon(R.drawable.ic_warning_black_24dp);
@@ -306,7 +307,7 @@ public class fragmentEditMatch extends Fragment
 
     private static String[] getTeamNumbers() {
         File fileDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        File fileToGet = new File(fileDirectory,"team_numbers.txt");
+        File fileToGet = new File(fileDirectory,"team_numbers.csv");
 
         BufferedReader br;
         try
