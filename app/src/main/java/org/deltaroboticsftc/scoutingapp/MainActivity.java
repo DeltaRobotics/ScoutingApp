@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ToggleButton;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -143,6 +145,8 @@ public class MainActivity extends AppCompatActivity
     private void defineStorage()
     {
 
+        InputStream defaultGame = getResources().openRawResource(R.raw.skystone_delta);
+
         boolean displayAlert = true;
 
         try
@@ -169,7 +173,7 @@ public class MainActivity extends AppCompatActivity
                     onLoadAlert();
                 }
 
-                InputStream inputStream = getResources().openRawResource(R.raw.relic_recovery_delta);
+                InputStream inputStream = defaultGame;
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder builder = new StringBuilder();
                 String line;
