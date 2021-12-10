@@ -4,7 +4,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <integer name="OfficialGameCount">4</integer>
+    <integer name="OfficialGameCount">5</integer>
+
+    <string name="Game4Title">Freight Frenzy</string>
+    <string name="Game4Year">2021&#8211;2022</string>
+    <string name="Game4File">freight_frenzy_delta</string>
 
     <string name="Game3Title">Skystone</string>
     <string name="Game3Year">2019&#8211;2020</string>
