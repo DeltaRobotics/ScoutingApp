@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Robotics-ScoutingApp.iml" filepath="$PROJECT_DIR$/Robotics-ScoutingApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/ScoutingApp.iml" filepath="$PROJECT_DIR$/ScoutingApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ScoutingApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ScoutingApp.app.iml" />
     </modules>
   </component>
 </project>
