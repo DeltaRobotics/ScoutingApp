@@ -65,71 +65,138 @@
     }
   },
   "TeleOp": {
-    "itemCount": 4,
+    "itemCount": 5,
     "item0": {
       "itemType": "counter",
-      "title": "Stones in Building Zone",
+      "title": "Cargo on top level",
       "default": 0,
       "modifier": 1,
       "minValue": 0,
-      "maxValue": 36
+      "maxValue": 60
     },
     "item1": {
       "itemType": "counter",
-      "title": "Stones on Foundation",
-      "default": 0,
-      "modifier": 1,
-      "minValue": 0,
-      "maxValue": 36
-    },
-    "item2": {
-      "itemType": "checkBox",
-      "title": "Team Role",
-      "count": 2,
-      "box0": "Deliver",
-      "box0Checked": false,
-      "box1": "Build",
-      "box1Checked": false
-    },
-    "item3": {
-      "itemType": "counter",
-      "title": "Highest Stone Placed",
-      "default": 0,
-      "modifier": 1,
-      "minValue": 0,
-      "maxValue": 36
-    }
-  },
-  "EndGame": {
-    "itemCount": 4,
-    "item0": {
-      "itemType": "toggleButton",
-      "title": "Capstone",
-      "default": false,
-      "trueText": "Placed",
-      "falseText": "Not placed"
-    },
-    "item1": {
-      "itemType": "counter",
-      "title": "Capstone Levels",
+      "title": "Cargo on middle level",
       "default": 0,
       "modifier": 1,
       "minValue": 0,
       "maxValue": 60
     },
     "item2": {
-      "itemType": "toggleButton",
-      "title": "Moving Foundation",
-      "default": false,
-      "trueText": "Moved",
-      "falseText": "Did Not Move"
+      "itemType": "counter",
+      "title": "Cargo on bottom level",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
     },
     "item3": {
+      "itemType": "counter",
+      "title": "Cargo in warehouse",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
+    },
+    "item4": {
+      "itemType": "counter",
+      "title": "Cargo on shared hub",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
+    }
+  },
+  "EndGame": {
+    "itemCount": 9,
+    "item0": {
+      "itemType": "counter",
+      "title": "Ducks delivered",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 10
+    },
+    "item1": {
+      "itemType": "counter",
+      "title": "Cargo on top level",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
+    },
+    "item2": {
+      "itemType": "counter",
+      "title": "Cargo on middle level",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
+    },
+    "item3": {
+      "itemType": "counter",
+      "title": "Cargo on bottom level",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
+    },
+    "item4": {
+      "itemType": "counter",
+      "title": "Cargo on shared hub",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
+    },
+    "item5": {
       "itemType": "toggleButton",
-      "title": "Parking",
+      "title": "Shipping hub balanced",
       "default": false,
-      "trueText": "Parked",
-      "falseText": "Not Parked"
+      "trueText": "balanced",
+      "falseText": "Not balanced"
+    },
+    "item6": {
+      "itemType": "toggleButton",
+      "title": "Shared hub tilt",
+      "default": false,
+      "trueText": "tilted",
+      "falseText": "Not tilted"
+    },
+    "item7": {
+      "itemType": "toggleButton",
+      "title": "capping",
+      "default": false,
+      "trueText": "capped",
+      "falseText": "Not capped"
+    },
+    "item8": {
+      "itemType": "radioGroup",
+      "title": "parking",
+      "count": 3,
+      "default": 3,
+      "radio0": "fully parked",
+      "radio1": "partially parked",
+      "radio2": "not parked"
+    },
+    "penalties": {
+      "itemCount":2,
+      "item0": {
+        "itemType": "counter",
+        "title": "Minor penalties",
+        "default": 0,
+        "modifier": 1,
+        "minValue": 0,
+        "maxValue": 60
+      },
+      "item1": {
+        "itemType": "counter",
+        "title": "Major penalties",
+        "default": 0,
+        "modifier": 1,
+        "minValue": 0,
+        "maxValue": 60
+      }
     }
   },
   "Extras": {
@@ -137,7 +204,7 @@
     "itemCount": 5,
     "item0": {
       "itemType": "radioGroup",
-      "title": "Robot Efficiency at Transporting Stones",
+      "title": "Robot Efficiency at Transporting Cargo",
       "count": 4,
       "default": 3,
       "radio0": "Good",
@@ -147,7 +214,7 @@
     },
     "item1": {
       "itemType": "radioGroup",
-      "title": "Robot Efficiency at Placing Stones",
+      "title": "Robot Efficiency at Placing Cargo",
       "count": 4,
       "default": 3,
       "radio0": "Good",
