@@ -185,7 +185,11 @@ public class fragmentEditMatch extends Fragment
         layout.addView(match.getEndGameLayout());
 
         layout = (LinearLayout) rootView.findViewById(R.id.game_penalties);
-        layout.addView(match.getPenaltiesLayout());
+        LinearLayout penaltiesLayout = match.getPenaltiesLayout();
+        if (null != penaltiesLayout) {
+            layout.setVisibility(View.VISIBLE);
+            layout.addView(match.getPenaltiesLayout());
+        }
 
         layout = (LinearLayout) rootView.findViewById(R.id.game_extras);
         if(match.getExtrasLayout() == null)
