@@ -47,7 +47,7 @@
     },
     "item5": {
       "itemType": "radioGroup",
-      "title": "parked in storage",
+      "title": "parked in depot",
       "count": 3,
       "default": 3,
       "radio0": "fully parked",
@@ -92,7 +92,7 @@
     },
     "item3": {
       "itemType": "counter",
-      "title": "Cargo in warehouse",
+      "title": "Cargo in depot",
       "default": 0,
       "modifier": 1,
       "minValue": 0,
@@ -160,15 +160,16 @@
       "itemType": "toggleButton",
       "title": "Shared hub tilt",
       "default": false,
-      "trueText": "tilted",
+      "trueText": "tilted in favor",
       "falseText": "Not tilted"
     },
     "item7": {
-      "itemType": "toggleButton",
+      "itemType": "counter",
       "title": "capping",
-      "default": false,
-      "trueText": "capped",
-      "falseText": "Not capped"
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 2
     },
     "item8": {
       "itemType": "radioGroup",
