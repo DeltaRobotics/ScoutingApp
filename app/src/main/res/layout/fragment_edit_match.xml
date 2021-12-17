@@ -155,6 +155,30 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/game_penalties"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dividerHeight"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PENALTIES"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/game_extras"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

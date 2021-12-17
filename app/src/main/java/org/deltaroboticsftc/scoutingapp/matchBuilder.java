@@ -33,6 +33,8 @@ public class matchBuilder
     private ArrayList<matchElement> TeleOpElements;
     private LinearLayout EndGameLayout;
     private ArrayList<matchElement> EndGameElements;
+    private LinearLayout PenaltiesLayout;
+    private ArrayList<matchElement> PenaltiesElements;
     private LinearLayout ExtrasLayout;
     private ArrayList<matchElement> ExtrasElements;
     private boolean includeExtras;
@@ -57,6 +59,7 @@ public class matchBuilder
             JSONObject loadAutonomous = new JSONObject();
             JSONObject loadTeleOp = new JSONObject();
             JSONObject loadEndGame = new JSONObject();
+            JSONObject loadPenalties = new JSONObject();
             JSONObject loadExtras = new JSONObject();
 
             if(!newMatch && (!gameTitle.equals(loadMatch.getString("gameTitle")) || !gameBy.equals(loadMatch.getString("gameBy")) || !
@@ -81,6 +84,7 @@ public class matchBuilder
                 loadAutonomous = loadMatch.getJSONObject("Autonomous");
                 loadTeleOp = loadMatch.getJSONObject("TeleOp");
                 loadEndGame = loadMatch.getJSONObject("EndGame");
+                loadPenalties = loadMatch.getJSONObject("Penalties");
                 loadExtras = loadMatch.getJSONObject("Extras");
             }
 
@@ -92,6 +96,9 @@ public class matchBuilder
 
             EndGameElements = new ArrayList<>();
             EndGameLayout = buildLayout(game.getJSONObject("EndGame"), context, EndGameElements, newMatch, loadEndGame);
+
+            PenaltiesElements = new ArrayList<>();
+            PenaltiesLayout = buildLayout(game.getJSONObject("Penalties"), context, PenaltiesElements, newMatch, loadPenalties);
 
             if(game.getJSONObject("Extras").getBoolean("include"))
             {
@@ -140,6 +147,10 @@ public class matchBuilder
     public LinearLayout getEndGameLayout()
     {
         return EndGameLayout;
+    }
+
+    public LinearLayout getPenaltiesLayout() {
+        return PenaltiesLayout;
     }
 
     public LinearLayout getExtrasLayout()

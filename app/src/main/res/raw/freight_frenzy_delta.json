@@ -179,25 +179,25 @@
       "radio0": "fully parked",
       "radio1": "partially parked",
       "radio2": "not parked"
+    }
+  },
+  "Penalties": {
+    "itemCount":2,
+    "item0": {
+      "itemType": "counter",
+      "title": "Minor penalties",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
     },
-    "penalties": {
-      "itemCount":2,
-      "item0": {
-        "itemType": "counter",
-        "title": "Minor penalties",
-        "default": 0,
-        "modifier": 1,
-        "minValue": 0,
-        "maxValue": 60
-      },
-      "item1": {
-        "itemType": "counter",
-        "title": "Major penalties",
-        "default": 0,
-        "modifier": 1,
-        "minValue": 0,
-        "maxValue": 60
-      }
+    "item1": {
+      "itemType": "counter",
+      "title": "Major penalties",
+      "default": 0,
+      "modifier": 1,
+      "minValue": 0,
+      "maxValue": 60
     }
   },
   "Extras": {
